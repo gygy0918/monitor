@@ -103,8 +103,8 @@
                             //返回数据项的Id
                             getDataId: function(dataItem, index) {
                                 //index表示该数据项在数组中的索引位置，从0开始，如果确实没有id，可以返回index代替
-                                console.log('check',dataItem.lightId)
-                                return dataItem.index;
+//                                console.log('check',dataItem.lightId)
+                                return index;
                             },
                             //返回数据项的位置信息，需要是AMap.LngLat实例，或者是经纬度数组，比如[116.789806, 39.904989]
                             getPosition: function(dataItem) {
@@ -113,16 +113,19 @@
                             //返回数据项对应的Marker
                             getMarker: function(dataItem, context, recycledMarker) {
 //                                console.log('maker',typeof parseInt(dataItem.state) )
+                                console.log('maker',recycledMarker )
 
                                 var label = dataItem.lightId;
                                 var flag1=parseInt(dataItem.state);
                                 //存在可回收利用的marker
-                                if (recycledMarker) {
-                                    //直接更新内容返回
-                                    recycledMarker.setIconLabel(label);
-                                    return recycledMarker;
-                                }
+//                                if (recycledMarker) {
+//                                    //直接更新内容返回
+//                                    recycledMarker.setIconLabel(label);
+//                                    return recycledMarker;
+//                                }
                                 //返回一个新的Marker
+                                console.log('flag',flag1)
+                                console.log('maker',dataItem.state )
                                 return new SvgMarker(
                                     new SvgMarker.Shape.TriangleFlagPin({
                                         height: 30,
@@ -223,7 +226,8 @@
 
 
                         })
-                        markerList.on('markerClick markerMouseover ',function (event, record) {
+                        markerList.on('markerClick ',function (event, record) {
+
                             var pre=record.listElement;
                             pre.style.background='red';
                         })
@@ -286,7 +290,7 @@
                                     console.log('item',item.lightId)
 
                                 });
-                                setTimeout(()=>{markerList.render(datainfo)}, 10000);
+                                setTimeout(()=>{markerList.render(datainfo)}, 10);
 //                                markerList.render(datainfo)
 //                                console.log('window',window.test);
 //                                var data=window.test ;

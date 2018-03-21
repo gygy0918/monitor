@@ -9,6 +9,7 @@
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="loginout">退出</el-dropdown-item>
+                    <el-dropdown-item command="modified">修改密码</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -28,10 +29,18 @@
             }
         },
         methods:{
+//            modified(){
+//
+//            },
             handleCommand(command) {
                 if(command == 'loginout'){
                     localStorage.removeItem('ms_username')
                     this.$router.push('/login');
+                }else {
+                    if(command == 'modified'){
+//                    localStorage.removeItem('ms_username')
+                        this.$router.push('/modifiedPassword');
+                    }
                 }
             }
         }

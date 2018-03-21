@@ -17,6 +17,10 @@ export default new Router({
                     path: '/',
                     component: resolve => require(['../components/page/Readme.vue'], resolve)
                 },
+{
+    path: '/modifiedPassword',
+        component: resolve => require(['../components/page/permission/modifiedPassword.vue'], resolve)
+},
                 {
                     path: '/personList',
                     component: resolve => require(['../components/page/person/PersonList.vue'], resolve)
@@ -95,5 +99,6 @@ export default new Router({
             path: '/login',
             component: resolve => require(['../components/page/login/Login.vue'], resolve)
         },
+
     ]
 })

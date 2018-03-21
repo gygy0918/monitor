@@ -285,7 +285,6 @@
         <!--margin: 5px;-->
     <!--}-->
 <!--</style>-->
-
 <template>
     <div class="dashboard-container" style="background:black">
         <h3 　style="text-align:center;color:white">欢迎进入校园路灯监控后台管理系统</h3>
