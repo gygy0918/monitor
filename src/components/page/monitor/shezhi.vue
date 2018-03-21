@@ -22,7 +22,7 @@
             v-model="form.electricity"
             :disabled="true">
         </el-input>
-        <p style="margin-top: 20px;">开关</p>
+        <p style="margin-top: 20px;"  :disabled=this.form.state?true:false>开关</p>
        <el-switch
         v-model="value2"
         active-color="#13ce66"
@@ -50,12 +50,14 @@
             return {
               value1: true,
               value2: true,
+                type:'',
               value8: 0,
                 form: {
                     lightId:'',
                     lightName:'',
                     power:'',
                     electricity:'',
+                    state:'',
                     location
                 },
                 ruleForm: {
@@ -78,13 +80,31 @@
             this.form.power= window.localStorage.getItem('power')
             this.form.electricity= window.localStorage.getItem('electricity')
             this.form.location= window.localStorage.getItem('location')
+            this.form.state=parseInt(window.localStorage.getItem('state'))
 
-//            console.log('electricity',data)
+            console.log('state',this.form.state)
         },
         methods: {
             onSubmit() {
-                console.log('submit!');
-                this.$router.push('/lamp')
+                if(this.value2){
+                    this.type=1;
+                }else {
+                    this.type=2;
+                }
+                let data={type:this.type,lightId:this.form.lightId}
+                this.$ajax({
+                    method:'post',
+                    url:'http://10.103.241.154:8080/commandLog/command',
+                    data:data
+                }).then((res)=>{
+                    console.log('test',res)
+//                    localStorage.setItem('ms_username',self.ruleForm.username);
+//                    localStorage.setItem('token',res.data.token);
+//                    localStorage.setItem('msg',res.data.msg);
+//                    this.$router.push('/lamp')
+                })
+//                console.log('submit!',);
+
             },
             submitForm(formName) {
                 const self = this;

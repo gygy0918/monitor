@@ -8,7 +8,7 @@
             <div id="intro">
                 <h5>详细信息</h5>
             </div>
-            <ul id="my-list" ></ul>
+            <ul id="my-list" style="max-height: 600px"></ul>
         </div>
     </div>
 </template>
@@ -85,6 +85,12 @@
 
                 AMapUI.loadUI(['misc/MarkerList', 'overlay/SvgMarker', 'overlay/SimpleInfoWindow'],
                     function(MarkerList, SvgMarker, SimpleInfoWindow){
+
+                        var defaultIconStyle = 'red', //默认的图标样式
+                            hoverIconStyle = 'green', //鼠标hover时的样式
+                            selectedIconStyle = 'purple' //选中时的图标样式
+                        ;
+
                         if (!SvgMarker.supportSvg) {
                             //当前环境并不支持SVG，此时SvgMarker会回退到父类，即SimpleMarker
                             alert('当前环境不支持SVG');
@@ -113,18 +119,18 @@
                             //返回数据项对应的Marker
                             getMarker: function(dataItem, context, recycledMarker) {
 //                                console.log('maker',typeof parseInt(dataItem.state) )
-                                console.log('maker',recycledMarker )
-
+//                                console.log('maker',recycledMarker )
                                 var label = dataItem.lightId;
                                 var flag1=parseInt(dataItem.state);
-                                //存在可回收利用的marker
-//                                if (recycledMarker) {
-//                                    //直接更新内容返回
-//                                    recycledMarker.setIconLabel(label);
-//                                    return recycledMarker;
-//                                }
+                                    //存在可回收利用的marker
+//                                    if (recycledMarker) {
+//                                        //直接更新内容返回
+//                                        recycledMarker.setIconLabel(label);
+//                                        return recycledMarker;
+//                                    }
+
                                 //返回一个新的Marker
-                                console.log('flag',flag1)
+//                                console.log('flag',flag1)
                                 console.log('maker',dataItem.state )
                                 return new SvgMarker(
                                     new SvgMarker.Shape.TriangleFlagPin({
@@ -142,7 +148,7 @@
                             getListElement: function(dataItem, context, recycledListElement) {
 
                                 var tpl1= '<p><%- dataItem.location %><br/>楼层平面图：<a src="../../assets/logo.png" ></a></p>';
-                                var tpl2 = '<div style="font-size:12px;overflow-y: scroll;"><%- dataItem.location %>室外</img>' +
+                                var tpl2 = '<div style="font-size:12px;overflow-y: scroll"><%- dataItem.location %>室外</img>' +
                                     '<p>当前电压<%- dataItem.voltage %>V</p>' +
                                     '<p>当前电流<%- dataItem.electricity%>A</p>'+
                                     '<p>当前功率<%- dataItem.power%>W</p>'
@@ -165,7 +171,6 @@
                             },
                             getInfoWindow: function(dataItem, context, recycledInfoWindow) {
                                 var flag2=parseInt(dataItem.state);
-
                                 if (recycledInfoWindow) {
                                     //存在可回收利用的infoWindow, 直接更新内容返回
                                     recycledInfoWindow.setInfoTitle(dataItem.lightName);
@@ -198,6 +203,31 @@
 //                            alert('Click .mybtn of infoBody');
 //
 //                        })
+                        markerList.on('selectedChanged', function(event, info) {
+//                            checkBtnStats();
+                            if (info.selected) {
+                                console.log('selectedinfo',info);
+                                if (info.selected.marker) {
+                                    //更新为选中样式
+//                                    info.selected.marker.setIconStyle(selectedIconStyle);
+                                }
+
+                                //选中并非由列表节点上的事件触发，将关联的列表节点移动到视野内
+                                if (!info.sourceEventInfo.isListElementEvent) {
+
+                                    if (info.selected.listElement) {
+                                        scrollListElementIntoView($(info.selected.listElement));
+                                    }
+                                }
+                            }
+
+                            if (info.unSelected && info.unSelected.marker) {
+                                console.log('info.unSelected ',info.unSelected.listElement
+                                )
+                                //更新为默认样式
+//                                info.unSelected.marker.setIconStyle(defaultIconStyle);
+                            }
+                        });
 
                         markerList.on('listElementClick listElementMouseenter listElementMouseleave ' +'markerClick markerMouseover'+
                             ' infoWindowMouseover infoWindowMouseout',
@@ -223,22 +253,48 @@
                             window.localStorage.setItem("location",record.data.location);
                             window.localStorage.setItem("electricity", record.data.electricity);
                             window.localStorage.setItem("power", record.data.power);
+                            window.localStorage.setItem("state", record.data.state);
 
 
                         })
-                        markerList.on('markerClick ',function (event, record) {
 
-                            var pre=record.listElement;
-                            pre.style.background='red';
-                        })
+//                        markerList.on('markerClick ',function (event, record) {
+//
+//                            var pre=record.listElement;
+//                            pre.style.background='red';
+//                        })
 //                  markerList.on('markerMouseout ',function (event, record) {
 //                      record.listElement.style.background='';
 //                  })
                         //监听选中改变
-                        markerList.on('selectedChanged', function(event, info) {
-                            info.selected.listElement.style.background='';
-                            console.log('****event',event,'info', info);
-                        });
+//                        markerList.on('selectedChanged', function(event, info) {
+//                            info.selected.listElement.style.background='';
+//                            console.log('****event',event,'info', info);
+//                        });
+                        function isElementInViewport(el) {
+                            var rect = el.getBoundingClientRect();
+
+                            return (
+                                rect.top >= 0 &&
+                                rect.left >= 0 &&
+                                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+                                rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+                            );
+                        };
+                        function scrollListElementIntoView($listEle) {
+
+                            if (!isElementInViewport($listEle.get(0))) {
+                                $('#panel').scrollTop($listEle.offset().top - $listEle.parent().offset().top);
+                            }
+
+                            //闪动一下
+                            $listEle
+                                .one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+                                    function(e) {
+                                        $(this).removeClass('select');
+                                    }).addClass('select');
+                        };
+
                         var flag=0;
                         //构建一个数据项数组，数据项本身没有格式要求，但需要支持下述的getDataId和getPosition
 //                        var data1 = [{
@@ -330,7 +386,22 @@
         min-width: 100px;
         line-height: 170%;
     }
-
+    /*.select{*/
+/*background: rebeccapurple;*/
+    /*}*/
+    .select {
+        /*width: 90px;*/
+        /*height: 60px;*/
+        -webkit-animation-name: skyset;
+        -webkit-animation-duration: 2000ms;
+        /*-webkit-animation-iteration-count: infinite; !*无限循环*!*/
+        -webkit-animation-timing-function: linear;
+    }
+    @-webkit-keyframes skyset {
+        0% { background: #ffffff;}
+        50%{ background:yellow}
+        100% {background:#ffffff;}
+    }
     .eventType {
         font-size: 120%;
         letter-spacing: 1px;
