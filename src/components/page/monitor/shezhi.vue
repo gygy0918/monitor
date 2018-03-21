@@ -1,6 +1,5 @@
 <template>
 
-
     <div id="control" style="width: 300px">
        物品名称： <el-input
             placeholder="请输入内容"
@@ -22,23 +21,54 @@
             v-model="form.electricity"
             :disabled="true">
         </el-input>
-        <p style="margin-top: 20px;"  :disabled=this.form.state?true:false>开关</p>
+        <p style="margin-top: 20px;"  >开关</p>
        <el-switch
         v-model="value2"
         active-color="#13ce66"
         inactive-color="#ff4949"
-    style="margin-top: 20px">
+    style="margin-top: 20px"
+        :disabled="this.disable">
     </el-switch>
         <p style="margin-top: 20px;">亮度控制</p>
         <el-slider
             v-model="value8"
             :step="0.1"
             :max="1"
+            :disabled="this.disable"
             show-input>
         </el-slider>
 
             <el-button type="primary" @click="onSubmit" style="margin-top: 20px;">确定并返回</el-button>
             <el-button>取消</el-button>
+        <div style="width: 750px;margin: 20px;float: left">
+        <el-table :data="repairInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+            <!--<el-table-column type="selection" width="20"></el-table-column>-->
+            <el-table-column prop="rName" label="维修人员" width="150">
+            </el-table-column>
+            <el-table-column prop="rCompony" label="所在公司地址" width="150">
+            </el-table-column>
+            <el-table-column prop="rCall" label="电话" width="150">
+            </el-table-column>
+            <el-table-column prop="reason" label="维修原因" width="150">
+            </el-table-column>
+            <el-table-column prop="createTime" label="维修时间" width="150">
+            </el-table-column>
+            <!--<el-table-column prop="job" label="职位电话" width="120">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="state" label="状态" width="120">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="address" label="地址" :formatter="formatter">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column label="操作" width="180">-->
+            <!--<template scope="scope">-->
+            <!--&lt;!&ndash;<el-button size="small"&ndash;&gt;-->
+            <!--&lt;!&ndash;@click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>&ndash;&gt;-->
+            <!--<el-button size="small" type="danger"-->
+            <!--@click="handleDelete(scope.$index, scope.row)">删除</el-button>-->
+            <!--</template>-->
+            <!--</el-table-column>-->
+        </el-table>
+        </div>
 
     </div>
 
@@ -50,7 +80,9 @@
             return {
               value1: true,
               value2: true,
-                type:'',
+              type:'',
+              disable:true,
+              repairInfo:[],
               value8: 0,
                 form: {
                     lightId:'',
@@ -81,8 +113,35 @@
             this.form.electricity= window.localStorage.getItem('electricity')
             this.form.location= window.localStorage.getItem('location')
             this.form.state=parseInt(window.localStorage.getItem('state'))
+            if(this.form.state===2){
+                this.value2=false;
+                this.disable=false;
+            }
+            if(this.form.state===0){
+                this.disable=true;
 
-            console.log('state',this.form.state)
+            }
+            if(this.form.state===1){
+                this.disable=false;
+                this.value2=true;
+
+            }
+            this.$ajax({
+                method:'get',
+                url:'http://10.103.241.154:8080/repair/find',
+                params:{
+                    lightId: this.form.lightId,
+                },
+            }).then((res)=>{
+                console.log('test',res.data.data)
+                this.repairInfo=res.data.data
+//                    localStorage.setItem('ms_username',self.ruleForm.username);
+//                    localStorage.setItem('token',res.data.token);
+//                    localStorage.setItem('msg',res.data.msg);
+//                this.$router.push('/lamp')
+            })
+//            console.log('state',this.form.state)
+//            console.log('value2',this.type)
         },
         methods: {
             onSubmit() {
@@ -101,7 +160,7 @@
 //                    localStorage.setItem('ms_username',self.ruleForm.username);
 //                    localStorage.setItem('token',res.data.token);
 //                    localStorage.setItem('msg',res.data.msg);
-//                    this.$router.push('/lamp')
+                    this.$router.push('/lamp')
                 })
 //                console.log('submit!',);
 

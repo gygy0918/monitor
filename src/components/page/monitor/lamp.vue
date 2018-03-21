@@ -137,7 +137,7 @@
                                         height: 30,
                                         strokeWidth: 1,
                                         strokeColor: '#ccc',
-                                        fillColor: flag1?'green':'red'
+                                        fillColor: flag1===1?'green':(flag1===2?'black':'red')
                                     }), {
 //                                  iconLabel: label,
                                         containerClassNames: 'my-svg-marker',
