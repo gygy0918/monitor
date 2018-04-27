@@ -2,8 +2,8 @@
     <div>
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-date"></i>新增入库表单</el-breadcrumb-item>
-                <el-breadcrumb-item>新增入库基本表单</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-date"></i>申请入库表单</el-breadcrumb-item>
+                <el-breadcrumb-item>申请入库基本表单</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="form-box">
@@ -81,7 +81,7 @@
             return {
                 warehouseInfo:[],
                 form: {
-                    yhId: '',
+                    yhId: localStorage.getItem('yhId'),
                     ckId: '',
                     hgId: '',
                     spId: '',
@@ -99,7 +99,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouseIn',
+                        url: 'http://10.103.243.94:8080/warehouseApply',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

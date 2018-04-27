@@ -57,6 +57,7 @@
                             if(res.data.msg==='登录成功'){
                                 localStorage.setItem('ms_username',self.ruleForm.username);
                                 localStorage.setItem('token',res.data.token);
+                                localStorage.setItem('yhId',res.data.yhId);
                                 localStorage.setItem('msg',res.data.msg);
                                 self.$router.push('/readme');
 

@@ -7,54 +7,54 @@
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <el-input v-model="form.ID" placeholder="编号" class="handle-input" style="width: 100px;height: 5px;"></el-input>
+            <el-input v-model="form.spId" placeholder="编号" class="handle-input" style="width: 100px;height: 5px;"></el-input>
             <el-input v-model="form.type" placeholder="类型" class="handle-input" style="width: 100px"></el-input>
             <el-date-picker
                 type="date"
-                      v-model="form.createTime" placeholder="创建时间" class="handle-input" style="width: 150px"></el-date-picker
+                v-model="form.createTime" placeholder="创建时间" class="handle-input" style="width: 150px"></el-date-picker
             >
             <!--<el-input v-model="select_word" placeholder="地点" class="handle-input" style="width: 80px"></el-input>-->
             <!--<el-select v-model="select_cate" placeholder="性别" class="handle-select mr10" style="width: 80px;height: 5px;">-->
-                <!--<el-option key="1" label="男" value="张三"></el-option>-->
-                <!--<el-option key="2" label="女" value="湖南省"></el-option>-->
+            <!--<el-option key="1" label="男" value="张三"></el-option>-->
+            <!--<el-option key="2" label="女" value="湖南省"></el-option>-->
             <!--</el-select>-->
             <!--<el-select v-model="select_cate" placeholder="职位" class="handle-select mr10" style="width: 80px;height: 5px;">-->
-                <!--<el-option key="1" label="管理员" value="张三"></el-option>-->
-                <!--<el-option key="2" label="采购员" value="湖南省"></el-option>-->
+            <!--<el-option key="1" label="管理员" value="张三"></el-option>-->
+            <!--<el-option key="2" label="采购员" value="湖南省"></el-option>-->
             <!--</el-select>-->
             <!--<el-select v-model="select_cate" placeholder="状态" class="handle-select mr10"  style="width: 80px;height: 5px;">-->
-                <!--<el-option key="1" label="张三" value="张三"></el-option>-->
-                <!--<el-option key="2" label="李四" value="湖南省"></el-option>-->
+            <!--<el-option key="1" label="张三" value="张三"></el-option>-->
+            <!--<el-option key="2" label="李四" value="湖南省"></el-option>-->
             <!--</el-select>-->
             <!--<el-input v-model="select_word" placeholder="邮箱" class="handle-input" style="width: 120px"></el-input>-->
             <el-button type="primary" icon="search" @click="onSubmit">搜索</el-button>
         </div>
-        <el-table :data="tasksInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+        <el-table :data="commodityInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="ID" label="编号" sortable width="150">
+            <el-table-column prop="spId" label="编号" sortable width="150">
             </el-table-column>
-            <el-table-column prop="type" label="类型" width="120">
+            <el-table-column prop="spType" label="商品类型" width="120">
             </el-table-column>
-            <el-table-column prop="createTime" label="创建时间" width="120">
+            <el-table-column prop="createTime" label="创建时间" width="150">
             </el-table-column>
-            <el-table-column prop="latitude" label="地点" width="120">
+            <el-table-column prop="spBrand" label="品牌" width="120">
             </el-table-column>
-            <!--<el-table-column prop="email" label="邮箱" width="120">-->
-            <!--</el-table-column>-->
-            <!--<el-table-column prop="job" label="职位" width="120">-->
-            <!--</el-table-column>-->
+            <el-table-column prop="spAttribute" label="商品属性" width="120">
+            </el-table-column>
+            <el-table-column prop="spSize" label="尺寸" width="120">
+            </el-table-column>
             <!--<el-table-column prop="state" label="状态" width="120">-->
             <!--</el-table-column>-->
             <!--<el-table-column prop="address" label="地址" :formatter="formatter">-->
             <!--</el-table-column>-->
-            <!--<el-table-column label="操作" width="180">-->
-                <!--<template scope="scope">-->
-                    <!--&lt;!&ndash;<el-button size="small"&ndash;&gt;-->
-                    <!--&lt;!&ndash;@click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>&ndash;&gt;-->
-                    <!--<el-button size="small" type="danger"-->
-                               <!--@click="handleDelete(scope.$index, scope.row)">删除</el-button>-->
-                <!--</template>-->
-            <!--</el-table-column>-->
+            <el-table-column label="操作" width="180">
+            <template scope="scope">
+            <el-button size="small"
+            @click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>
+            <el-button size="small" type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+            </el-table-column>
         </el-table>
 
         <div class="pagination">
@@ -64,6 +64,38 @@
                 :total="1000">
             </el-pagination>
         </div>
+        <el-dialog title="更新仓库信息" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="编号" :label-width="formLabelWidth">
+                    <el-input v-model="form.spId" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="商品类型" :label-width="formLabelWidth">
+                    <el-input v-model="form.spType" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="创建时间" :label-width="formLabelWidth">
+                    <el-input v-model="form.createTime" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="品牌" :label-width="formLabelWidth">
+                    <el-input v-model="form.spBrand" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="商品属性" :label-width="formLabelWidth">
+                    <el-input v-model="form.spAttribute" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="尺寸" :label-width="formLabelWidth">
+                    <el-input v-model="form.spSize" auto-complete="off"></el-input>
+                </el-form-item>
+                <!--<el-form-item label="活动区域" :label-width="formLabelWidth">-->
+                <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
+                <!--<el-option label="区域一" value="shanghai"></el-option>-->
+                <!--<el-option label="区域二" value="beijing"></el-option>-->
+                <!--</el-select>-->
+                <!--</el-form-item>-->
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="submitUpdataWarehouse('form')">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -71,7 +103,7 @@
     export default {
         data() {
             return {
-                tasksInfo: [],
+                commodityInfo: [],
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
@@ -80,8 +112,12 @@
                 is_search: false,
                 dialogFormVisible: false,
                 form: {
-                    ID: '',
-                    type:'',
+                    spId: '',
+                    spName:'',
+                    spSize:'',
+                    spType:'',
+                    spAttribute:'',
+                    spBrand:'',
                     createTime: ''
                 },
                 formLabelWidth: '120px'
@@ -92,24 +128,17 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.241.110:8080/task/look',
+                    url: 'http://10.103.243.94:8080/commodity/page',
                     params:{
                         page:1,
-                        size:50,
-                        distance:-1
+                        size:5
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
-                this.tasksInfo=[],
-                    res.data.data.results.map((item)=>{
-                        console.log('0000',item)
-                        item.type=item.type==8 ?'其他':'线路维修'
-                        item.latitude=item.latitude?'教三附近':'不在线'
-                    })
-                this.tasksInfo=res.data.data.results;
-                console.log('结果',res.data.data)
-
-            })
+                this.commodityInfo=[],
+                this.commodityInfo=res.data.data.results;
+            console.log('结果商品',res.data.data.results)
+        })
         },
         computed: {
             data(){
@@ -151,10 +180,10 @@
                     }
                 }).then(
                     (res) => {
-                        this.tasksInfo=[];
-                        this.tasksInfo =res.data.data.results;
-                        console.log(res.data.data);
-                    });
+                    this.tasksInfo=[];
+                this.tasksInfo =res.data.data.results;
+                console.log(res.data.data);
+            });
             },
             addUser(formName){
                 let data=Object.assign({},this.form);
@@ -167,9 +196,9 @@
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
                     this.usersInfo=[],
-                        this.usersInfo=res.data.data.results;
-                    console.log('结果',this.usersInfo)
-                });
+                    this.usersInfo=res.data.data.results;
+                console.log('结果',this.usersInfo)
+            });
                 this.dialogFormVisible = false;
             },
             handleCurrentChange(val){
@@ -183,7 +212,7 @@
                 };
                 self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
                     self.tableData = res.data.list;
-                })
+            })
             },
             search(){
                 this.is_search = true;
@@ -195,7 +224,27 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                this.$message('编辑第'+(index+1)+'行');
+                this.dialogFormVisible = true;
+//                this.$message('编辑第'+(index+1)+'行');
+                this.form=row;
+            },
+            submitUpdataWarehouse(form){
+                let data=Object.assign({},this.form);
+                delete data.createTime;
+                delete data.lastUpdate;
+                console.log('编辑提交信息',data)
+                this.$ajax(
+                    {
+                        method: 'put', //请求方式
+                        url: 'http://10.103.243.94:8080/commodity',
+                        data:data,
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    // this.warehouseInfo=[],
+                    // this.warehouseInfo=res.data.data.results;
+                console.log('结果',res)
+            });
+                this.dialogFormVisible = false;
             },
 //            handleDelete(index, row) {
 //                this.$message.error('删除第'+(index+1)+'行');
@@ -215,27 +264,27 @@
             handleDelete (index, row) {
                 this.$confirm('确认删除？')
                     .then(_ => {
-                        console.log('8888')
-                        this.usersInfo.splice(index, 1);
-                        console.log('ddddd',row.uid)
-                        let uid=row.uid;
-                        this.$ajax({
-                            method: 'delete', //请求方式
-                            url: 'http://10.103.243.94:8080/userInfo',
-                            params:{
-                                uid
-                            },
-                            headers:{"Authorization":localStorage.getItem('token')}
-                        }).then(
-                            (res) => {
-                                console.log(res);
-                            });
-                        this.$message({
-                            message: "操作成功！",
-                            type: 'success'
-                        });
-                    })
-                    .catch(_ => {});
+                    console.log('8888')
+                this.usersInfo.splice(index, 1);
+                console.log('ddddd',row.uid)
+                let uid=row.uid;
+                this.$ajax({
+                    method: 'delete', //请求方式
+                    url: 'http://10.103.243.94:8080/userInfo',
+                    params:{
+                        uid
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')}
+                }).then(
+                    (res) => {
+                    console.log(res);
+            });
+                this.$message({
+                    message: "操作成功！",
+                    type: 'success'
+                });
+            })
+            .catch(_ => {});
 
             },
             delAll(){

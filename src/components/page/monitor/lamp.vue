@@ -1,9 +1,14 @@
 <template>
     <div >
-        <div id="container" style="float: left;width:700px; height:700px;margin:10px">室外</div>
-        <div id="outer-box" style="margin-left: 620px;">
-            <!--<div id="eventInfo">事件信息</div>-->
+        <div>
+            <el-button type="success" round style="margin:10px" @click="add">新增监控物品</el-button>
+            <el-button type="success" round style="margin:10px" @click="add">仓库数据</el-button>
         </div>
+        <div id="container" style="float: left;width:700px; height:700px;margin:10px">室外 </div>
+        <div id="outer-box" style="margin-left: 620px;">
+            <!--<div id="eventInfo">添加监控物品</div>-->
+        </div>
+
         <div id="panel">
             <div id="intro">
                 <h5>详细信息</h5>
@@ -82,6 +87,7 @@
                     resizeEnable: true,
                     zoom: 16,
                 });
+
 
                 AMapUI.loadUI(['misc/MarkerList', 'overlay/SvgMarker', 'overlay/SimpleInfoWindow'],
                     function(MarkerList, SvgMarker, SimpleInfoWindow){
@@ -362,8 +368,9 @@
                     })
 
             },//初始化完毕
-
-
+            add() {
+               this.$router.push('../addWarehouse')
+            }
 
         }
 

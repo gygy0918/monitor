@@ -64,37 +64,72 @@
                             }
                         ]
                     },
-//                    {
-//                        icon: 'el-icon-date',
-//                        index: '4',
-//                        title: '仓库管理',
-//                        subs: [
+                   {
+                       icon: 'el-icon-date',
+                       index: '4',
+                       title: '仓库管理',
+                       subs: [
+                           {
+                               index: 'warehouselist',
+                               title: '仓库列表'
+                           },
+                           {
+                               index: 'filterMap',
+                               title: '仓库可视化'
+                           },
+                           {
+                               index: 'newwarehouse',
+                               title: '申请入库'
+                           },
+                           {
+                               index: 'checkApply',
+                               title: '查看申请入库'
+                           },
+                           {
+                               index: 'personnalCheckApply',
+                               title: '我的入库申请'
+                           },
+                           {
+                               index: 'addWarehouse',
+                               title: '新增仓库'
+                           },
+                           {
+                               index: 'inWarehousesList',
+                               title: '入库信息列表'
+                           },
+                           {
+                               index: 'outWarehousesList',
+                               title: '出库信息列表'
+                           }
 //                            {
-//                                index: 'warehouselist',
-//                                title: '仓库列表'
+//                                index: 'markdown',
+//                                title: 'markdown'
 //                            },
 //                            {
-//                                index: 'newwarehouse',
-//                                title: '新增入库'
-//                            },
-//                            {
-//                                index: 'inWarehousesList',
-//                                title: '入库信息列表'
-//                            },
-//                            {
-//                                index: 'outWarehousesList',
-//                                title: '出库信息列表'
+//                                index: 'upload',
+//                                title: '文件上传'
 //                            }
-////                            {
-////                                index: 'markdown',
-////                                title: 'markdown'
-////                            },
-////                            {
-////                                index: 'upload',
-////                                title: '文件上传'
-////                            }
-//                        ]
-//                    },
+                       ]
+                   },
+                    {
+                        icon: 'el-icon-menu',
+                        index: '9',
+                        title: '商品管理',
+                        subs: [
+                            {
+                                index: 'commodity',
+                                title: '商品信息'
+                            },
+                            {
+                                index: 'commodityTotal',
+                                title: '商品总体信息'
+                            },
+                            {
+                                index: 'addCommodity',
+                                title: '新增商品信息'
+                            }
+                        ]
+                    },
                     {
                         icon: 'el-icon-menu',
                         index: '6',

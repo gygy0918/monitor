@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>仓库列表管理</el-breadcrumb-item>
-                <el-breadcrumb-item>仓库列表信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>申请入库信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>申请入库信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
@@ -13,32 +13,31 @@
             </el-select>
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
-            <!--<el-button type="primary"  @click="search">新增人员</el-button>-->
         </div>
-        <el-table :data="warehouseInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+        <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <!--<el-table-column prop="date" label="日期" sortable width="150">-->
             <!--</el-table-column>-->
-            <el-table-column prop="ckId" label="仓库标号" width="120">
+            <el-table-column prop="yhId" label="申请入库人编号" width="120">
             </el-table-column>
-            <el-table-column prop="ckName" label="仓库名称" width="120">
+            <el-table-column prop="ckId" label="仓库编号" width="120">
             </el-table-column>
-            <el-table-column prop="ckName" label="位置" width="120">
+            <el-table-column prop="hgId" label="货柜编号" width="120">
             </el-table-column>
-            <el-table-column prop="ckHgCount" label="货柜总数" width="120">
+            <el-table-column prop="spId" label="商品编号" width="120">
             </el-table-column>
-            <el-table-column prop="ckAttribute" label="属性" width="120">
+            <el-table-column prop="applyCount" label="申请数量" width="120">
             </el-table-column>
-            <el-table-column prop="ckStatus" label="状态" width="120">
-            </el-table-column>
-            <!--<el-table-column prop="address" label="地址" :formatter="formatter">-->
+            <!--<el-table-column prop="remark" label="是否出库" width="120">-->
             <!--</el-table-column>-->
+            <el-table-column prop="remark" label="备注信息" width="120">
+            </el-table-column>
             <el-table-column label="操作" width="180">
                 <template scope="scope">
                     <el-button size="small"
-                    @click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>
+                               @click="handleEdit(scope.$index, scope.row)">同意</el-button>
                     <el-button size="small" type="danger"
-                               @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                               @click="handleDelete(scope.$index,scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -49,36 +48,39 @@
                 :total="1000">
             </el-pagination>
         </div>
-        <el-dialog title="更新仓库信息" :visible.sync="dialogFormVisible">
-            <el-form :model="form">
+        <el-dialog title="修改入库信息" :visible.sync="dialogFormVisible">
+            <el-form :model="form" ref="form">
+                <el-form-item label="出库人编号" :label-width="formLabelWidth">
+                    <el-input v-model="form.yhId" auto-complete="off"></el-input>
+                </el-form-item>
                 <el-form-item label="仓库编号" :label-width="formLabelWidth">
                     <el-input v-model="form.ckId" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="仓库名称" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckName" auto-complete="off"></el-input>
+                <el-form-item label="货柜编号	" :label-width="formLabelWidth">
+                    <el-input v-model="form.hgId" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="位置" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckLocation" auto-complete="off"></el-input>
+                <el-form-item label="商品编号" :label-width="formLabelWidth">
+                    <el-input v-model="form.spId" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="货柜总数" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckHgCount" auto-complete="off"></el-input>
+                <el-form-item label="出库商品数量" :label-width="formLabelWidth">
+                    <el-input v-model="form.applyCount" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="属性" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckAttribute" auto-complete="off"></el-input>
+                <el-form-item label="备注" :label-width="formLabelWidth">
+                    <el-input v-model="form.remark" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="状态" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckStatus" auto-complete="off"></el-input>
-                </el-form-item>
+                <!--<el-form-item label="邮箱" :label-width="formLabelWidth">-->
+                <!--<el-input v-model="form.email" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
                 <!--<el-form-item label="活动区域" :label-width="formLabelWidth">-->
-                    <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
-                        <!--<el-option label="区域一" value="shanghai"></el-option>-->
-                        <!--<el-option label="区域二" value="beijing"></el-option>-->
-                    <!--</el-select>-->
+                <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
+                <!--<el-option label="区域一" value="shanghai"></el-option>-->
+                <!--<el-option label="区域二" value="beijing"></el-option>-->
+                <!--</el-select>-->
                 <!--</el-form-item>-->
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="submitUpdataWarehouse('form')">确 定</el-button>
+                <el-button type="primary" @click="submitEdit('form')">确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -88,7 +90,7 @@
     export default {
         data() {
             return {
-                warehouseInfo: [],
+                warehouseOut:[],
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
@@ -96,55 +98,27 @@
                 del_list: [],
                 is_search: false,
                 dialogFormVisible:false,
-                form: {
-                    ckId:'',
-                    ckName: '',
-                    ckLocation:'',
-                    ckAttribute: '',
-                    ckHgCount: '',
-                    ckStatus: ''
-                },
+                form:{},
                 formLabelWidth: '120px'
             }
         },
         created(){
 //            this.getData();
-
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouse/page',
+                    url: 'http://10.103.243.94:8080/warehouseApply/page',
                     params:{
                         page:1,
-                        size:5
+                        size:5,
+                        ckManager:18
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
-                this.warehouseInfo=[],
-                    this.warehouseInfo=res.data.data.results;
-                console.log('结果仓库',this.warehouseInfo)
-            })
-            let input= [
-                "2018-4-6 3:00",
-                "2018-4-6 4:00",
-                "2018-4-6 5:00",
-                "2018-4-6 6:00",
-                "2018-4-6 7:00",
-                "2018-4-7 3:00",
-                "2018-4-7 4:00",
-                "2018-4-7 5:00",
-                "2018-4-7 6:00",
-                "2018-4-7 7:00",
-                "2018-4-8 3:00",
-                "2018-4-8 4:00",
-                "2018-4-8 5:00",
-                "2018-4-8 6:00",
-                "2018-4-8 7:00",
-                "2018-4-12 6:00"
-            ];
-            let out =this.getTimeDuration(input);
-            console.log(out);
-
+                this.warehouseOut=[],
+                this.warehouseOut=res.data.data.results;
+            console.log('结果',this.warehouseOut)
+        })
         },
         computed: {
             data(){
@@ -169,40 +143,6 @@
             }
         },
         methods: {
-            getTimeDuration(input) {
-                let ret = [];
-                //你的实现
-                input.map((item)=>{
-                    let index=item.indexOf(' ')
-                    console.log('77777777',index)
-                let date=item.substring(0,index+1)
-                let time=item.substring(index+1)
-                let subDate=[];
-                let subTime=[];
-                var curDtae;
-                // subTime.push(time)
-                //     if(subDate.indexOf(data)==-1){
-                //     // data.concat()
-                //         subDate.push(date)
-                //         curDtae=data;
-                //     }else{
-                //     let mintime=Math.min(...subTime)
-                //     let maxtime=Math.max(...subTime)
-                //     let startTime=curDtae.concat(mintime)
-                //     let endTime=curDtae.concat(maxtime)
-                //         ret.push(startTime)
-                //         ret.push(endTime)
-                //     }
-
-
-                    // console.log('222222',date,'3333',time)
-                })
-                return ret;
-                console.log('99',ret)
-            },
-
-    // let out = getTimeDuration(input);
-    // console.log(out);
             handleCurrentChange(val){
                 this.cur_page = val;
                 this.getData();
@@ -214,7 +154,7 @@
                 };
                 self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
                     self.tableData = res.data.list;
-                })
+            })
             },
             search(){
                 this.is_search = true;
@@ -226,49 +166,64 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-           this.dialogFormVisible = true;
 //                this.$message('编辑第'+(index+1)+'行');
+                this.dialogFormVisible=true;
+
+//                row.delete(createTime);
+//                row.delete(lastUpdate);
                 this.form=row;
+                this.form.createTime='';
+                this.form.lastUpdate='';
+                console.log('test66',this.form)
             },
-            submitUpdataWarehouse(form){
+            submitEdit(){
                 let data=Object.assign({},this.form);
-                console.log('编辑提交信息',data)
+                console.log('id',data);
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouse',
+                        url: 'http://10.103.243.94:8080/warehouseOut',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
-                    this.warehouseInfo=[],
-                        this.warehouseInfo=res.data.data.results;
-                    console.log('结果',this.warehouseInfo)
-                });
+//                    this.usersInfo=[],
+//                        this.usersInfo=res.data.data.results;
+                    console.log('结果',this.warehouseOut)
+            });
                 this.dialogFormVisible = false;
             },
-            handleDelete (index, row) {
-                this.warehouseInfo.splice(index, 1);
-                console.log('ddddd',row.ckId)
-                let ckId=row.ckId;
+            handleDelete(index, row) {
+                this.warehouseOut.splice(index, 1);
+                console.log('ddddd',row.uid)
+                let id=row.id;
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouse',
+                    url: 'http://10.103.243.94:8080/warehouseOut',
                     params:{
-                        ckId
+                        id
                     },
-                    headers:{"Authorization":localStorage.getItem('token')},
+                    headers:{"Authorization":localStorage.getItem('token')}
                 }).then(
                     (res) => {
-                        console.log('删除仓库测试',res);
-                    });
+                    console.log(res);
+            });
                 this.$message({
                     message: "操作成功！",
                     type: 'success'
                 });
-            },
-//            handleDelete(index, row) {
 //                this.$message.error('删除第'+(index+1)+'行');
-//            },
+//                this.$ajax(
+//                    {
+//                        method: 'put', //请求方式
+//                        url: 'http://10.103.243.94:8080/warehouseIn',
+//                        data:data,
+//                        headers:{"Authorization":localStorage.getItem('token')},
+//                    }).then((res)=>{
+////                    this.usersInfo=[],
+////                        this.usersInfo=res.data.data.results;
+//                    console.log('结果',this.usersInfo)
+//                });
+            },
             delAll(){
                 const self = this,
                     length = self.multipleSelection.length;

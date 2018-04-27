@@ -36,7 +36,7 @@
             <el-table-column label="操作" width="180">
                 <template scope="scope">
                     <el-button size="small"
-                    @click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>
+                               @click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>
                     <el-button size="small" type="danger"
                                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
@@ -70,10 +70,10 @@
                     <el-input v-model="form.ckStatus" auto-complete="off"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="活动区域" :label-width="formLabelWidth">-->
-                    <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
-                        <!--<el-option label="区域一" value="shanghai"></el-option>-->
-                        <!--<el-option label="区域二" value="beijing"></el-option>-->
-                    <!--</el-select>-->
+                <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
+                <!--<el-option label="区域一" value="shanghai"></el-option>-->
+                <!--<el-option label="区域二" value="beijing"></el-option>-->
+                <!--</el-select>-->
                 <!--</el-form-item>-->
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -109,7 +109,6 @@
         },
         created(){
 //            this.getData();
-
             this.$ajax(
                 {
                     method: 'get', //请求方式
@@ -121,30 +120,9 @@
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
                 this.warehouseInfo=[],
-                    this.warehouseInfo=res.data.data.results;
-                console.log('结果仓库',this.warehouseInfo)
-            })
-            let input= [
-                "2018-4-6 3:00",
-                "2018-4-6 4:00",
-                "2018-4-6 5:00",
-                "2018-4-6 6:00",
-                "2018-4-6 7:00",
-                "2018-4-7 3:00",
-                "2018-4-7 4:00",
-                "2018-4-7 5:00",
-                "2018-4-7 6:00",
-                "2018-4-7 7:00",
-                "2018-4-8 3:00",
-                "2018-4-8 4:00",
-                "2018-4-8 5:00",
-                "2018-4-8 6:00",
-                "2018-4-8 7:00",
-                "2018-4-12 6:00"
-            ];
-            let out =this.getTimeDuration(input);
-            console.log(out);
-
+                this.warehouseInfo=res.data.data.results;
+            console.log('结果仓库',this.warehouseInfo)
+        })
         },
         computed: {
             data(){
@@ -169,40 +147,6 @@
             }
         },
         methods: {
-            getTimeDuration(input) {
-                let ret = [];
-                //你的实现
-                input.map((item)=>{
-                    let index=item.indexOf(' ')
-                    console.log('77777777',index)
-                let date=item.substring(0,index+1)
-                let time=item.substring(index+1)
-                let subDate=[];
-                let subTime=[];
-                var curDtae;
-                // subTime.push(time)
-                //     if(subDate.indexOf(data)==-1){
-                //     // data.concat()
-                //         subDate.push(date)
-                //         curDtae=data;
-                //     }else{
-                //     let mintime=Math.min(...subTime)
-                //     let maxtime=Math.max(...subTime)
-                //     let startTime=curDtae.concat(mintime)
-                //     let endTime=curDtae.concat(maxtime)
-                //         ret.push(startTime)
-                //         ret.push(endTime)
-                //     }
-
-
-                    // console.log('222222',date,'3333',time)
-                })
-                return ret;
-                console.log('99',ret)
-            },
-
-    // let out = getTimeDuration(input);
-    // console.log(out);
             handleCurrentChange(val){
                 this.cur_page = val;
                 this.getData();
@@ -214,7 +158,7 @@
                 };
                 self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
                     self.tableData = res.data.list;
-                })
+            })
             },
             search(){
                 this.is_search = true;
@@ -226,7 +170,7 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-           this.dialogFormVisible = true;
+                this.dialogFormVisible = true;
 //                this.$message('编辑第'+(index+1)+'行');
                 this.form=row;
             },
@@ -241,9 +185,9 @@
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
                     this.warehouseInfo=[],
-                        this.warehouseInfo=res.data.data.results;
-                    console.log('结果',this.warehouseInfo)
-                });
+                    this.warehouseInfo=res.data.data.results;
+                console.log('结果',this.warehouseInfo)
+            });
                 this.dialogFormVisible = false;
             },
             handleDelete (index, row) {
@@ -259,8 +203,8 @@
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then(
                     (res) => {
-                        console.log('删除仓库测试',res);
-                    });
+                    console.log('删除仓库测试',res);
+            });
                 this.$message({
                     message: "操作成功！",
                     type: 'success'

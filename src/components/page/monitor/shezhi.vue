@@ -37,9 +37,9 @@
             :disabled="this.disable"
             show-input>
         </el-slider>
-
             <el-button type="primary" @click="onSubmit" style="margin-top: 20px;">确定并返回</el-button>
             <el-button>取消</el-button>
+        <el-button type="primary" @click="checkWarehouse" style="margin-top: 20px;">查看理我最近的仓库</el-button>
         <div style="width: 750px;margin: 20px;float: left">
         <el-table :data="repairInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <!--<el-table-column type="selection" width="20"></el-table-column>-->
@@ -144,6 +144,10 @@
 //            console.log('value2',this.type)
         },
         methods: {
+            checkWarehouse(){
+                console.log('jjjjj')
+                this.$router.push('/nearbyWarehouse')
+            },
             onSubmit() {
                 if(this.value2){
                     this.type=1;
