@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30aad9c6-a12e-4922-a61a-48ceba30be42" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/commodity/addCommodity.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/commodity/commodity.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/commodity/commodityTotal.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/commodity/lockerDetails.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/commodity/lockers.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/add2.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/addWarehouse.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/checkApply.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/filterMap.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/link.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/nearbyWarehouse.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/personnalCheckApply.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/page/warehouse/warehouseMap.vue" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/Sidebar.vue" afterPath="$PROJECT_DIR$/src/components/common/Sidebar.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/login/Login.vue" afterPath="$PROJECT_DIR$/src/components/page/login/Login.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/monitor/lamp.vue" afterPath="$PROJECT_DIR$/src/components/page/monitor/lamp.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/monitor/shezhi.vue" afterPath="$PROJECT_DIR$/src/components/page/monitor/shezhi.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/repaire/repaireInfo.vue" afterPath="$PROJECT_DIR$/src/components/page/repaire/repaireInfo.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/test.vue" afterPath="$PROJECT_DIR$/src/components/page/test.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/warehouse/WarehouseList.vue" afterPath="$PROJECT_DIR$/src/components/page/warehouse/WarehouseList.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/warehouse/newWarehouse.vue" afterPath="$PROJECT_DIR$/src/components/page/warehouse/newWarehouse.vue" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="$PROJECT_DIR$/src/router/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -72,7 +49,7 @@
       <file leaf-file-name="filterMap.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/filterMap.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="258">
               <caret line="111" column="60" lean-forward="false" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
               <folding />
             </state>
@@ -181,8 +158,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="123" />
-    <option name="y" value="6" />
+    <option name="x" value="74" />
+    <option name="y" value="17" />
     <option name="width" value="1245" />
     <option name="height" value="650" />
   </component>
@@ -202,6 +179,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -260,7 +238,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -333,16 +310,16 @@
       <workItem from="1524469498746" duration="884000" />
       <workItem from="1524471299407" duration="4023000" />
       <workItem from="1524657931960" duration="6842000" />
-      <workItem from="1524819455294" duration="19000" />
+      <workItem from="1524819455294" duration="755000" />
+      <workItem from="1525255131893" duration="12000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89060000" />
+    <option name="totallyTimeSpent" value="89808000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="123" y="6" width="1245" height="650" extended-state="0" />
-    <editor active="true" />
+    <frame x="74" y="17" width="1245" height="650" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24855012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -352,7 +329,7 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -608,7 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1444">
           <caret line="76" column="10" lean-forward="false" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -672,7 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -730,7 +705,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/filterMap.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
+        <state relative-caret-position="258">
           <caret line="111" column="60" lean-forward="false" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
           <folding />
         </state>
