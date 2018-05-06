@@ -3,6 +3,7 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
+import echarts from 'echarts';
 import 'element-ui/lib/theme-default/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
@@ -15,6 +16,7 @@ const httpLink = new HttpLink({
     uri: 'http://localhost:4000/graphql',
 })
 
+Vue.prototype.$echarts = echarts
 // Create the apollo client
 const apolloClient = new ApolloClient({
     link: httpLink,

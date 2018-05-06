@@ -10,6 +10,7 @@
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="loginout">退出</el-dropdown-item>
                     <el-dropdown-item command="modified">修改密码</el-dropdown-item>
+                    <el-dropdown-item command="myApply">我的入库申请</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -40,6 +41,8 @@
                     if(command == 'modified'){
 //                    localStorage.removeItem('ms_username')
                         this.$router.push('/modifiedPassword');
+                    }else if(command=='myApply'){
+                        this.$router.push('/personnalCheckApply');
                     }
                 }
             }

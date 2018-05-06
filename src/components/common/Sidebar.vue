@@ -24,11 +24,11 @@
         data() {
             return {
                 items: [
-                    {
-                        icon: 'el-icon-setting',
-                        index: 'readme',
-                        title: '系统首页'
-                    },
+                    // {
+                    //     icon: 'el-icon-setting',
+                    //     index: 'readme',
+                    //     title: '系统首页'
+                    // },
                     {
                         icon: 'el-icon-menu',
                         index: '2',
@@ -67,31 +67,27 @@
                    {
                        icon: 'el-icon-date',
                        index: '4',
-                       title: '仓库管理',
+                       title: '仓库信息',
                        subs: [
                            {
                                index: 'warehouselist',
                                title: '仓库列表'
                            },
                            {
-                               index: 'filterMap',
-                               title: '仓库可视化'
+                               index: 'testGood',
+                               title: '测试'
                            },
                            {
-                               index: 'newwarehouse',
-                               title: '申请入库'
+                               index: 'filterMap',
+                               title: '仓库可视化'
                            },
                            {
                                index: 'checkApply',
                                title: '查看申请入库'
                            },
                            {
-                               index: 'personnalCheckApply',
-                               title: '我的入库申请'
-                           },
-                           {
-                               index: 'addWarehouse',
-                               title: '新增仓库'
+                               index: 'kuncun',
+                               title: '库存信息'
                            },
                            {
                                index: 'inWarehousesList',
@@ -111,6 +107,29 @@
 //                            }
                        ]
                    },
+                    {
+                        icon: 'el-icon-date',
+                        index: '5',
+                        title: '仓库管理',
+                        subs: [
+                            {
+                                index: 'newwarehouse',
+                                title: '申请入库'
+                            },
+                            {
+                                index: 'addWarehouse',
+                                title: '新增仓库'
+                            },
+//                            {
+//                                index: 'markdown',
+//                                title: 'markdown'
+//                            },
+//                            {
+//                                index: 'upload',
+//                                title: '文件上传'
+//                            }
+                        ]
+                    },
                     {
                         icon: 'el-icon-menu',
                         index: '9',
@@ -174,17 +193,17 @@
                                 title: '操作日志'
                             }
                         ]
-                    }
-//                    {
-//                        icon: 'el-icon-star-on',
-//                        index: 'basecharts',
-//                        title: '图表'
-//                    },
-//                    {
-//                        icon: 'el-icon-upload2',
-//                        index: 'drag',
-//                        title: '拖拽'
-//                    }
+                    },
+                   {
+                       icon: 'el-icon-star-on',
+                       index: 'basecharts',
+                       title: '数据分析'
+                   },
+                   // {
+                   //     icon: 'el-icon-upload2',
+                   //     index: 'drag',
+                   //     title: '拖拽'
+                   // }
                 ]
             }
         },

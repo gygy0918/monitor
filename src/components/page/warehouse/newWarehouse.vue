@@ -8,20 +8,42 @@
         </div>
         <div class="form-box">
             <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="用户ID">
+                <el-form-item label="用户ID" style="width:320px">
                     <el-input v-model="form.yhId"></el-input>
                 </el-form-item>
-                <el-form-item label="仓库ID">
-                    <el-input v-model="form.ckId"></el-input>
-                </el-form-item>
-                <el-form-item label="货柜ID">
-                    <el-input v-model="form.hgId"></el-input>
-                </el-form-item>
-                <el-form-item label="商品ID">
-                    <el-input v-model="form.spId"></el-input>
-                </el-form-item>
-                <el-form-item label="入库商品数量">
-                    <el-input v-model="form.rkCount"></el-input>
+                <div class="block" style="margin:20px;width:100%;">
+                    <span class="demonstration">仓库/货柜</span>
+                    <el-cascader
+                        :options=" options"
+                        v-model="selectedOptions"
+                        @change="handleChange">
+                    </el-cascader>
+                </div>
+                <div style="margin-left:20px;margin-bottom:20px">
+                <span style="margin:0">
+                商品ID
+                </span>
+                    <el-select v-model="value" placeholder="请选择" >
+                    <el-option
+                        v-for="item in options2"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+                </div>
+
+                <!--<el-form-item label="仓库ID">-->
+                    <!--<el-input v-model="form.ckId"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="货柜ID">-->
+                    <!--<el-input v-model="form.hgId"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="商品ID">-->
+                    <!--<el-input v-model="form.spId"></el-input>-->
+                <!--</el-form-item>-->
+                <el-form-item label="入库商品数量" style="width:320px">
+                    <el-input v-model="form.applyCount"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="备注">-->
                     <!--<el-input v-model="form.remark"></el-input>-->
@@ -62,7 +84,7 @@
                         <!--<el-radio label="imoo"></el-radio>-->
                     <!--</el-radio-group>-->
                 <!--</el-form-item>-->
-                <el-form-item label="备注">
+                <el-form-item label="备注" style="width:320px">
                     <el-input type="textarea" v-model="form.remark"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -79,6 +101,12 @@
     export default {
         data: function(){
             return {
+                obj:{},
+                spObj:{},
+                options:[],
+                options2:[],
+                value: '',
+                selectedOptions: [],
                 warehouseInfo:[],
                 form: {
                     yhId: localStorage.getItem('yhId'),
@@ -92,9 +120,50 @@
                 }
             }
         },
+        created(){
+//             var datainfo=[];
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.243.94:8080/list/ckIds',
+                    params:{
+                        page:1,
+                        size:9
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                this.options=res.data
+            console.log('结果666666',this.options)
+//                 datainfo=res.data.data.results;
+//
+        });
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.243.94:8080/list/spIds',
+                    params:{
+                        page:1,
+                        size:9
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                this.options2=res.data
+            console.log('结果+++++',res.data)
+//                 datainfo=res.data.data.results;
+//
+        });
+        },
         methods: {
+            handleChange(value) {
+                this.obj={};
+                this.obj.ckId=value[0];
+                this.obj.hgId=value[1];
+                console.log(this.obj);
+            },
             onSubmit() {
-                let data=Object.assign({},this.form);
+                // let spObj={}
+                this.spObj.spId=this.value;
+                let data=Object.assign({},this.form,this.obj,this.spObj);
                 console.log('ttt',data)
                 this.$ajax(
                     {
@@ -103,12 +172,10 @@
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
-                    this.warehouseInfo=[],
-                        this.warehouseInfo=res.data.data.results;
-                    console.log('结果',this.warehouseInfo)
+                    console.log('结果',res)
                 });
                 this.$message.success('提交成功！');
-                self.$router.push('/vueeditor');
+               this.$router.push('/checkApply');
             }
         }
     }

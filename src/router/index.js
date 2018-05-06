@@ -70,8 +70,17 @@ export default new Router({
         component: resolve => require(['../components/page/warehouse/WarehouseList.vue'], resolve)    // Vue-Quill-Editor组件
 },
 {
-    path: '/inWarehousesList',
-        component: resolve => require(['../components/page/warehouse/inWarehousesList.vue'], resolve)     // Vue-Quill-Editor组件
+    path: '/kuncun',
+        component: resolve => require(['../components/page/warehouse/kuncun.vue'], resolve)     // Vue-Quill-Editor组件
+},
+
+{
+    path: '/testGood',
+        component: resolve => require(['../components/page/warehouse/testGood.vue'], resolve)     // Vue-Quill-Editor组件
+},
+{
+    path: '/singleHK',
+        component: resolve => require(['../components/page/warehouse/singleHK.vue'], resolve)     // Vue-Quill-Editor组件
 },
 {
     path: '/outWarehousesList',
@@ -86,8 +95,20 @@ export default new Router({
         component: resolve => require(['../components/page/BaseCharts.vue'], resolve)   // vue-schart组件
 },
 {
+    path: '/testcharts',
+        component: resolve => require(['../components/page/warehouse/testPoits.vue'], resolve)   // vue-schart组件
+},
+{
+    path: '/testpictures',
+        component: resolve => require(['../components/page/warehouse/testPictures.vue'], resolve)   // vue-schart组件
+},
+{
     path: '/test',
         component: resolve => require(['../components/page/test.vue'], resolve)   // vue-schart组件
+},
+{
+    path: '/huoguiList',
+        component: resolve => require(['../components/page/huogui/huoguiList.vue'], resolve)   // vue-schart组件
 },
 {
     path: '/commodity',

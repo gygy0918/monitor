@@ -32,14 +32,14 @@
             <!--</el-table-column>-->
             <el-table-column prop="remark" label="备注信息" width="120">
             </el-table-column>
-            <!--<el-table-column label="操作" width="180">-->
-                <!--<template scope="scope">-->
-                    <!--<el-button size="small"-->
-                               <!--@click="handleEdit(scope.$index, scope.row)"></el-button>-->
-                    <!--<el-button size="small" type="danger"-->
-                               <!--@click="handleDelete(scope.$index,scope.row)">删除</el-button>-->
-                <!--</template>-->
-            <!--</el-table-column>-->
+            <el-table-column label="操作" width="180">
+                <template scope="scope">
+                    <el-button size="small"
+                               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="small" type="danger"
+                               @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
         </el-table>
         <div class="pagination">
             <el-pagination
@@ -48,9 +48,9 @@
                 :total="1000">
             </el-pagination>
         </div>
-        <el-dialog title="修改入库信息" :visible.sync="dialogFormVisible">
+        <el-dialog title="修改入库申请" :visible.sync="dialogFormVisible">
             <el-form :model="form" ref="form">
-                <el-form-item label="出库人编号" :label-width="formLabelWidth">
+                <el-form-item label="申请入库人编号" :label-width="formLabelWidth">
                     <el-input v-model="form.yhId" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="仓库编号" :label-width="formLabelWidth">
@@ -62,10 +62,10 @@
                 <el-form-item label="商品编号" :label-width="formLabelWidth">
                     <el-input v-model="form.spId" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="出库商品数量" :label-width="formLabelWidth">
+                <el-form-item label="申请数量" :label-width="formLabelWidth">
                     <el-input v-model="form.applyCount" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="备注" :label-width="formLabelWidth">
+                <el-form-item label="备注信息" :label-width="formLabelWidth">
                     <el-input v-model="form.remark" auto-complete="off"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="邮箱" :label-width="formLabelWidth">-->
@@ -111,7 +111,7 @@
                     params:{
                         page:1,
                         size:5,
-                        yhId:1
+                        yhId:localStorage.getItem('yhId')
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
@@ -182,7 +182,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouseOut',
+                        url: 'http://10.103.243.94:8080/warehouseApply',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -198,7 +198,7 @@
                 let id=row.id;
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouseOut',
+                    url: 'http://10.103.243.94:8080/warehouseApply',
                     params:{
                         id
                     },

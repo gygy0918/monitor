@@ -21,37 +21,12 @@
     export default {
         data(){
             return{
+                options:''
 
             }
 
         },
-        created(){
-//             var datainfo=[];
-//             this.$ajax(
-//                 {
-//                     method: 'get', //请求方式
-//                     url: 'http://10.103.241.154:8080/lightInfo/page',
-//                     params:{
-//                         page:1,
-//                         size:9
-//                     },
-//                 }).then((res)=>{
-// //                console.log('结果',res.data.data.results)
-//                 datainfo=res.data.data.results;
-//             datainfo.map((item)=>{
-//                 let positions=[]
-//                 if(item.longitude&&item.latitude){
-//                 positions.push(item.longitude);
-//                 positions.push(item.latitude);
-//                 item.positions=positions;
-//             }
-// //                this.datainfo=datainfo;
-//             console.log('page',datainfo)
-//             window.test=datainfo;
-//         })
-//
-//         });
-        },
+
         mounted: function () {
             this.$options.methods.inital.bind(this)();
 //            var goEasy = new GoEasy({
@@ -86,6 +61,7 @@
                     zoom: 18,
                 });
 
+
                 this.$ajax(
                     {
                         method: 'get', //请求方式
@@ -101,6 +77,7 @@
                     console.log(res.data.data.results)
                 let data=res.data.data.results
                 var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+                // infoWindow.open(map, marker.getPosition());
                 for (var i = 0, marker; i < data.length; i++) {
                     var marker = new AMap.Marker({
                         position: data[i].location,
@@ -108,26 +85,36 @@
                     });
                     // marker.content = '我是第' + (i + 1) + '个Marker';
                     console.log('999',data[i])
-                    marker.content='地名：' + data[i].ckAddress+'<p   onclick="test()">查看详情</p>'
-                   let p= document.getElementsByTagName('p')
-                    // p.addEventListener('click',function () {
-                    //     alter('iiii')
-                    // },false)
-                    // p.on('click', test);
+                    marker.content='地名：' + data[i].ckAddress+'<a id="test" href="/#/singleHK">查看详情</a>'
+                   // let a= document.getElementsByTagName('a')
                     marker.on('click', markerClick);
                     marker.emit('click', {target: marker});
                 }
                 function markerClick(e) {
                     infoWindow.setContent(e.target.content);
                     infoWindow.open(map, e.target.getPosition());
+                    // let aa= document.getElementById('test')
+                    // p.addEventListener('click',function () {
+                    //     alter('iiii')
+                    // },false)
+                    // p.on('click', test);
+                    // console.log('++++++',aa)
+                    console.log('000',e)
+                    // window.localStorage.setItem("ckId",record.data.ckId);
                     // setTimeout(function(){ alert('Hello'); },2000)
                 }
+                // infoWindow.on('click', '.iddd', function(event) {
+                //
+                //     //阻止冒泡
+                //     event.stopPropagation();
+                //
+                //     alert('Click .mybtn of infoBody');
+                //
+                // });
                 function test() {
                     alert('Hello');
                 }
                 map.setFitView();
-
-
 
             })
 

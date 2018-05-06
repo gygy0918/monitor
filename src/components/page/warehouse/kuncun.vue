@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>申请入库信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item>申请入库信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>出库信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>出库信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
@@ -18,29 +18,30 @@
             <el-table-column type="selection" width="55"></el-table-column>
             <!--<el-table-column prop="date" label="日期" sortable width="150">-->
             <!--</el-table-column>-->
-            <el-table-column prop="yhId" label="申请入库人编号" width="120">
+            <el-table-column prop="id" label="库存ID" width="120" style="display:none">
             </el-table-column>
             <el-table-column prop="ckId" label="仓库编号" width="120">
             </el-table-column>
-            <el-table-column prop="hgId" label="货柜编号" width="120">
+            <el-table-column prop="ckName" label="仓库名称" width="120">
+            </el-table-column>
+            <el-table-column prop="spBrand" label="商品名" width="120">
             </el-table-column>
             <el-table-column prop="spId" label="商品编号" width="120">
             </el-table-column>
-            <el-table-column prop="applyCount" label="申请数量" width="120">
+            <el-table-column prop="totalCount" label="总数量" width="120">
             </el-table-column>
             <!--<el-table-column prop="remark" label="是否出库" width="120">-->
             <!--</el-table-column>-->
-            <el-table-column prop="remark" label="备注信息" width="120">
-            </el-table-column>
-            <el-table-column label="操作" width="180">
-                <template scope="scope">
-                    <el-button size="small" v-if="scope.row.applyStatus==0"
-                               @click="handleEdit(scope.$index, scope.row)">同意</el-button>
-
-                    <el-button size="small" type="text" disabled v-else
-                               @click="handleDelete(scope.$index,scope.row)">已同意</el-button>
-                </template>
-            </el-table-column>
+            <!--<el-table-column prop="application" label="用途" width="120">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column label="操作" width="180">-->
+                <!--<template scope="scope">-->
+                    <!--<el-button size="small"-->
+                               <!--@click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>-->
+                    <!--<el-button size="small" type="danger"-->
+                               <!--@click="handleDelete(scope.$index,scope.row)">删除</el-button>-->
+                <!--</template>-->
+            <!--</el-table-column>-->
         </el-table>
         <div class="pagination">
             <el-pagination
@@ -64,10 +65,10 @@
                     <el-input v-model="form.spId" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="出库商品数量" :label-width="formLabelWidth">
-                    <el-input v-model="form.applyCount" auto-complete="off"></el-input>
+                    <el-input v-model="form.outCount" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" :label-width="formLabelWidth">
-                    <el-input v-model="form.remark" auto-complete="off"></el-input>
+                    <el-input v-model="form.application" auto-complete="off"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="邮箱" :label-width="formLabelWidth">-->
                 <!--<el-input v-model="form.email" auto-complete="off"></el-input>-->
@@ -108,12 +109,10 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouseApply/pageByManage',
+                    url: 'http://10.103.243.94:8080/repertories/page',
                     params:{
                         page:1,
-                        size:5,
-                        ckManager:localStorage.getItem('yhId')
-                        // applyStatus:0
+                        size:10
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
@@ -168,22 +167,8 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                console.log('canshu111',row)
-                // let data={}
-                // let {id,yhId,ckId,hgId,spId ,rkCount ,remark,ckManager}=row
-                // data={id,yhId,ckId,hgId,spId ,rkCount ,remark,ckManager}
-                // console.log('cansh4444',data)
-                this.$ajax(
-                    {
-                        method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouseIn',
-                        data:row,
-                        headers:{"Authorization":localStorage.getItem('token')},
-                    }).then((res)=>{
-                    this.$message('已同意成功！');
-            })
 //                this.$message('编辑第'+(index+1)+'行');
-//                 this.dialogFormVisible=true;
+                this.dialogFormVisible=true;
 
 //                row.delete(createTime);
 //                row.delete(lastUpdate);

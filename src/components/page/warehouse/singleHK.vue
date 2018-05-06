@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>申请入库信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item>申请入库信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>入库信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>入库信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
@@ -14,31 +14,32 @@
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
         </div>
-        <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+        <el-table :data="warehouseIn" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <!--<el-table-column prop="date" label="日期" sortable width="150">-->
             <!--</el-table-column>-->
-            <el-table-column prop="yhId" label="申请入库人编号" width="120">
+            <el-table-column prop="hgId" label="货柜编号" width="180">
             </el-table-column>
-            <el-table-column prop="ckId" label="仓库编号" width="120">
+            <el-table-column prop="hgSizeName" label="货柜大小" width="300">
             </el-table-column>
-            <el-table-column prop="hgId" label="货柜编号" width="120">
+            <el-table-column prop="hgStatus" label="货柜状态" width="120">
             </el-table-column>
-            <el-table-column prop="spId" label="商品编号" width="120">
-            </el-table-column>
-            <el-table-column prop="applyCount" label="申请数量" width="120">
-            </el-table-column>
+            <!--<el-table-column prop="spId" label="商品编号" width="120">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="rkCount" label="入库商品数量" width="120">-->
+            <!--</el-table-column>-->
             <!--<el-table-column prop="remark" label="是否出库" width="120">-->
             <!--</el-table-column>-->
-            <el-table-column prop="remark" label="备注信息" width="120">
-            </el-table-column>
-            <el-table-column label="操作" width="180">
+            <!--<el-table-column prop="remark" label="备注" :formatter="formatter">-->
+            <!--</el-table-column>-->
+            <el-table-column label="操作" width="280">
                 <template scope="scope">
-                    <el-button size="small" v-if="scope.row.applyStatus==0"
-                               @click="handleEdit(scope.$index, scope.row)">同意</el-button>
-
-                    <el-button size="small" type="text" disabled v-else
-                               @click="handleDelete(scope.$index,scope.row)">已同意</el-button>
+                    <el-button size="small"
+                               @click="handlecheck(scope.$index, scope.row)">查看储物信息</el-button>
+                    <el-button size="small"
+                               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="small" type="danger"
+                               @click="handleDelete(scope.$index,scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -49,26 +50,47 @@
                 :total="1000">
             </el-pagination>
         </div>
-        <el-dialog title="修改入库信息" :visible.sync="dialogFormVisible">
+        <el-dialog title="物品信息" :visible.sync="dialogTableVisible">
+            <el-table :data="commodity">
+                <el-table-column property="spBrand" label="品牌" width="150"></el-table-column>
+                <el-table-column property="spName" label="商品名称" width="200"></el-table-column>
+                <el-table-column property="rkCount" label="数量"></el-table-column>
+                <el-table-column property="spAttribute" label="规格"></el-table-column>
+            </el-table>
+        </el-dialog>
+        <el-dialog title="货柜中的商品" :visible.sync="dialogFormVisible ">
             <el-form :model="form" ref="form">
-                <el-form-item label="出库人编号" :label-width="formLabelWidth">
-                    <el-input v-model="form.yhId" auto-complete="off"></el-input>
+                <!--<el-form-item label="货柜编号" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="form.id" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="仓库编号" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="form.ckId" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="货柜大小" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="form.hgSizeId" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <div style="margin-left:55px;margin-bottom:20px">
+                <span style="margin:0">
+                货柜大小
+                </span>
+                    <el-select v-model="form.hgSizeName" placeholder="请选择" >
+                        <el-option
+                            v-for="item in options2"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <el-form-item label="货柜名称" :label-width="formLabelWidth">
+                    <el-input v-model="form.hgName" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="仓库编号" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckId" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="货柜编号	" :label-width="formLabelWidth">
-                    <el-input v-model="form.hgId" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="商品编号" :label-width="formLabelWidth">
-                    <el-input v-model="form.spId" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="出库商品数量" :label-width="formLabelWidth">
-                    <el-input v-model="form.applyCount" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="备注" :label-width="formLabelWidth">
-                    <el-input v-model="form.remark" auto-complete="off"></el-input>
-                </el-form-item>
+                <!--<el-form-item label="入库商品数量" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="form.rkCount" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="备注" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="form.remark" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
                 <!--<el-form-item label="邮箱" :label-width="formLabelWidth">-->
                 <!--<el-input v-model="form.email" auto-complete="off"></el-input>-->
                 <!--</el-form-item>-->
@@ -91,35 +113,46 @@
     export default {
         data() {
             return {
-                warehouseOut:[],
+                warehouseIn:[],
+                value2:'',
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
                 select_word: '',
                 del_list: [],
+                commodity:[],
+                options2:[],
                 is_search: false,
+                dialogTableVisible :false,
                 dialogFormVisible:false,
-                form:{},
+                form:{
+                    yhId:'',
+                    ckId:'',
+                    hgId:'',
+                    spId:'',
+                    rkCount:'',
+                    remark:''
+                },
                 formLabelWidth: '120px'
             }
         },
         created(){
 //            this.getData();
+            this.form.ckId= window.localStorage.getItem('ckId')
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouseApply/pageByManage',
+                    url: 'http://10.103.243.94:8080/box/page',
                     params:{
                         page:1,
                         size:5,
-                        ckManager:localStorage.getItem('yhId')
-                        // applyStatus:0
+                        ckId: this.form.ckId,
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
-                this.warehouseOut=[],
-                this.warehouseOut=res.data.data.results;
-            console.log('结果',this.warehouseOut)
+                this.warehouseIn=[],
+                this.warehouseIn=res.data.data.results;
+            console.log('结果9999',res.data.data.results)
         })
         },
         computed: {
@@ -167,54 +200,89 @@
             filterTag(value, row) {
                 return row.tag === value;
             },
-            handleEdit(index, row) {
-                console.log('canshu111',row)
-                // let data={}
-                // let {id,yhId,ckId,hgId,spId ,rkCount ,remark,ckManager}=row
-                // data={id,yhId,ckId,hgId,spId ,rkCount ,remark,ckManager}
-                // console.log('cansh4444',data)
+            handlecheck(index, row) {
+//                this.$message('编辑第'+(index+1)+'行');
+                console.log('hg',row.hgId)
+                this.dialogTableVisible=true;
                 this.$ajax(
                     {
-                        method: 'post', //请求方式
+                        method: 'get', //请求方式
                         url: 'http://10.103.243.94:8080/warehouseIn',
-                        data:row,
+                        params:{
+                            // hgId: row.hgId,
+                            hgId:152289888161255
+                        },
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
-                    this.$message('已同意成功！');
+                    this.commodity=[],
+                console.log('*****',res.data.data)
+                let add={rkCount:res.data.data.rkCount}
+                    // res.data.data.commodity.rkCount=res.data.data.rkCount
+               Object.assign({},res.data.data.commodity,add)
+                    this.commodity.push(Object.assign({},res.data.data.commodity,add));
+                    // this.commodity=res.data.data;
+                console.log('结果000',this.commodity)
             })
-//                this.$message('编辑第'+(index+1)+'行');
-//                 this.dialogFormVisible=true;
 
 //                row.delete(createTime);
 //                row.delete(lastUpdate);
+//                 this.form=row;
+//                 this.form.createTime='';
+//                 this.form.lastUpdate='';
+//                 console.log('test66',this.form)
+            },
+            handleEdit(index, row) {
+                // delete this.form.hgStatus
+//                this.$message('编辑第'+(index+1)+'行');
+                console.log('hg',row)
+                let data=row
+                this.dialogFormVisible =true;
                 this.form=row;
-                this.form.createTime='';
-                this.form.lastUpdate='';
-                console.log('test66',this.form)
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.243.94:8080/list/hgSize',
+                        params:{
+                            page:1,
+                            size:9
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    this.options2=res.data
+                    console.log('*****',res)
+            })
+
+//                row.delete(createTime);
+//                row.delete(lastUpdate);
+//                 this.form=row;
+//                 this.form.createTime='';
+//                 this.form.lastUpdate='';
+//                 console.log('test66',this.form)
             },
             submitEdit(){
+
                 let data=Object.assign({},this.form);
                 console.log('id',data);
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouseOut',
+                        url: 'http://10.103.243.94:8080/box',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
 //                    this.usersInfo=[],
 //                        this.usersInfo=res.data.data.results;
-                    console.log('结果',this.warehouseOut)
+                    console.log('结果',res)
             });
                 this.dialogFormVisible = false;
             },
             handleDelete(index, row) {
-                this.warehouseOut.splice(index, 1);
-                console.log('ddddd',row.uid)
+                this.warehouseIn.splice(index, 1);
+                console.log('ddddd',row)
                 let id=row.id;
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouseOut',
+                    url: 'http://10.103.243.94:8080/box',
                     params:{
                         id
                     },

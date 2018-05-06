@@ -33,67 +33,33 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.241.154:8080/lightInfo/page',
+                    url: 'http://10.103.243.94:8080/warehouse/page',
                     params:{
                         page:1,
-                        size:9
+                        size:1000
                     },
+                    headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
-//                console.log('结果',res.data.data.results)
+               console.log('结果111',res.data.data.results)
                 datainfo=res.data.data.results;
-                datainfo.map((item)=>{
-                    let positions=[]
-                    if(item.longitude&&item.latitude){
-                        positions.push(item.longitude);
-                        positions.push(item.latitude);
-                        item.positions=positions;
-                    }
+            datainfo.map((item)=>{
+                let positions=[]
+                if(item.lat&&item.lng){
+                positions.push(item.lng);
+                positions.push(item.lat);
+                item.positions=positions;
+            }
 //                this.datainfo=datainfo;
-                    console.log('page',datainfo)
-                    window.test=datainfo;
-                })
+            console.log('page',datainfo)
+            window.test=datainfo;
+        })
 
-            });
+        });
         },
-    //     case 'WaterDrop':
-    // offset = new AMap.Pixel(0, -67);
-    // break;
-    // case 'SquarePin':
-    // break;
-    // case 'ShieldPin':
-    // break;
-    // case 'FivePointsStar':
-    // offset = new AMap.Pixel(0, -25);
-    // break;
-    // case 'TriangleFlagPin':
-    // offset = new AMap.Pixel(20, -80);
-    // break;
-    // case 'RectangleFlagPin':
-    // offset = new AMap.Pixel(20, -80);
-    // break;
-    // }
+
         mounted: function () {
             this.$options.methods.inital.bind(this)();
-//            var goEasy = new GoEasy({
-//                appkey: "BS-6d10683de85143f488ca00f6ea1c04b7",
-////                onConnected: function () {
-////                    alert("成功连接GoEasy。");
-////                },
-//            });
-//            window.ss=goEasy;
-//            var datainfo = new Array(10);
-//            var obj={};
-//           ss.subscribe({
-//                channel: "light_info",
-//                onMessage: function (message) {
-//                    obj=message.content;
-//                   let id=JSON.parse(obj).lightId;
-////                    console.log('message',message.content.lightId
-//                    datainfo[id]=JSON.parse(obj);
-//                    console.log('实时数组拼接',datainfo);
-//                    window.test=datainfo;
-//                }
-//            });
+
         },
 
         methods: {
@@ -144,8 +110,8 @@
 //                                console.log('maker',typeof parseInt(dataItem.state) )
 //                                console.log('maker',recycledMarker )
                                 var label = dataItem.lightId;
-                                var flag1=parseInt(dataItem.state);
-                                    //存在可回收利用的marker
+                                // var flag1=parseInt(dataItem.state);
+                                //存在可回收利用的marker
 //                                    if (recycledMarker) {
 //                                        //直接更新内容返回
 //                                        recycledMarker.setIconLabel(label);
@@ -156,11 +122,12 @@
 //                                console.log('flag',flag1)
                                 console.log('maker',dataItem.state )
                                 return new SvgMarker(
-                                    new SvgMarker.Shape.TriangleFlagPin({
+                                    new SvgMarker.Shape.WaterDrop({
                                         height: 30,
                                         strokeWidth: 1,
                                         strokeColor: '#ccc',
-                                        fillColor: flag1===1?'green':(flag1===2?'black':'red')
+                                        // fillColor: flag1===1?'green':(flag1===2?'black':'red')
+                                        fillColor:'blue'
                                     }), {
 //                                  iconLabel: label,
                                         containerClassNames: 'my-svg-marker',
@@ -170,12 +137,12 @@
                             //返回数据项对应的列表节点
                             getListElement: function(dataItem, context, recycledListElement) {
 
-                                var tpl1= '<p><%- dataItem.location %><br/>楼层平面图：<a src="../../assets/logo.png" ></a></p>';
-                                var tpl2 = '<div style="font-size:12px;overflow-y: scroll"><%- dataItem.location %>室外</img>' +
-                                    '<p>当前电压<%- dataItem.voltage %>V</p>' +
-                                    '<p>当前电流<%- dataItem.electricity%>A</p>'+
-                                    '<p>当前功率<%- dataItem.power%>W</p>'
-                                     +
+                                var tpl1= '<p><%- dataItem.ckAddress %><br/>楼层平面图：<a src="../../assets/logo.png" ></a></p>';
+                                var tpl2 = '<div style="font-size:12px;overflow-y: scroll"></img>' +
+                                    '<p>仓库名称：<%- dataItem.ckName %></p>' +
+                                    '<p>管理员编号：<%- dataItem.ckManager%></p>'  +
+                                    '<p>货柜数量：<%- dataItem.ckHgCount%>个</p>'
+                                    +'<p>具体位置：<%- dataItem.ckAddress%></p>'+
                                     '</div><br/>';
                                 var tpl=flag?tpl1:tpl2
                                 var content = MarkerList.utils.template(tpl, {
@@ -196,9 +163,10 @@
                                 var flag2=parseInt(dataItem.state);
                                 if (recycledInfoWindow) {
                                     //存在可回收利用的infoWindow, 直接更新内容返回
-                                    recycledInfoWindow.setInfoTitle(dataItem.lightName);
+                                    recycledInfoWindow.setInfoTitle(dataItem.ckAddress);
 //                                    recycledInfoWindow.setInfoBody(flag2?'当前状态：正常':'当前状态：危险');
-                                    recycledInfoWindow.setInfoBody(flag2?'当前状态：正常(点击设置电灯状态)':'当前状态：危险(点击设置电灯状态)');
+//                                     recycledInfoWindow.setInfoBody(flag2?'当前状态：正常(点击设置电灯状态)':'当前状态：危险(点击设置电灯状态)');
+                                    recycledInfoWindow.setInfoBody(点击查看仓库详细信息);
                                     return recycledInfoWindow;
                                 }
                                 //返回一个新的InfoWindow
@@ -213,7 +181,8 @@
 //                                    '<input type="range" id="a" value="0" min="0" max="5" step="1">\n' +
 //                                    '<output name="x" for="a" ></output>A\n' +
 //                                    '</form>',
-                                    infoBody: flag2?'当前状态：正常(点击设置电灯状态)':'当前状态：危险(点击设置电灯状态)'
+//                                     infoBody: flag2?'当前状态：正常(点击设置电灯状态)':'当前状态：危险(点击设置电灯状态)'
+                                    infoBody: '点击查看仓库详细信息'
 
                                 });
 
@@ -269,15 +238,9 @@
 //                                }));
                             });
                         markerList.on('infoWindowClick',function (event, record) {
-                            window.location.href = "/#/shezhi"
-                            console.log('8888',record.data.lightId)
-                            window.localStorage.setItem("lightId",record.data.lightId);
-                            window.localStorage.setItem("lightName", record.data.lightName);
-                            window.localStorage.setItem("location",record.data.location);
-                            window.localStorage.setItem("electricity", record.data.electricity);
-                            window.localStorage.setItem("power", record.data.power);
-                            window.localStorage.setItem("state", record.data.state);
-
+                            window.location.href = "/#/singleHK"
+                            console.log('8888',record.data.ckId)
+                            window.localStorage.setItem("ckId",record.data.ckId);
 
                         })
 
@@ -348,33 +311,9 @@
                         //展示该数据
 //                        var getdata=this.getdata();
 //                            console.log('实时改变test',getdata)
-                        var goEasy = new GoEasy({
-                            appkey: "BS-6d10683de85143f488ca00f6ea1c04b7",
-//                onConnected: function () {
-//                    alert("成功连接GoEasy。");
-//                },
-                        });
-                        window.ss=goEasy;
                         var datainfo = new Array(10);
                         var obj={};
-                        ss.subscribe({
-                            channel: "light_info",
-                            onMessage: function (message) {
-                                obj=message.content;
-                                let id=JSON.parse(obj).lightId;
-//                    console.log('message',message.content.lightId
-                                datainfo[id]=JSON.parse(obj);
-                                console.log('实时数组拼接',datainfo);
-                                datainfo.map((item)=>{
-                                    console.log('item',item.lightId)
 
-                                });
-                                setTimeout(()=>{markerList.render(datainfo)}, 10);
-//                                markerList.render(datainfo)
-//                                console.log('window',window.test);
-//                                var data=window.test ;
-                            }
-                        });
 
                         console.log('window.test',window.test)
 //                        window.markerList=markerList;
@@ -386,7 +325,7 @@
 
             },//初始化完毕
             add() {
-               this.$router.push('../addWarehouse')
+                this.$router.push('../addWarehouse')
             }
 
         }
@@ -396,7 +335,7 @@
 </script>
 <style>
     #panel{
-       margin: 0 auto;
+        margin: 0 auto;
         overflow-y: scroll;
     }
     #eventInfo {
@@ -411,7 +350,7 @@
         line-height: 170%;
     }
     /*.select{*/
-/*background: rebeccapurple;*/
+    /*background: rebeccapurple;*/
     /*}*/
     .select {
         /*width: 90px;*/
