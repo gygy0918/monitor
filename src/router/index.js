@@ -46,6 +46,10 @@ export default new Router({
         component: resolve => require(['../components/page/warehouse/addWarehouse.vue'], resolve)    // 拖拽列表组件
 },
 {
+    path: '/pppp',
+        component: resolve => require(['../components/page/warehouse/pppp.vue'], resolve)    // 拖拽列表组件
+},
+{
     path: '/nearbyWarehouse',
         component: resolve => require(['../components/page/warehouse/nearbyWarehouse.vue'], resolve)    // 拖拽列表组件
 },

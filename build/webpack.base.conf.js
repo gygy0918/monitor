@@ -3,6 +3,7 @@ var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -65,10 +66,21 @@ module.exports = {
       }
     ]
   },
-    // plugins: [
-    //     new webpack.DllReferencePlugin({
-    //       context: path.resolve(__dirname, '..'),
-    //       manifest: require('./vendor-manifest.json')
-    //     })
-    // ]
+    plugins: [
+        // new webpack.DllReferencePlugin({
+        //   context: path.resolve(__dirname, '..'),
+        //   manifest: require('./vendor-manifest.json')
+        // }),
+        // new CopyWebpackPlugin([ ...patterns ], options)
+        new CopyWebpackPlugin([
+       {
+                from: 'src/assets',
+                to: 'assets'
+            }
+        ], {
+            ignore: [],
+            copyUnmodified: true,
+            debug: "debug"
+        })
+    ]
 }
