@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>入库信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item>入库信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>货柜信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>室内货柜信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">

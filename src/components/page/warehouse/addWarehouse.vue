@@ -9,16 +9,31 @@
             <div id="poiInfo"></div>
         </div>
         <div style="float: right;width:300px; height:100px;margin-top: 80px;">
-            <el-form ref=" LocationItem" :model=" LocationItem" label-width="80px">
-                <el-form-item label="物品名称">
-                    <el-input v-model=" LocationItem.name"></el-input>
+            <el-form ref=" LocationDetails" :model=" LocationDetails" label-width="80px">
+                <el-form-item label="输入仓库名称">
+                    <el-input v-model=" LocationDetails.ckName"></el-input>
                 </el-form-item>
-                <el-form-item label="物品型号">
-                    <el-input v-model=" LocationItem.address"></el-input>
+                <el-form-item label="输入仓库具体位置">
+                    <el-input v-model=" LocationDetails.ckAddress"></el-input>
                 </el-form-item>
-                <el-form-item label="物品信息">
-                    <el-input v-model=" LocationItem.location"></el-input>
+                <!--<el-form-item label="仓库管理员">-->
+                    <!--<el-input v-model=" LocationDetails.ckManage"></el-input>-->
+                <!--</el-form-item>-->
+                仓库管理员: <el-select v-model="value" placeholder="请选择" >
+                    <el-option
+                        v-for="item in options2"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+                <el-form-item label="仓库创建者">
+                    <el-input v-model="  LocationDetails.ckBuilder"></el-input>
                 </el-form-item>
+                <el-form-item label="仓库属性（常规）">
+                    <el-input v-model="  LocationDetails.ckAttribute"></el-input>
+                </el-form-item>
+
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">确认添加</el-button>
                     <el-button>取消</el-button>
@@ -33,14 +48,48 @@
 <script>
     import AMap from 'AMap'
     export default {
-        data(){
-            return{
-                 LocationItem:''
+        data: function(){
+            return {
+                     LocationItem:'',
+                    subDistricts:[],
+                options2:[],
+                value: '',
+                    city:'',
+                    district:'',
+                    LocationDetails:{
+                        ckName:'',
+                        ckAddress:'',
+                        ckManage:'',
+                        ckBuilder:'',
+                        ckAttribute:''},
+                form: {
+                    yhId: localStorage.getItem('yhId'),
+                    ckId: '',
+                    hgId: '',
+                    spId: '',
+//                    delivery: true,
+//                    type: ['步步高'],
+                    rkCount: '',
+                    remark: ''
+                }
             }
-
         },
         created(){
-            // console.log('3333',this.LocationItem)
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.243.94:8080/list/ckManager',
+                    params:{
+                        page:1,
+                        size:9
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                this.options2=res.data
+            console.log('结果+++++',res.data)
+//                 datainfo=res.data.data.results;
+//
+        });
         },
         mounted: function () {
             this.$options.methods.inital.bind(this)();
@@ -53,6 +102,11 @@
                 var clickListener,map = new AMap.Map("container", {
                     resizeEnable: true,
                     zoom: 16,
+                });
+               var lnglatXY = [116.289603,39.998364];
+                var geocoder = new AMap.Geocoder({
+                    radius: 1000,
+                    extensions: "all"
                 });
 
                 AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
@@ -78,7 +132,7 @@
 
                     //选取了某个POI
                     poiPicker.on('poiPicked', function(poiResult) {
-
+                        console.log('0000',poiResult.item)
                         var source = poiResult.source,
                             poi = poiResult.item,
                             info = {
@@ -88,19 +142,39 @@
                                 location: poi.location.toString(),
                                 address: poi.address
                             };
+                        console.log('1111',info.location)
+                        geocoder.getAddress(info.location, function(status, result) {
+                            if (status === 'complete' && result.info === 'OK') {
+                                geocoder_CallBack(result);
+                            }
+                        });
+                        function geocoder_CallBack(data) {
+                            console.log('//返回地址描述',data.regeocode.formattedAddress)
+                            var str=data.regeocode.formattedAddress
+                            var index=str.indexOf('市')
+                            window.city=str.substring(0,index+1)//city "北京市"
+                            var index2=str.indexOf('区')
+                            window.district=str.slice(index+1,index2+1)
+                            console.log('//返回地址描述',data.regeocode.formattedAddress,city,district)
+                            // var address = data.regeocode.formattedAddress; //返回地址描述
+                            // document.getElementById("result").innerHTML = address;
+                        }
                         window.LocationItem={
-                            ckName:poi.name,
-                            ckLocation:String(poi.location),
-                            ckAddress:poi.address,
-                            ckNearestRoad: '',
+                            locationName:poi.name,
+                            // city:this.city,
+                            // district:this.district,
+                            // ckLocation:String(poi.location),
+                            // ckAddress:poi.address,
+                            // ckNearestRoad: '',
                             lat:poi.location.lat,
                             lng:poi.location.lng,
-                            ckPointInfo: '',
-                            ckHgCount:12,
-                            ckAttribute:'normal'
+                            // ckPointInfo: '',
+                            // ckHgCount:12,
+                            // ckAttribute:'normal',
                         }
+
                         // window.LocationItem=info;
-                        console.log('lll', window.LocationItem)
+                        // console.log('lll', window.LocationItem)
 
                         marker.setMap(map);
                         infoWindow.setMap(map);
@@ -128,19 +202,35 @@
             //
             // },
             onSubmit() {
-
-                console.log('submit!',window.LocationItem);
+console.log('0000000000000',this.value)
+                window.LocationItem.city=window.city
+                this.LocationDetails.ckManage=this.value;
+                window.LocationItem.district=window.district
+                this.LocationDetails.lat=window.LocationItem.lat
+                this.LocationDetails.lng=window.LocationItem.lng
+                // this.subDistricts.push(
+                //     {SubCkLocationthis:window.LocationItem.ckLocation}
+                // )
+                // console.log('1111111111111111111111',this.LocationDetails.ckManage)
+                // console.log('submit!',window.district,this.LocationDetails);
+                // let data=Object.assign({},this.LocationDetails,window.LocationItem);
                 let data=window.LocationItem
+                this.subDistricts.push(
+                    this.LocationDetails
+                )
+                data.subDistricts=this.subDistricts
+                console.log('llllllll',data)
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouse',
+                        url: 'http://10.103.243.94:8080/warehouseParent',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
                     //     this.warehouseIn=res.data.data.results;
-                    this.$router.push('/filterMap')
+
                     console.log('结果',res)
+                // this.$router.push('/filterMap')
             })
             }
 
