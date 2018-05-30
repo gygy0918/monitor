@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>出库信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item>出库信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>物品库存信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>物品库存信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
@@ -13,6 +13,10 @@
             </el-select>
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
+            <el-button type="primary" icon="search" @click="inwarehouse">入库信息</el-button>
+            <el-button type="primary" icon="search" @click="outwarehouse">出库信息</el-button>
+            <el-button type="primary" icon="search" @click="getQuarter">可视化查询</el-button>
+            <!--<el-button type="primary" icon="search" @click="getQuarter2" style="margin-top: 10px">可视化查询2</el-button>-->
         </div>
         <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
@@ -144,6 +148,18 @@
             }
         },
         methods: {
+            getQuarter(){
+                this.$router.push('/test');
+            },
+            getQuarter2(){
+                this.$router.push('/echarts');
+            },
+            inwarehouse(){
+                this.$router.push('/inWarehousesList');
+            },
+            outwarehouse(){
+                this.$router.push('/outWarehousesList');
+            },
             handleCurrentChange(val){
                 this.cur_page = val;
                 this.getData();

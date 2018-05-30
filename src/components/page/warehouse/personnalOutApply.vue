@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>申请入库信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item>申请入库信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>申请出库信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>申请出库信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
@@ -18,7 +18,7 @@
             <el-table-column type="selection" width="55"></el-table-column>
             <!--<el-table-column prop="date" label="日期" sortable width="150">-->
             <!--</el-table-column>-->
-            <el-table-column prop="yhId" label="申请入库人编号" width="120">
+            <el-table-column prop="yhId" label="申请出库人编号" width="120">
             </el-table-column>
             <el-table-column prop="ckId" label="仓库编号" width="120">
             </el-table-column>
@@ -26,18 +26,20 @@
             </el-table-column>
             <el-table-column prop="spId" label="商品编号" width="120">
             </el-table-column>
-            <el-table-column prop="applyCount" label="申请数量" width="120">
+            <el-table-column prop="applyCount" label="申请数量" width="100">
+            </el-table-column>
+            <el-table-column prop="ckManager" label="仓库管理员" width="100">
             </el-table-column>
             <!--<el-table-column prop="remark" label="是否出库" width="120">-->
             <!--</el-table-column>-->
-            <el-table-column prop="remark" label="备注信息" width="120">
+            <el-table-column prop="remark" label="备注信息" width="100">
             </el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作" width="150">
                 <template scope="scope">
                     <el-button size="small"
                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="small"
-                               @click="handleEdit(scope.$index, scope.row)">申请出库</el-button>
+                    <!--<el-button size="small"-->
+                               <!--@click="handleEdit(scope.$index, scope.row)">申请出库</el-button>-->
                     <el-button size="small" type="danger"
                                @click="handleDelete(scope.$index,scope.row)">删除</el-button>
                 </template>
@@ -109,7 +111,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/warehouseApply/page',
+                    url: 'http://10.103.243.94:8080/warehouseOutApply/page',
                     params:{
                         page:1,
                         size:5,
@@ -119,7 +121,7 @@
                 }).then((res)=>{
                 this.warehouseOut=[],
                 this.warehouseOut=res.data.data.results;
-            console.log('结果',this.warehouseOut)
+            console.log('我的申请出库',this.warehouseOut)
         })
         },
         computed: {

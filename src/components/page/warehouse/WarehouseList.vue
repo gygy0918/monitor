@@ -7,12 +7,68 @@
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-                <el-option key="1" label="广东省" value="广东省"></el-option>
-                <el-option key="2" label="湖南省" value="湖南省"></el-option>
-            </el-select>
-            <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-            <el-button type="primary" icon="search" @click="search">搜索</el-button>
+            <!--<el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">-->
+                <!--<el-option key="1" label="广东省" value="广东省"></el-option>-->
+                <!--<el-option key="2" label="湖南省" value="湖南省"></el-option>-->
+            <!--</el-select>-->
+            <el-form ref="form2" :model="form2" label-width="80px" style="display: inline-block;">
+                <el-form-item label="仓库名称" style="display: inline-block;width: 200px">
+                    <el-input v-model="form2.name" placeholder="筛选关键词"></el-input>
+                </el-form-item>
+                <el-form-item label="活动区域" style="display: inline-block;width: 150px">
+                    <el-select v-model="form2.region" placeholder="请选择活动区域">
+                        <el-option label="区域一" value="shanghai"></el-option>
+                        <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="选择日期" style="display: inline-block;width: 500px">
+                        <el-date-picker
+                            v-model="value7"
+                            type="date"
+                            placeholder="开始日期"
+                            format="yyyy 年 MM 月 dd 日"
+                            value-format="yyyy-MM-dd">
+                        </el-date-picker>
+                        <!--<el-col class="line" :span="2">-</el-col>-->
+                        <el-date-picker
+                            v-model="value6"
+                            type="date"
+                            placeholder="选结束日期"
+                            format="yyyy 年 MM 月 dd 日"
+                            value-format="yyyy-MM-dd">
+                        </el-date-picker>
+
+                    <!--<span class="demonstration"></span>-->
+                    <!--<el-date-picker-->
+                        <!--v-model="value7"-->
+                        <!--type="daterange"-->
+                        <!--align="right"-->
+                        <!--unlink-panels-->
+                        <!--range-separator="至"-->
+                        <!--start-placeholder="开始日期"-->
+                        <!--end-placeholder="结束日期"-->
+                        <!--:picker-options="pickerOptions2">-->
+                    <!--</el-date-picker>-->
+                    <!--<el-col :span="4">-->
+                        <!--<el-date-picker type="date" placeholder="选择日期" v-model="form2.date1" style="width: 100%;"  format="yyyy 年 MM 月 dd 日"-->
+                                        <!--value-format="yyyy-MM-dd"></el-date-picker>-->
+                    <!--</el-col>-->
+                    <!--<el-col class="line" :span="2">-</el-col>-->
+                    <!--<el-col :span="4">-->
+                        <!--<el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>-->
+                    <!--</el-col>-->
+                </el-form-item>
+                <!--<el-form-item style="display: inline-block;width: 200px">-->
+                    <!--<el-button type="primary" @click="onSubmit">立即创建</el-button>-->
+                    <el-button type="primary" icon="search" @click="search">搜索</el-button>
+                    <el-button>取消</el-button>
+                <!--</el-form-item>-->
+            </el-form>
+            <!--<el-input v-model="select_word" placeholder="筛选关键词" style="width:150px"></el-input>-->
+            <div style="display: inline-block;">
+
+            </div>
+
             <!--<el-button type="primary"  @click="search">新增人员</el-button>-->
         </div>
         <el-table :data="warehouseInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
@@ -21,11 +77,11 @@
             <!--</el-table-column>-->
             <el-table-column prop="ckId" label="仓库标号" width="120">
             </el-table-column>
-            <el-table-column prop="ckName" label="仓库名称" width="120">
+            <el-table-column prop="name" label="仓库名称" width="120">
             </el-table-column>
-            <el-table-column prop="ckName" label="位置" width="120">
+            <el-table-column prop="ckAddress" label="位置" width="120">
             </el-table-column>
-            <el-table-column prop="ckHgCount" label="货柜总数" width="120">
+            <el-table-column prop="count" label="货柜总数" width="120">
             </el-table-column>
             <el-table-column prop="ckAttribute" label="属性" width="120">
             </el-table-column>
@@ -55,13 +111,13 @@
                     <el-input v-model="form.ckId" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="仓库名称" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckName" auto-complete="off"></el-input>
+                    <el-input v-model="form.name" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="位置" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckLocation" auto-complete="off"></el-input>
+                    <el-input v-model="form.ckAddress" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="货柜总数" :label-width="formLabelWidth">
-                    <el-input v-model="form.ckHgCount" auto-complete="off"></el-input>
+                    <el-input v-model="form.count" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="属性" :label-width="formLabelWidth">
                     <el-input v-model="form.ckAttribute" auto-complete="off"></el-input>
@@ -96,6 +152,7 @@
                 del_list: [],
                 is_search: false,
                 dialogFormVisible:false,
+                form2:{},
                 form: {
                     ckId:'',
                     ckName: '',
@@ -104,6 +161,35 @@
                     ckHgCount: '',
                     ckStatus: ''
                 },
+                pickerOptions2: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                },
+                value6: '',
+                value7: '',
                 formLabelWidth: '120px'
             }
         },
@@ -116,7 +202,7 @@
                     url: 'http://10.103.243.94:8080/warehouse/page',
                     params:{
                         page:1,
-                        size:5
+                        size:15
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
@@ -124,26 +210,6 @@
                     this.warehouseInfo=res.data.data.results;
                 console.log('结果仓库',this.warehouseInfo)
             })
-            let input= [
-                "2018-4-6 3:00",
-                "2018-4-6 4:00",
-                "2018-4-6 5:00",
-                "2018-4-6 6:00",
-                "2018-4-6 7:00",
-                "2018-4-7 3:00",
-                "2018-4-7 4:00",
-                "2018-4-7 5:00",
-                "2018-4-7 6:00",
-                "2018-4-7 7:00",
-                "2018-4-8 3:00",
-                "2018-4-8 4:00",
-                "2018-4-8 5:00",
-                "2018-4-8 6:00",
-                "2018-4-8 7:00",
-                "2018-4-12 6:00"
-            ];
-            let out =this.getTimeDuration(input);
-            console.log(out);
 
         },
         computed: {
@@ -217,7 +283,28 @@
                 })
             },
             search(){
-                this.is_search = true;
+                // this.is_search = true;
+                // console.log('000',this.form2,this.value7.toLocaleDateString(),this.value6.toLocaleDateString())
+                this.form2.startTime=this.value7.toLocaleDateString()
+                this.form2.endTime=this.value6.toLocaleDateString()
+                console.log('1111111111',this.form2)
+                // http://10.103.243.94:8080/warehouse/pageByTime?page=1&start=2017/3/29&size=5&end=2018/4/3
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.94:8080/warehouse/pageByTime',
+                            params:{
+                                page:1,
+                                size:5,
+                                start:this.form2.startTime,
+                                end:this.form2.endTime
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseInfo=[],
+                        this.warehouseInfo=res.data.content;
+                console.log('日期查询仓库',res.data)
+            })
             },
             formatter(row, column) {
                 return row.address;

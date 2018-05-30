@@ -11,7 +11,7 @@
         <div style="float: right;width:300px; height:100px;margin-top: 80px;">
             <el-form ref=" LocationDetails" :model=" LocationDetails" label-width="80px">
                 <el-form-item label="输入仓库名称">
-                    <el-input v-model=" LocationDetails.ckName"></el-input>
+                    <el-input v-model=" LocationDetails.name"></el-input>
                 </el-form-item>
                 <el-form-item label="输入仓库具体位置">
                     <el-input v-model=" LocationDetails.ckAddress"></el-input>
@@ -57,9 +57,9 @@
                     city:'',
                     district:'',
                     LocationDetails:{
-                        ckName:'',
+                        name:'',
                         ckAddress:'',
-                        ckManage:'',
+                        ckManager:'',
                         ckBuilder:'',
                         ckAttribute:''},
                 form: {
@@ -160,7 +160,7 @@
                             // document.getElementById("result").innerHTML = address;
                         }
                         window.LocationItem={
-                            locationName:poi.name,
+                            name:poi.name,
                             // city:this.city,
                             // district:this.district,
                             // ckLocation:String(poi.location),
@@ -204,7 +204,7 @@
             onSubmit() {
 console.log('0000000000000',this.value)
                 window.LocationItem.city=window.city
-                this.LocationDetails.ckManage=this.value;
+                this.LocationDetails.ckManager=this.value;
                 window.LocationItem.district=window.district
                 this.LocationDetails.lat=window.LocationItem.lat
                 this.LocationDetails.lng=window.LocationItem.lng
@@ -228,9 +228,12 @@ console.log('0000000000000',this.value)
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
                     //     this.warehouseIn=res.data.data.results;
-
+                    this.$message({
+                    message: "操作成功！",
+                    type: 'success'
+                });
                     console.log('结果',res)
-                // this.$router.push('/filterMap')
+                this.$router.push('/testpictures')
             })
             }
 

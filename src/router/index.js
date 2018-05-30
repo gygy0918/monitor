@@ -74,10 +74,25 @@ export default new Router({
         component: resolve => require(['../components/page/warehouse/WarehouseList.vue'], resolve)    // Vue-Quill-Editor组件
 },
 {
-    path: '/kuncun',
-        component: resolve => require(['../components/page/warehouse/kuncun.vue'], resolve)     // Vue-Quill-Editor组件
+    path: '/inWarehousesList',
+        component: resolve => require(['../components/page/warehouse/inWarehousesList.vue'], resolve)    // Vue-Quill-Editor组件
 },
-
+{
+    path: '/echarts',
+        component: resolve => require(['../components/page/warehouse/echarts.vue'], resolve)    // Vue-Quill-Editor组件
+},
+{
+    path: '/kucun',
+        component: resolve => require(['../components/page/warehouse/kuncun.vue'], resolve)    // Vue-Quill-Editor组件
+},
+{
+    path: '/checkOut',
+        component: resolve => require(['../components/page/warehouse/checkOut.vue'], resolve)     // Vue-Quill-Editor组件
+},
+{
+    path: '/WarehouseList',
+        component: resolve => require(['../components/page/warehouse/WarehouseList.vue'], resolve)    // Vue-Quill-Editor组件
+},
 {
     path: '/testGood',
         component: resolve => require(['../components/page/warehouse/testGood.vue'], resolve)     // Vue-Quill-Editor组件
@@ -99,6 +114,14 @@ export default new Router({
         component: resolve => require(['../components/page/BaseCharts.vue'], resolve)   // vue-schart组件
 },
 {
+    path: '/test',
+        component: resolve => require(['../components/page/warehouse/test.vue'], resolve)   // vue-schart组件
+},
+{
+    path: '/personnalOutApply',
+        component: resolve => require(['../components/page/warehouse/personnalOutApply.vue'], resolve)   // vue-schart组件
+},
+{
     path: '/testcharts',
         component: resolve => require(['../components/page/warehouse/testPoits.vue'], resolve)   // vue-schart组件
 },
@@ -109,6 +132,10 @@ export default new Router({
 {
     path: '/test',
         component: resolve => require(['../components/page/test.vue'], resolve)   // vue-schart组件
+},
+{
+    path: '/rode',
+        component: resolve => require(['../components/page/rode.vue'], resolve)   // vue-schart组件
 },
 {
     path: '/huoguiList',

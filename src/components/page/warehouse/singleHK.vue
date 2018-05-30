@@ -22,7 +22,7 @@
             </el-table-column>
             <el-table-column prop="hgSizeName" label="货柜大小" width="300">
             </el-table-column>
-            <el-table-column prop="hgStatus" label="货柜状态" width="120">
+            <el-table-column prop="hgStatus" label="货柜状态" width="80">
             </el-table-column>
             <!--<el-table-column prop="spId" label="商品编号" width="120">-->
             <!--</el-table-column>-->
@@ -32,7 +32,7 @@
             <!--</el-table-column>-->
             <!--<el-table-column prop="remark" label="备注" :formatter="formatter">-->
             <!--</el-table-column>-->
-            <el-table-column label="操作" width="280">
+            <el-table-column label="操作" width="400">
                 <template scope="scope">
                     <el-button size="small"
                                @click="handlecheck(scope.$index, scope.row)">查看储物信息</el-button>
@@ -40,6 +40,8 @@
                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button size="small" type="danger"
                                @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                    <!--<el-button size="small" type="danger"-->
+                               <!--@click="applyOutWarehouse(scope.$index,scope.row)">申请出库</el-button>-->
                 </template>
             </el-table-column>
         </el-table>
@@ -56,9 +58,15 @@
                 <el-table-column property="spName" label="商品名称" width="200"></el-table-column>
                 <el-table-column property="rkCount" label="数量"></el-table-column>
                 <el-table-column property="spAttribute" label="规格"></el-table-column>
+                <el-table-column label="操作" width="400">
+                    <template scope="scope">
+                        <el-button size="small" type="danger"
+                                   @click="applyOutWarehouse(scope.$index,scope.row)">申请出库</el-button>
+                    </template>
+                </el-table-column>
             </el-table>
         </el-dialog>
-        <el-dialog title="货柜中的商品" :visible.sync="dialogFormVisible ">
+        <el-dialog title="货柜中的商品" :visible.sync="dialogFormVisible">
             <el-form :model="form" ref="form">
                 <!--<el-form-item label="货柜编号" :label-width="formLabelWidth">-->
                     <!--<el-input v-model="form.id" auto-complete="off"></el-input>-->
@@ -106,6 +114,67 @@
                 <el-button type="primary" @click="submitEdit('form')">确 定</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="出库信息" :visible.sync="dialogFormVisible2 ">
+            <el-form :model="form2" ref="form2">
+                <el-form-item label="申请人编号" :label-width="formLabelWidth">
+                <el-input v-model="form2.yhId" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="仓库编号" :label-width="formLabelWidth">
+                <el-input v-model="form2.ckId" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="货柜编号" :label-width="formLabelWidth">
+                <el-input v-model="form2.hgId" auto-complete="off"></el-input>
+                </el-form-item>
+                <!--<div style="margin-left:55px;margin-bottom:20px">-->
+                <!--<span style="margin:0">-->
+                <!--申请人id-->
+                <!--</span>-->
+                    <!--<el-select v-model="form.hgSizeName" placeholder="请选择" >-->
+                        <!--<el-option-->
+                            <!--v-for="item in options2"-->
+                            <!--:key="item.value"-->
+                            <!--:label="item.label"-->
+                            <!--:value="item.value">-->
+                        <!--</el-option>-->
+                    <!--</el-select>-->
+                <!--</div>-->
+                <!--<el-form-item label="商品" :label-width="formLabelWidth" style="display: none">-->
+                    <!--<el-input v-model="form2.spId" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <div style="margin-left: 50px;margin-bottom: 10px">
+                商品名称  <el-select v-model="value" placeholder="请选择">
+                    <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+                </div>
+                <!--<el-form-item label="商品名称" :label-width="formLabelWidth">-->
+                    <!--<el-input v-model="form2.spName" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <el-form-item label="申请出库数量" :label-width="formLabelWidth">
+                <el-input v-model="form2.applyCount" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="备注" :label-width="formLabelWidth">
+                <el-input v-model="form2.remark" auto-complete="off"></el-input>
+                </el-form-item>
+                <!--<el-form-item label="邮箱" :label-width="formLabelWidth">-->
+                <!--<el-input v-model="form.email" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="活动区域" :label-width="formLabelWidth">-->
+                <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
+                <!--<el-option label="区域一" value="shanghai"></el-option>-->
+                <!--<el-option label="区域二" value="beijing"></el-option>-->
+                <!--</el-select>-->
+                <!--</el-form-item>-->
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+                <el-button type="primary" @click="submitout('form2')">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -125,6 +194,7 @@
                 is_search: false,
                 dialogTableVisible :false,
                 dialogFormVisible:false,
+                dialogFormVisible2:false,
                 form:{
                     yhId:'',
                     ckId:'',
@@ -133,19 +203,30 @@
                     rkCount:'',
                     remark:''
                 },
-                formLabelWidth: '120px'
+                form2:{
+                    ckId:'',
+                    yhId:'',
+                    hgId:'',
+                    spId:'',
+                    applyCount:'',
+                    remark:''
+                },
+                formLabelWidth: '120px',
+                options: [],
+                value: ''
             }
         },
         created(){
 //            this.getData();
             this.form.ckId= window.localStorage.getItem('ckId')
+            console.log('this.form.ckId',this.form.ckId)
             this.$ajax(
                 {
                     method: 'get', //请求方式
                     url: 'http://10.103.243.94:8080/box/page',
                     params:{
                         page:1,
-                        size:5,
+                        size:10,
                         ckId: this.form.ckId,
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
@@ -182,6 +263,7 @@
                 this.cur_page = val;
                 this.getData();
             },
+
             getData(){
                 let self = this;
                 if(process.env.NODE_ENV === 'development'){
@@ -200,9 +282,50 @@
             filterTag(value, row) {
                 return row.tag === value;
             },
-            handlecheck(index, row) {
+            applyOutWarehouse(index, row){
+                let newObj={ value:row.spId,
+                    label:row.spName}
+                console.log('申请出库',row)
+                console.log('出库',newObj)
+                this.options.push(newObj)
+                let ckObj={}
+                ckObj.ckId=localStorage.getItem('ckId')
+                ckObj.yhId=localStorage.getItem('yhId')
+                ckObj.hgId=152289927416169
+                // ckObj.hgId==localStorage.getItem('hgId')
+                this.form2=Object.assign({},row,ckObj) ;
+                this.dialogFormVisible2=true;
+                //     this.form=row;
+                //     this.$ajax(
+                //         {
+                //             method: 'post', //请求方式
+                //             url: 'http://10.103.243.94:8080/warehouseOutApply',
+                //             data:row,
+                //             headers:{"Authorization":localStorage.getItem('token')},
+                //         }).then((res)=>{
+                //         this.options2=res.data
+                //     console.log('*****',res)
+                // })
+            },
+            submitout(form2){
+                console.log('出库提交',this.form2)
+                let data=this.form2
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.243.94:8080/warehouseOutApply',
+                        data:data,
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    this.dialogFormVisible2=false;
+                this.$router.push('/personnalOutApply');
+                console.log('*****',res)
+            })
+            },
+            handlecheck(index, row){
 //                this.$message('编辑第'+(index+1)+'行');
                 console.log('hg',row.hgId)
+                localStorage.hgId=row.hgId
                 this.dialogTableVisible=true;
                 this.$ajax(
                     {
@@ -210,33 +333,26 @@
                         url: 'http://10.103.243.94:8080/warehouseIn',
                         params:{
                             // hgId: row.hgId,
-                            hgId:152289888161255
+                            hgId:152289927416169
                         },
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
                     this.commodity=[],
-                console.log('*****',res.data.data)
-                let add={rkCount:res.data.data.rkCount}
-                    // res.data.data.commodity.rkCount=res.data.data.rkCount
-               Object.assign({},res.data.data.commodity,add)
-                    this.commodity.push(Object.assign({},res.data.data.commodity,add));
-                    // this.commodity=res.data.data;
-                console.log('结果000',this.commodity)
+                console.log('*****',res.data.data.rkCount)
+                let info=res.data.data.commodity;
+                info.rkCount=res.data.data.rkCount
+                window.info=info
+                this.commodity.push(info)
+                console.log('000',this.commodity)
             })
 
-//                row.delete(createTime);
-//                row.delete(lastUpdate);
-//                 this.form=row;
-//                 this.form.createTime='';
-//                 this.form.lastUpdate='';
-//                 console.log('test66',this.form)
             },
             handleEdit(index, row) {
                 // delete this.form.hgStatus
 //                this.$message('编辑第'+(index+1)+'行');
                 console.log('hg',row)
                 let data=row
-                this.dialogFormVisible =true;
+                this.dialogFormVisible2 =true;
                 this.form=row;
                 this.$ajax(
                     {

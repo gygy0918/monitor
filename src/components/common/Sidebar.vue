@@ -73,9 +73,13 @@
                                index: 'warehouselist',
                                title: '仓库列表'
                            },
+                           // {
+                           //     index: 'testGood',
+                           //     title: '测试'
+                           // },
                            {
-                               index: 'testGood',
-                               title: '测试'
+                               index: 'testpictures',
+                               title: '点聚合'
                            },
                            {
                                index: 'filterMap',
@@ -86,17 +90,13 @@
                                title: '查看申请入库'
                            },
                            {
-                               index: 'kuncun',
-                               title: '库存信息'
+                               index: 'checkOut',
+                               title: '查看申请出库'
                            },
                            {
-                               index: 'inWarehousesList',
-                               title: '入库信息列表'
+                               index: 'kucun',
+                               title: '总体库存信息'
                            },
-                           {
-                               index: 'outWarehousesList',
-                               title: '出库信息列表'
-                           }
 //                            {
 //                                index: 'markdown',
 //                                title: 'markdown'
@@ -119,15 +119,7 @@
                             {
                                 index: 'addWarehouse',
                                 title: '新增仓库'
-                            },
-//                            {
-//                                index: 'markdown',
-//                                title: 'markdown'
-//                            },
-//                            {
-//                                index: 'upload',
-//                                title: '文件上传'
-//                            }
+                            }
                         ]
                     },
                     {
