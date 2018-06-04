@@ -38,35 +38,13 @@
                             value-format="yyyy-MM-dd">
                         </el-date-picker>
 
-                    <!--<span class="demonstration"></span>-->
-                    <!--<el-date-picker-->
-                        <!--v-model="value7"-->
-                        <!--type="daterange"-->
-                        <!--align="right"-->
-                        <!--unlink-panels-->
-                        <!--range-separator="至"-->
-                        <!--start-placeholder="开始日期"-->
-                        <!--end-placeholder="结束日期"-->
-                        <!--:picker-options="pickerOptions2">-->
-                    <!--</el-date-picker>-->
-                    <!--<el-col :span="4">-->
-                        <!--<el-date-picker type="date" placeholder="选择日期" v-model="form2.date1" style="width: 100%;"  format="yyyy 年 MM 月 dd 日"-->
-                                        <!--value-format="yyyy-MM-dd"></el-date-picker>-->
-                    <!--</el-col>-->
-                    <!--<el-col class="line" :span="2">-</el-col>-->
-                    <!--<el-col :span="4">-->
-                        <!--<el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>-->
-                    <!--</el-col>-->
+
                 </el-form-item>
-                <!--<el-form-item style="display: inline-block;width: 200px">-->
-                    <!--<el-button type="primary" @click="onSubmit">立即创建</el-button>-->
                     <el-button type="primary" icon="search" @click="search">搜索</el-button>
                     <el-button>取消</el-button>
-                <!--</el-form-item>-->
             </el-form>
             <!--<el-input v-model="select_word" placeholder="筛选关键词" style="width:150px"></el-input>-->
             <div style="display: inline-block;">
-
             </div>
 
             <!--<el-button type="primary"  @click="search">新增人员</el-button>-->

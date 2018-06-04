@@ -2,7 +2,6 @@
     <div >
         <div>
             <el-button type="success" round style="margin:10px" @click="add">新增监控物品</el-button>
-            <el-button type="success" round style="margin:10px" @click="add">仓库数据</el-button>
         </div>
         <div id="container" style="float: left;width:700px; height:700px;margin:10px">室外 </div>
         <div id="outer-box" style="margin-left: 620px;">

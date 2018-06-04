@@ -13,6 +13,7 @@
             </el-select>
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
+            <el-button type="primary" icon="search" @click="out">查看出库</el-button>
         </div>
         <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
@@ -160,6 +161,9 @@
             },
             search(){
                 this.is_search = true;
+            },
+            out(){
+                this.$router.push('/checkOut');
             },
             formatter(row, column) {
                 return row.address;

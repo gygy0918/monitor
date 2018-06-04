@@ -162,6 +162,14 @@ export default new Router({
         component: resolve => require(['../components/page/warehouse/link.vue'], resolve)   // vue-schart组件
 },
 {
+    path: '/check',
+        component: resolve => require(['../components/page/warehouse/check.vue'], resolve)   // vue-schart组件
+},
+{
+    path: '/detailsCheck',
+        component: resolve => require(['../components/page/warehouse/detailsCheck.vue'], resolve)   // vue-schart组件
+},
+{
     path: '/lockerDetails',
         component: resolve => require(['../components/page/commodity/lockerDetails.vue'], resolve)   // vue-schart组件
 },
@@ -192,6 +200,14 @@ export default new Router({
 {
     path: '/shezhi',
         component: resolve => require(['../components/page/monitor/shezhi.vue'], resolve)    // 拖拽列表组件
+},
+{
+    path: '/serviceList',
+        component: resolve => require(['../components/page/serviceManger/serviceList.vue'], resolve)    // 拖拽列表组件
+},
+{
+    path: '/QOSlist',
+        component: resolve => require(['../components/page/serviceManger/QOSlist.vue'], resolve)    // 拖拽列表组件
 }
 ]
 },

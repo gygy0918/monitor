@@ -22,7 +22,20 @@
             </el-table-column>
             <el-table-column prop="hgSizeName" label="货柜大小" width="300">
             </el-table-column>
-            <el-table-column prop="hgStatus" label="货柜状态" width="80">
+            <!--<el-table-column prop="hgStatus" label="货柜状态" width="80">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="hgStatus" label="存货状态" width="80">-->
+            <!--</el-table-column>-->
+            <el-table-column prop="remark" label="货柜状态" width="150">
+                <template scope="scope">
+                    <el-tag type="success" v-if="scope.row.hgStatus==1">有货物</el-tag>
+                    <el-tag type="danger" v-else>空货柜</el-tag>
+                    <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
+                    <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
+
+                    <!--<el-button size="small" type="text" disabled v-else-->
+                    <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
+                </template>
             </el-table-column>
             <!--<el-table-column prop="spId" label="商品编号" width="120">-->
             <!--</el-table-column>-->
@@ -291,7 +304,9 @@
                 let ckObj={}
                 ckObj.ckId=localStorage.getItem('ckId')
                 ckObj.yhId=localStorage.getItem('yhId')
-                ckObj.hgId=152289927416169
+                ckObj.hgId=localStorage.getItem('hgId')
+                // ckObj.hgId=152289887438404
+                // ckObj.hgId=row.hgId
                 // ckObj.hgId==localStorage.getItem('hgId')
                 this.form2=Object.assign({},row,ckObj) ;
                 this.dialogFormVisible2=true;
@@ -332,8 +347,8 @@
                         method: 'get', //请求方式
                         url: 'http://10.103.243.94:8080/warehouseIn',
                         params:{
-                            // hgId: row.hgId,
-                            hgId:152289927416169
+                            hgId: row.hgId,
+                            // hgId:152289887438404
                         },
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

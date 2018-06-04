@@ -78,6 +78,10 @@
                            //     title: '测试'
                            // },
                            {
+                               index: 'check',
+                               title: '盘点'
+                           },
+                           {
                                index: 'testpictures',
                                title: '点聚合'
                            },
@@ -87,12 +91,12 @@
                            },
                            {
                                index: 'checkApply',
-                               title: '查看申请入库'
+                               title: '查看申请单'
                            },
-                           {
-                               index: 'checkOut',
-                               title: '查看申请出库'
-                           },
+                           // {
+                           //     index: 'checkOut',
+                           //     title: '查看申请出库'
+                           // },
                            {
                                index: 'kucun',
                                title: '总体库存信息'
@@ -186,11 +190,26 @@
                             }
                         ]
                     },
-                   {
-                       icon: 'el-icon-star-on',
-                       index: 'basecharts',
-                       title: '数据分析'
-                   },
+                    {
+                        icon: 'el-icon-star-on',
+                        index: '19',
+                        title: '服务管理',
+                        subs: [
+                            {
+                                index: 'serviceList',
+                                title: '服务信息'
+                            },
+                            {
+                                index: 'QOSlist',
+                                title: 'QOS信息'
+                            }
+                        ]
+                    },
+                   // {
+                   //     icon: 'el-icon-star-on',
+                   //     index: 'basecharts',
+                   //     title: '数据分析'
+                   // },
                    // {
                    //     icon: 'el-icon-upload2',
                    //     index: 'drag',

@@ -428,7 +428,7 @@
         margin-right: 30px;
     }
     .detail-list{
-        height: 120px;
+        height: 150px;
         margin-bottom: 10px;
         border-bottom: grey solid 5px;
         border-radius: 8px;

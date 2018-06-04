@@ -1,6 +1,36 @@
 <template>
     <div class="main_content">
-        <el-button type="primary" round @click="getMonth" style="margin-left: 100px">按月份查询</el-button>
+
+        <!--<el-button type="primary" round @click="getMonth" style="margin-left: 100px">按月份查询</el-button>-->
+        <div class="handle-box">
+            <el-form ref="form2" :model="form2" label-width="80px" style="display: inline-block;">
+                <el-form-item label="选择日期" style="display: inline-block;width: 500px">
+                    <el-date-picker
+                        v-model="value7"
+                        type="date"
+                        placeholder="开始日期"
+                        format="yyyy 年 MM 月 dd 日"
+                        value-format="yyyy-MM-dd">
+                    </el-date-picker>
+                    <!--<el-col class="line" :span="2">-</el-col>-->
+                    <el-date-picker
+                        v-model="value6"
+                        type="date"
+                        placeholder="选结束日期"
+                        format="yyyy 年 MM 月 dd 日"
+                        value-format="yyyy-MM-dd">
+                    </el-date-picker>
+                </el-form-item>
+                <el-button type="primary" icon="search" @click="search">按天查询</el-button>
+                <el-button type="primary" round @click="getMonth" style="margin-left: 10px">按月份查询</el-button>
+                <el-button type="primary" round @click="goDetails" style="margin-left: 10px">详细信息查询</el-button>
+                <el-button>取消</el-button>
+            </el-form>
+            <!--<el-input v-model="select_word" placeholder="筛选关键词" style="width:150px"></el-input>-->
+            <div style="display: inline-block;">
+            </div>
+            <!--<el-button type="primary"  @click="search">新增人员</el-button>-->
+        </div>
         <div id="bedroom"></div>
 
     </div>
@@ -10,12 +40,15 @@
     export default {
         data() {
             return {
+                form2:{},
                 chart: null,
                 outnumber:[],
                 intnumber:[],
                 key:[],
                 val:[],
                 val2:[],
+                value7:'',
+                value6:'',
                 arr:[5, 20, 40, 10, 10, 20],
                 opinion: ['物品使用效果差', '物品使用效果一般', '物品使用效果很好'],
                 opinionData: [
@@ -43,6 +76,38 @@
         })
         },
         methods: {
+            goDetails(){
+                this.$router.push('/detailsCheck')
+            },
+            search(){
+                // this.is_search = true;
+                console.log('000',this.form2,this.value7.toLocaleDateString(),this.value6.toLocaleDateString())
+                this.form2.startTime=this.value7.toLocaleDateString()
+                this.form2.endTime=this.value6.toLocaleDateString()
+                console.log('1111111111',this.form2)
+                // http://10.103.243.94:8080/warehouse/pageByTime?page=1&start=2017/3/29&size=5&end=2018/4/3
+                this.$ajax(
+                    {
+
+                        method: 'get', //请求方式
+                        url: 'http://10.103.243.94:8080/check/getDay',
+                        params:{
+                            page:1,
+                            size:5,
+                            start:this.form2.startTime,
+                            end:this.form2.endTime
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                console.log('按天查询仓库',res.data)
+                let len=res.data.length/2;
+                console.log('季度*****',res.data)
+                let total=res.data
+                this.intnumber=total.slice(0,len+1)
+                this.outnumber=total.slice(len,res.data.length)
+                this.drawLine()
+            })
+            },
 
             drawLine(){
                 console.log('实例化',this.outnumber, this.intnumber)
@@ -74,7 +139,8 @@
                         feature : {
                             mark : {show: true},
                             dataView : {show: true, readOnly: false},
-                            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                            // magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                            magicType : {show: true, type: ['line', 'bar']},
                             restore : {show: true},
                             saveAsImage : {show: true}
                         }

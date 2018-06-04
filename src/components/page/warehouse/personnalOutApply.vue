@@ -6,45 +6,157 @@
                 <el-breadcrumb-item>申请出库信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div class="handle-box">
-            <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-                <el-option key="1" label="广东省" value="广东省"></el-option>
-                <el-option key="2" label="湖南省" value="湖南省"></el-option>
-            </el-select>
-            <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-            <el-button type="primary" icon="search" @click="search">搜索</el-button>
-        </div>
-        <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <!--<el-table-column prop="date" label="日期" sortable width="150">-->
-            <!--</el-table-column>-->
-            <el-table-column prop="yhId" label="申请出库人编号" width="120">
-            </el-table-column>
-            <el-table-column prop="ckId" label="仓库编号" width="120">
-            </el-table-column>
-            <el-table-column prop="hgId" label="货柜编号" width="120">
-            </el-table-column>
-            <el-table-column prop="spId" label="商品编号" width="120">
-            </el-table-column>
-            <el-table-column prop="applyCount" label="申请数量" width="100">
-            </el-table-column>
-            <el-table-column prop="ckManager" label="仓库管理员" width="100">
-            </el-table-column>
-            <!--<el-table-column prop="remark" label="是否出库" width="120">-->
-            <!--</el-table-column>-->
-            <el-table-column prop="remark" label="备注信息" width="100">
-            </el-table-column>
-            <el-table-column label="操作" width="150">
-                <template scope="scope">
-                    <el-button size="small"
-                               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <!--<el-button size="small"-->
-                               <!--@click="handleEdit(scope.$index, scope.row)">申请出库</el-button>-->
-                    <el-button size="small" type="danger"
-                               @click="handleDelete(scope.$index,scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
+        <!--<div class="handle-box">-->
+            <!--<el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">-->
+                <!--<el-option key="1" label="广东省" value="广东省"></el-option>-->
+                <!--<el-option key="2" label="湖南省" value="湖南省"></el-option>-->
+            <!--</el-select>-->
+            <!--<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>-->
+            <!--<el-button type="primary" icon="search" @click="search">搜索</el-button>-->
+        <!--</div>-->
+        <el-tabs type="border-card"  v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="全部出库申请单" name="first">
+                <span slot="label"><i class="el-icon-date"></i>全部出库申请单</span>
+                <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+                    <el-table-column type="selection" width="55"></el-table-column>
+                    <!--<el-table-column prop="date" label="日期" sortable width="150">-->
+                    <!--</el-table-column>-->
+                    <el-table-column prop="yhId" label="申请出库人编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ckId" label="仓库编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="hgId" label="货柜编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="spId" label="商品编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="applyCount" label="申请数量" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ckManager" label="仓库管理员" width="80">
+                    </el-table-column>
+                    <el-table-column prop="remark" label="申请状态" width="100">
+                        <template scope="scope">
+                            <el-tag type="danger"  v-if="scope.row.applyStatus==0">未同意</el-tag>
+                            <el-tag type="info" v-else>已同意</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="250">
+                        <template scope="scope">
+                            <el-button size="small"
+                                       @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="small" type="danger"
+                                       @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-tab-pane>
+            <el-tab-pane >
+                <span slot="label"><i class="el-icon-date"></i> 审核通过 等待确认</span>
+                <!--已完成的出库申请单-->
+                <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+                    <el-table-column type="selection" width="55"></el-table-column>
+                    <!--<el-table-column prop="date" label="日期" sortable width="150">-->
+                    <!--</el-table-column>-->
+                    <el-table-column prop="yhId" label="申请出库人编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ckId" label="仓库编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="hgId" label="货柜编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="spId" label="商品编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="applyCount" label="申请数量" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ckManager" label="仓库管理员" width="80">
+                    </el-table-column>
+                    <!--<el-table-column prop="remark" label="是否出库" width="120">-->
+                    <!--</el-table-column>-->
+                    <el-table-column prop="remark" label="申请状态" width="120">
+                        <template scope="scope">
+                            <el-tag type="info" v-if="scope.row.outStatus==0">未完成确认</el-tag>
+                            <el-tag type="danger" v-else>已确认完成</el-tag>
+                            <!--<el-tag type="info" v-if="scope.row.outStatus==0">未完成</el-tag>-->
+                            <!--<el-tag type="danger" v-else>已完成</el-tag>-->
+                            <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
+                                       <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
+
+                            <!--<el-button size="small" type="text" disabled v-else-->
+                                       <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="250">
+                        <template scope="scope">
+                            <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
+                                       <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
+
+                            <!--<el-button size="small" type="text" disabled v-else-->
+                                       <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
+                            <el-button size="small"  v-if="scope.row.outStatus==0"
+                                       @click="handleSure(scope.$index, scope.row)">确认出库</el-button>
+                            <el-button size="small" type="text" disabled v-else
+                                       @click="handleDelete(scope.$index,scope.row)">已确认</el-button>
+                            <el-button size="small"
+                                       @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="small" type="danger"
+                                       @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-tab-pane>
+            <el-tab-pane>
+                <span slot="label"><i class="el-icon-date"></i> 已确认的库申请单</span>
+                <el-table :data="warehouseOut" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+                    <el-table-column type="selection" width="55"></el-table-column>
+                    <!--<el-table-column prop="date" label="日期" sortable width="150">-->
+                    <!--</el-table-column>-->
+                    <el-table-column prop="yhId" label="申请出库人编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ckId" label="仓库编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="hgId" label="货柜编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="spId" label="商品编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="applyCount" label="申请数量" width="100">
+                    </el-table-column>
+                    <el-table-column prop="ckManager" label="仓库管理员" width="80">
+                    </el-table-column>
+                    <!--<el-table-column prop="remark" label="是否出库" width="120">-->
+                    <!--</el-table-column>-->
+                    <el-table-column prop="remark" label="申请状态" width="150">
+                        <template scope="scope">
+                            <el-tag type="info" v-if="scope.row.outStatus==0">未完成</el-tag>
+                            <el-tag type="danger" v-else>已确认完成</el-tag>
+                            <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
+                                       <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
+
+                            <!--<el-button size="small" type="text" disabled v-else-->
+                                       <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="250">
+                        <template scope="scope">
+                            <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
+                            <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
+
+                            <!--<el-button size="small" type="text" disabled v-else-->
+                            <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
+                            <el-button size="small"  v-if="scope.row.outStatus==0"
+                                       @click="handleSure(scope.$index, scope.row)">确认出库</el-button>
+                            <el-button size="small" type="text" disabled v-else
+                                       @click="handleDelete(scope.$index,scope.row)">已确认</el-button>
+                            <el-button size="small"
+                                       @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="small" type="danger"
+                                       @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-tab-pane>
+
+            <!--<el-tab-pane label="已确认">已确认</el-tab-pane>-->
+            <!--<el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>-->
+        </el-tabs>
+
         <div class="pagination">
             <el-pagination
                 @current-change ="handleCurrentChange"
@@ -94,6 +206,7 @@
     export default {
         data() {
             return {
+                activeName: 'first',
                 warehouseOut:[],
                 cur_page: 1,
                 multipleSelection: [],
@@ -147,6 +260,84 @@
             }
         },
         methods: {
+            handleSure(index, row){
+                // let data={outStatus:1,id:row.id},
+                let data={}
+                data . outStatus=1
+                data.id=row.id
+                console.log('确认',data)
+                this.$ajax(
+                    {
+                        method: 'put', //请求方式
+                        url: 'http://10.103.243.94:8080/warehouseOutApply',
+                        data:data,
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    // this.warehouseOut=[],
+                    // this.warehouseOut=res.data.data;
+                    this.$message({
+                    message: "操作成功！",
+                    type: 'success'
+                });
+                console.log('确认申请出库',res)
+            })
+            },
+            handleClick(tab, event) {
+                console.log(tab.index);
+                if(tab.index==0){
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.94:8080/warehouseOutApply/page',
+                            params:{
+                                page:1,
+                                size:5,
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseOut=[],
+                        this.warehouseOut=res.data.data.results;
+                    console.log('我的申请出库',this.warehouseOut)
+                })
+                }
+                else if(tab.index==2){
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.94:8080/warehouseOutApply/page',
+                            params:{
+                                page:1,
+                                size:5,
+                                outStatus:1,
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseOut=[],
+                        this.warehouseOut=res.data.data.results;
+                    console.log('我的申请出库',this.warehouseOut)
+                })
+                }else if(tab.index==1){
+                    console.log('未被确认')
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.94:8080/warehouseOutApply/page',
+                            params:{
+                                page:1,
+                                size:5,
+                                outStatus:0,
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseOut=[],
+                        this.warehouseOut=res.data.data.results;
+                    console.log('我的申请出库',this.warehouseOut)
+                })
+                }
+            },
             handleCurrentChange(val){
                 this.cur_page = val;
                 this.getData();
