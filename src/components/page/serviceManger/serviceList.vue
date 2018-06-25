@@ -6,22 +6,45 @@
             <el-breadcrumb-item>服务信息</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
-    <div style="margin-bottom: 10px" >
-        <el-form ref="Searchform2" :model="Searchform2"  style="display: inline-block;">
-            <el-form-item style="display: inline-block; margin-left: 10px;" >
-            <el-select v-model="Searchform2.name" placeholder="服务类型"  style="display: inline-block;width: 100px" >
-                <el-option key="1" label="广东省" value="广东省"></el-option>
-                <el-option key="2" label="湖南省" value="湖南省"></el-option>
-            </el-select>
-            </el-form-item>
-            <el-form-item style="display: inline-block;width: 200px">
-            <el-input v-model="Searchform2.name" placeholder="服务名称"   ></el-input>
-            </el-form-item>
-            <el-button type="primary" icon="search" @click="search">搜索</el-button>
-            <el-button>取消</el-button>
-        </el-form>
-        <el-button type="primary"  class="el-icon-plus" @click="addService">增加服务</el-button>
-    </div>
+        <div style="width: 550px;display: inline-block">
+            <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
+                <el-form-item
+                    v-for="(domain, index) in dynamicValidateForm.domains"
+                    :label="'条件' + index"
+                    :key="domain.key"
+                    :prop="'domains.' + index + '.value'">
+                    <el-select v-model="domain.key" placeholder="请选择" style="width: 150px">
+                        <el-option
+                            v-for="item in options2"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="domain.operation" placeholder="请选择条件" style="width: 120px">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+
+                    <el-input v-model="domain.value" style="width: 80px"></el-input>
+                    <el-button @click.prevent="removeDomain(domain)">删除</el-button>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm('dynamicValidateForm')">查询</el-button>
+                    <el-button @click="addDomain">新增查询项</el-button>
+                    <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
+                </el-form-item>
+            </el-form>
+
+        </div>
+        <div style="width: 300px;display: inline-block;margin-left:160px" >
+            <el-button type="primary"  class="el-icon-plus" @click="addService">增加服务</el-button>
+            <el-button type="primary"  class="el-icon-plus" @click="matching">自动匹配</el-button>
+        </div>
     <el-table
         :data="tableData"
         style="width: 100%"
@@ -83,7 +106,7 @@
             </template>
         </el-table-column>
     </el-table>
-        <el-dialog title="添加服务" :visible.sync="dialogFormVisible">
+        <el-dialog title="添加服务" :visible.sync="dialogFormVisible6">
             <el-form :model="form">
                 <el-form-item label="服务名称" :label-width="formLabelWidth">
                     <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -153,6 +176,38 @@
                 <el-table-column property="usability" label="可用性"></el-table-column>
             </el-table>
         </el-dialog>
+        <el-dialog title="输入匹配值" :visible.sync="dialogFormVisible6">
+            <el-form :model="form">
+                <el-form-item label="延时" :label-width="formLabelWidth">
+                    <el-input v-model="form.delay" auto-complete="off"  placeholder="0-1"></el-input>
+                </el-form-item>
+                <el-form-item label="响应时间" :label-width="formLabelWidth">
+                    <el-input v-model="form.responseTime" auto-complete="off"  placeholder="0-1"></el-input>
+                </el-form-item>
+                <el-form-item label="可靠性" :label-width="formLabelWidth">
+                    <el-input v-model="form.reliability" auto-complete="off" placeholder="0.5-1"></el-input>
+                </el-form-item>
+                <!--<el-form-item label="服务区域" :label-width="formLabelWidth">-->
+                <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
+                <!--<el-option label="区域一" value="shanghai"></el-option>-->
+                <!--<el-option label="区域二" value="beijing"></el-option>-->
+                <!--</el-select>-->
+                <!--</el-form-item>-->
+                <el-form-item label="可用性" :label-width="formLabelWidth">
+                    <el-input v-model="form.usability" auto-complete="off" placeholder="可用性（0、1）"></el-input>
+                </el-form-item>
+                <el-form-item label="费用" :label-width="formLabelWidth">
+                    <el-input v-model="form.cost" auto-complete="off" placeholder="费用（0~10）" ></el-input>
+                </el-form-item>
+                <el-form-item label="重要性" :label-width="formLabelWidth">
+                    <el-input v-model="form.m" auto-complete="off" placeholder="重要属性（2、3）"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="submitMatch('form')">确 定</el-button>
+            </div>
+        </el-dialog>
         <div class="block" style="margin-top: 50px;margin-left: 300px">
             <!--<span class="demonstration">页数较少时的效果</span>-->
             <el-pagination
@@ -166,11 +221,55 @@
     export default {
         data() {
             return {
+                options: [{
+                    value: 'gt',
+                    label: '大于'
+                }, {
+                    value: 'lt',
+                    label: '小于'
+                }],
+                options2: [{
+                    value: 'serviceId',
+                    label: '服务编号'
+                }, {
+                    value: 'delay',
+                    label: '延时'
+                },{
+                    value: 'responseTime',
+                    label: '响应时间'
+                },
+                    {
+                        value:'reliability',
+                        label: '可靠性'
+                    },
+                    {
+                        value:'m',
+                        label: '重要值'
+                    },
+                    {
+                        value:'cost',
+                        label: '费用'
+                    },
+                    {
+                        value:'usability',
+                        label: '可用性'
+                    }],
+                operation: '',
+                dynamicValidateForm: {
+                    domains: [{
+                        value: '',
+                        key:""
+                    }],
+                    // email: '',
+                    // operation:'',
+                    // key:''
+                },
                 tableData: [],
                 gridData:[],
                 dialogTableVisible: false,
                 dialogFormVisible: false,
                 dialogFormVisible1:false,
+                dialogFormVisible6:false,
                 form: {},
                 editform:{},
                 Searchform2:{},
@@ -193,14 +292,70 @@
         })
         },
         methods: {
+            submitForm(formName) {
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.241.154:8080/ws/result',
+                        data:this.dynamicValidateForm.domains
+                    }).then((res)=>{
+                    // this.warehouseOut=[],
+                    this.tableData=res.data.data;
+                console.log('zuhe服务结果',res.data.data)
+            })
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        console.log('dynamicValidateForm',this.dynamicValidateForm.domains)
+
+
+                    } else {
+                        console.log('error submit!!');
+                return false;
+            }
+            });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            removeDomain(item) {
+                var index = this.dynamicValidateForm.domains.indexOf(item)
+                if (index !== -1) {
+                    this.dynamicValidateForm.domains.splice(index, 1)
+                }
+            },
+            addDomain() {
+                this.dynamicValidateForm.domains.push({
+                    value: '',
+                    key: Date.now()
+                });
+            },
             search(){
                 let data=this.Searchform2
             },
             // openAdd(){
             //
             // },
+            matching(){
+                this.dialogFormVisible6=true;
+
+            },
+            submitMatch(){
+                console.log('00000',this.form)
+                let data=this.form
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.241.154:8080/ws/matching',
+                        data:data
+                    }).then((res)=>{
+                    this.tableData=[],
+                    this.tableData.push(res.data.data);
+                console.log('自动匹配结果',this.tableData)
+                this.dialogFormVisible6=false
+            })
+            },
             addService(){
-                this.dialogFormVisible = true
+                this.dialogFormVisible6 = true
             },
             submitAdd(){
                 let data=this.form;
@@ -213,7 +368,7 @@
                     }).then((res)=>{
                     // this.warehouseOut=[],
                     console.log('添加服务结果',res)
-                this.dialogFormVisible = false
+                this.dialogFormVisible6 = false
             })
             },
             formatter(row, column) {

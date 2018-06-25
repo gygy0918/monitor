@@ -208,6 +208,10 @@ export default new Router({
 {
     path: '/QOSlist',
         component: resolve => require(['../components/page/serviceManger/QOSlist.vue'], resolve)    // 拖拽列表组件
+},
+{
+    path: '/searchtest',
+        component: resolve => require(['../components/page/serviceManger/test.vue'], resolve)    // 拖拽列表组件
 }
 ]
 },

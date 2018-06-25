@@ -41,7 +41,7 @@
         </div>
         <el-table
             :data="tableData"
-            style="width: 100%"
+            style="width: 75%"
             :default-sort = "{prop: 'date', order: 'descending'}"
         >
             <!--<el-table-column-->
@@ -55,50 +55,50 @@
             <!--</template>-->
             <!--</el-table-column>-->
             <el-table-column
-                prop="name"
-                label="服务名称"
+                prop="ckName"
+                label="仓库名称"
                 sortable
-                width="120">
+                width="150">
                 <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top">
-                        <p>名称: {{ scope.row.name }}</p>
+                        <p>名称: {{ scope.row.ckName }}</p>
                         <p>编号: {{ scope.row.serviceId }}</p>
                         <div slot="reference" class="name-wrapper">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                            <el-tag size="medium">{{ scope.row.ckName }}</el-tag>
                         </div>
                     </el-popover>
                 </template>
             </el-table-column>
             <el-table-column
-                prop="category"
-                label="服务类型"
-                width="100">
+                prop="spName"
+                label="商品名称"
+                width="150">
             </el-table-column>
             <el-table-column
-                prop="description"
-                label="服务描述"
-                width="120">
-            </el-table-column>
-            <el-table-column
-                prop="url"
-                label="URL"
+                prop="spType"
+                label="商品类型"
                 width="160">
             </el-table-column>
             <el-table-column
-                prop="cost"
-                label="费用"
+                prop="rkCount"
+                label="入库数量"
                 width="150">
             </el-table-column>
-            <el-table-column label="操作" >
-                <template scope="scope">
-                    <el-button size="small"
-                               @click="handleDetail(scope.$index, scope.row)">查看详情</el-button>
-                    <el-button size="small"
-                               @click="handleEdit(scope.$index, scope.row)" class="el-icon-edit">编辑</el-button>
-                    <el-button size="small" type="danger"
-                               @click="handleDelete(scope.$index,scope.row)" class="el-icon-delete">删除</el-button>
-                </template>
+            <el-table-column
+                prop="outCount"
+                label="出库数量"
+                width="150">
             </el-table-column>
+            <!--<el-table-column label="操作" >-->
+                <!--<template scope="scope">-->
+                    <!--<el-button size="small"-->
+                               <!--@click="handleDetail(scope.$index, scope.row)">查看详情</el-button>-->
+                    <!--<el-button size="small"-->
+                               <!--@click="handleEdit(scope.$index, scope.row)" class="el-icon-edit">编辑</el-button>-->
+                    <!--<el-button size="small" type="danger"-->
+                               <!--@click="handleDelete(scope.$index,scope.row)" class="el-icon-delete">删除</el-button>-->
+                <!--</template>-->
+            <!--</el-table-column>-->
         </el-table>
     </div>
 </template>
@@ -106,230 +106,69 @@
     export default {
         data() {
             return {
+                obj:{},
                 tableData:[],
                 value6:'',
                 value7:'',
                 form2:{},
-                options: [{
-                    value: 'zhinan',
-                    label: '指南',
-                    children: [{
-                        value: 'shejiyuanze',
-                        label: '设计原则',
-                        children: [{
-                            value: 'yizhi',
-                            label: '一致'
-                        }, {
-                            value: 'fankui',
-                            label: '反馈'
-                        }, {
-                            value: 'xiaolv',
-                            label: '效率'
-                        }, {
-                            value: 'kekong',
-                            label: '可控'
-                        }]
-                    }, {
-                        value: 'daohang',
-                        label: '导航',
-                        children: [{
-                            value: 'cexiangdaohang',
-                            label: '侧向导航'
-                        }, {
-                            value: 'dingbudaohang',
-                            label: '顶部导航'
-                        }]
-                    }]
-                }, {
-                    value: 'zujian',
-                    label: '组件',
-                    children: [{
-                        value: 'basic',
-                        label: 'Basic',
-                        children: [{
-                            value: 'layout',
-                            label: 'Layout 布局'
-                        }, {
-                            value: 'color',
-                            label: 'Color 色彩'
-                        }, {
-                            value: 'typography',
-                            label: 'Typography 字体'
-                        }, {
-                            value: 'icon',
-                            label: 'Icon 图标'
-                        }, {
-                            value: 'button',
-                            label: 'Button 按钮'
-                        }]
-                    }, {
-                        value: 'form',
-                        label: 'Form',
-                        children: [{
-                            value: 'radio',
-                            label: 'Radio 单选框'
-                        }, {
-                            value: 'checkbox',
-                            label: 'Checkbox 多选框'
-                        }, {
-                            value: 'input',
-                            label: 'Input 输入框'
-                        }, {
-                            value: 'input-number',
-                            label: 'InputNumber 计数器'
-                        }, {
-                            value: 'select',
-                            label: 'Select 选择器'
-                        }, {
-                            value: 'cascader',
-                            label: 'Cascader 级联选择器'
-                        }, {
-                            value: 'switch',
-                            label: 'Switch 开关'
-                        }, {
-                            value: 'slider',
-                            label: 'Slider 滑块'
-                        }, {
-                            value: 'time-picker',
-                            label: 'TimePicker 时间选择器'
-                        }, {
-                            value: 'date-picker',
-                            label: 'DatePicker 日期选择器'
-                        }, {
-                            value: 'datetime-picker',
-                            label: 'DateTimePicker 日期时间选择器'
-                        }, {
-                            value: 'upload',
-                            label: 'Upload 上传'
-                        }, {
-                            value: 'rate',
-                            label: 'Rate 评分'
-                        }, {
-                            value: 'form',
-                            label: 'Form 表单'
-                        }]
-                    }, {
-                        value: 'data',
-                        label: 'Data',
-                        children: [{
-                            value: 'table',
-                            label: 'Table 表格'
-                        }, {
-                            value: 'tag',
-                            label: 'Tag 标签'
-                        }, {
-                            value: 'progress',
-                            label: 'Progress 进度条'
-                        }, {
-                            value: 'tree',
-                            label: 'Tree 树形控件'
-                        }, {
-                            value: 'pagination',
-                            label: 'Pagination 分页'
-                        }, {
-                            value: 'badge',
-                            label: 'Badge 标记'
-                        }]
-                    }, {
-                        value: 'notice',
-                        label: 'Notice',
-                        children: [{
-                            value: 'alert',
-                            label: 'Alert 警告'
-                        }, {
-                            value: 'loading',
-                            label: 'Loading 加载'
-                        }, {
-                            value: 'message',
-                            label: 'Message 消息提示'
-                        }, {
-                            value: 'message-box',
-                            label: 'MessageBox 弹框'
-                        }, {
-                            value: 'notification',
-                            label: 'Notification 通知'
-                        }]
-                    }, {
-                        value: 'navigation',
-                        label: 'Navigation',
-                        children: [{
-                            value: 'menu',
-                            label: 'NavMenu 导航菜单'
-                        }, {
-                            value: 'tabs',
-                            label: 'Tabs 标签页'
-                        }, {
-                            value: 'breadcrumb',
-                            label: 'Breadcrumb 面包屑'
-                        }, {
-                            value: 'dropdown',
-                            label: 'Dropdown 下拉菜单'
-                        }, {
-                            value: 'steps',
-                            label: 'Steps 步骤条'
-                        }]
-                    }, {
-                        value: 'others',
-                        label: 'Others',
-                        children: [{
-                            value: 'dialog',
-                            label: 'Dialog 对话框'
-                        }, {
-                            value: 'tooltip',
-                            label: 'Tooltip 文字提示'
-                        }, {
-                            value: 'popover',
-                            label: 'Popover 弹出框'
-                        }, {
-                            value: 'card',
-                            label: 'Card 卡片'
-                        }, {
-                            value: 'carousel',
-                            label: 'Carousel 走马灯'
-                        }, {
-                            value: 'collapse',
-                            label: 'Collapse 折叠面板'
-                        }]
-                    }]
-                }, {
-                    value: 'ziyuan',
-                    label: '资源',
-                    children: [{
-                        value: 'axure',
-                        label: 'Axure Components'
-                    }, {
-                        value: 'sketch',
-                        label: 'Sketch Templates'
-                    }, {
-                        value: 'jiaohu',
-                        label: '组件交互文档'
-                    }]
-                }],
+                options: [],
                 selectedOptions: [],
                 selectedOptions2: []
             };
         },
+        created(){
+            //查询下拉菜单
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.243.94:8080/list/ckAndSp',
+                    params:{
+                        page:1,
+                        size:5,
+                        yhId:localStorage.getItem('yhId')
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                this.options=[],
+                this.options=res.data;
+                console.log(res.data)
+        })
+        },
+
         methods: {
             handleChange(value) {
-                console.log(value);
+                this.obj={};
+                this.obj.ckId=value[0];
+                this.obj.spId=value[1];
+                // console.log(this.obj);
             },
             search(){
-               let data=this.form2;
-//             this.$ajax(
-//                 {
-//                     method: 'get', //请求方式
-//                     url: 'http://10.103.243.94:8080/warehouseApply/page',
-//                     params:{
-//                         page:1,
-//                         size:5,
-//                         yhId:localStorage.getItem('yhId')
-//                     },
-//                     headers:{"Authorization":localStorage.getItem('token')},
-//                 }).then((res)=>{
-//                 this.tableData=[],
-//                 this.tableData=res.data.data.results;
-//             console.log('查询盘点',this.tableData3)
-//         })
+                // this.spObj.spId=this.value;
+                this.obj.startTime=this.value7.toLocaleDateString()
+                this.obj.endTime=this.value6.toLocaleDateString()
+                // let data=Object.assign({},this.value6,this.value7,this.obj);
+                // console.log('data',data)
+                // let data=this.form2;
+                console.log(this.value7.toLocaleDateString());
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.94:8080/check/getCkSp',
+                            params:{
+                                page:1,
+                                size:5,
+                                ckId:this.obj.ckId,
+                                spId:this.obj.spId,
+                                start:this.value7.toLocaleDateString(),
+                                end:this.value6.toLocaleDateString(),
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.tableData=[],
+                        this.tableData.push(res.data)
+                    console.log('查询盘点',this.tableData)
+                })
             }
         }
     };
