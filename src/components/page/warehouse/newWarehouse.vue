@@ -6,12 +6,12 @@
                 <el-breadcrumb-item>申请入库基本表单</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div class="form-box">
+        <div class="form-box" v-if="display">
             <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="用户ID" style="width:320px">
                     <el-input v-model="form.yhId"></el-input>
                 </el-form-item>
-                <div class="block" style="margin:20px;width:100%;">
+                <div class="block" style="margin:20px;width:100%;" v-if="auto">
                     <span class="demonstration">仓库/货柜</span>
                     <el-cascader
                         :options=" options"
@@ -89,9 +89,30 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">提交</el-button>
+                    <el-button type="primary" @click="auto=0">自动分配</el-button>
                     <el-button>取消</el-button>
                 </el-form-item>
             </el-form>
+        </div>
+        <div class="form-box" v-else>
+            <el-button type="danger" style="border-bottom: 20px" @click="sure">确认分配结果</el-button>
+            <el-table :data="applyIn" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <!--<el-table-column prop="date" label="日期" sortable width="150">-->
+                <!--</el-table-column>-->
+                <el-table-column prop="ckId" label="仓库编号" width="120">
+                </el-table-column>
+                <el-table-column prop="applyCount" label="申请数量" width="120">
+                </el-table-column>
+                <el-table-column label="操作" width="180">
+                    <template scope="scope">
+                        <el-button size="small"
+                                   @click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>
+                        <el-button size="small" type="danger"
+                                   @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </div>
 
     </div>
@@ -101,11 +122,16 @@
     export default {
         data: function(){
             return {
+                display:1,
                 obj:{},
                 spObj:{},
                 options:[],
                 options2:[],
                 value: '',
+                auto:1,
+                dataIndo:{},
+                applyIn:[],
+                paramdata:[],
                 selectedOptions: [],
                 warehouseInfo:[],
                 form: {
@@ -115,7 +141,6 @@
                     spId: '',
 //                    delivery: true,
 //                    type: ['步步高'],
-                    rkCount: '',
                     remark: ''
                 }
             }
@@ -133,7 +158,6 @@
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
                 this.options=res.data
-            console.log('结果666666',this.options)
 //                 datainfo=res.data.data.results;
 //
         });
@@ -148,34 +172,86 @@
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
                 this.options2=res.data
-            console.log('结果+++++',res.data)
 //                 datainfo=res.data.data.results;
 //
         });
         },
         methods: {
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
             handleChange(value) {
                 this.obj={};
                 this.obj.ckId=value[0];
                 this.obj.hgId=value[1];
                 console.log(this.obj);
             },
-            onSubmit() {
-                // let spObj={}
-                this.spObj.spId=this.value;
-                let data=Object.assign({},this.form,this.obj,this.spObj);
-                console.log('ttt',data)
+            auto(){
+                alert('0000',this.auto)
+                this.auto=0;
+            },
+            sure(){
+                const extra={
+                    yhId:this.dataIndo.yhId,
+                    spId:this.dataIndo.spId,
+                    remark:this.dataIndo.remark
+                }
+                const newarr=[]
+                this.applyIn.forEach(function(element) {
+                    const newitem=Object.assign({},element,extra)
+                    newarr.push(newitem)
+
+                });
+                console.log(' this.applyIn', newarr)
                 this.$ajax(
                     {
-                        method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouseApply',
-                        data:data,
+                        method: 'POST', //请求方式
+                        url: 'http://10.103.243.94:8080/warehouseApply/scheduling',
+                        data:newarr,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
-                    console.log('结果',res)
+                     console.log('一键确认',res)
+            });
+            },
+            onSubmit() {
+                // let spObj={}
+                if(this.auto){
+                    this.spObj.spId=this.value;
+                    let data=Object.assign({},this.form,this.obj,this.spObj);
+                    this.$ajax(
+                        {
+                            method: 'post', //请求方式
+                            url: 'http://10.103.243.94:8080/warehouseApply',
+                            data:data,
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
                 });
-                this.$message.success('提交成功！');
-               this.$router.push('/checkApply');
+                    this.$message.success('提交成功！');
+                    this.$router.push('/checkApply');
+                }else{
+                    console.log('zidong',this.form,this.obj,this.spObj)
+                    this.spObj.spId=this.value;
+                    let data=Object.assign({},this.form,this.obj,this.spObj);
+                    this.dataIndo=data;
+                    console.log('ttt',data)
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.94:8080/scheduling/In',
+                            params:{
+                                applyCount:data.applyCount,
+                                spId:data.spId
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                    this.applyIn=res.data;
+                    console.log('查看自动分配结果',this.applyIn,res.data)
+                });
+                    this.$message.success('提交成功,查看自动分配结果！');
+                    this.display=0
+                    // this.$router.push('/checkApply');
+                }
+
             }
         }
     }

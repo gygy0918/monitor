@@ -64,7 +64,7 @@
             prop="name"
             label="服务名称"
             sortable
-            width="120">
+            width="100">
             <template slot-scope="scope">
                 <el-popover trigger="hover" placement="top">
                     <p>名称: {{ scope.row.name }}</p>
@@ -83,7 +83,7 @@
         <el-table-column
             prop="description"
             label="服务描述"
-            width="120">
+            width="100">
         </el-table-column>
         <el-table-column
             prop="url"
@@ -93,7 +93,7 @@
         <el-table-column
             prop="cost"
             label="费用"
-            width="150">
+            width="100">
         </el-table-column>
         <el-table-column label="操作" >
             <template scope="scope">
@@ -103,6 +103,10 @@
                            @click="handleEdit(scope.$index, scope.row)" class="el-icon-edit">编辑</el-button>
                 <el-button size="small" type="danger"
                            @click="handleDelete(scope.$index,scope.row)" class="el-icon-delete">删除</el-button>
+                <el-button size="small"
+                           @click="addMessage(scope.$index, scope.row)">增加消息</el-button>
+                <el-button size="small"
+                           @click="checkMessage(scope.$index, scope.row)">查看消息</el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -208,6 +212,54 @@
                 <el-button type="primary" @click="submitMatch('form')">确 定</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="添加消息" :visible.sync="dialogFormVisible2">
+            <el-form :model="dynamicValidateForm2" ref="dynamicValidateForm2" label-width="100px" class="demo-dynamic" >
+                <el-form-item label="消息名称" :label-width="formLabelWidth">
+                <el-input v-model="form.delay" auto-complete="off"  placeholder="0-1"></el-input>
+                </el-form-item>
+                <el-form-item label="服务id" :label-width="formLabelWidth">
+                <el-input v-model="form.responseTime" auto-complete="off"  placeholder="0-1"></el-input>
+                </el-form-item>
+                <el-form-item label="消息属性" :label-width="formLabelWidth">
+                    <el-input v-model="form.responseTime" auto-complete="off"  placeholder="0-1"></el-input>
+                </el-form-item>
+                <el-form-item
+                    v-for="(domain, index) in dynamicValidateForm2.domains"
+                    :label="'属性' + index"
+                    :key="domain.key"
+                    :prop="'domains.' + index + '.value'">
+                    <el-input v-model="domain.value" style="width: 80px" label="属性名称" placeholder="属性名称" ></el-input>
+                    <el-input v-model="domain.value" style="width: 80px" label="属性类型" placeholder="属性类型" ></el-input>
+                    <el-input v-model="domain.value" style="width: 80px" label="属性含义" placeholder="属性含义" ></el-input>
+                    <el-select v-model="domain.key" placeholder="是否为空" style="width: 80px">
+                        <el-option
+                            v-for="item in options3"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="domain.operation" placeholder="是否必须在消息中" style="width: 80px">
+                        <el-option
+                            v-for="item in options4"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <el-button @click.prevent="removeattribute(domain)">删除</el-button>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="addattribute">新增属性</el-button>
+                    <el-button @click="resetForm('dynamicValidateForm2')">重置</el-button>
+                    <el-button type="primary" @click="submitForm('dynamicValidateForm2')">查询</el-button>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="submitMatch('form')">确 定</el-button>
+            </div>
+        </el-dialog>
         <div class="block" style="margin-top: 50px;margin-left: 300px">
             <!--<span class="demonstration">页数较少时的效果</span>-->
             <el-pagination
@@ -254,8 +306,31 @@
                         value:'usability',
                         label: '可用性'
                     }],
+                options3: [{
+                    value: 'ture',
+                    label: 'ture'
+                }, {
+                    value: 'false',
+                    label: 'false'
+                }],
+                options4: [{
+                    value: 'ture',
+                    label: 'ture'
+                }, {
+                    value: 'false',
+                    label: 'false'
+                }],
                 operation: '',
                 dynamicValidateForm: {
+                    domains: [{
+                        value: '',
+                        key:""
+                    }],
+                    // email: '',
+                    // operation:'',
+                    // key:''
+                },
+                dynamicValidateForm2: {
                     domains: [{
                         value: '',
                         key:""
@@ -267,8 +342,10 @@
                 tableData: [],
                 gridData:[],
                 dialogTableVisible: false,
+                dialogTableVisible2: false,
                 dialogFormVisible: false,
                 dialogFormVisible1:false,
+                dialogFormVisible2:false,
                 dialogFormVisible6:false,
                 form: {},
                 editform:{},
@@ -317,6 +394,12 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
+            addMessage(index,data){
+                this.dialogFormVisible2=true;
+            },
+            checkMessage(index,data){
+                this.dialogFormVisible2=true;
+            },
             removeDomain(item) {
                 var index = this.dynamicValidateForm.domains.indexOf(item)
                 if (index !== -1) {
@@ -329,6 +412,19 @@
                     key: Date.now()
                 });
             },
+            addattribute() {
+                this.dynamicValidateForm2.domains.push({
+                    value: '',
+                    key: Date.now()
+                });
+            },
+            removeattribute(item) {
+                var index = this.dynamicValidateForm2.domains.indexOf(item)
+                if (index !== -1) {
+                    this.dynamicValidateForm2.domains.splice(index, 1)
+                }
+            },
+
             search(){
                 let data=this.Searchform2
             },

@@ -70,6 +70,10 @@ export default new Router({
         component: resolve => require(['../components/page/warehouse/personnalCheckApply.vue'], resolve)
 },
 {
+    path: '/maprouter',
+        component: resolve => require(['../components/page/warehouse/mapRouter.vue'], resolve)
+},
+{
     path: '/WarehouseList',
         component: resolve => require(['../components/page/warehouse/WarehouseList.vue'], resolve)    // Vue-Quill-Editor组件
 },
@@ -80,6 +84,10 @@ export default new Router({
 {
     path: '/echarts',
         component: resolve => require(['../components/page/warehouse/echarts.vue'], resolve)    // Vue-Quill-Editor组件
+},
+{
+    path: '/findHuogui',
+        component: resolve => require(['../components/page/warehouse/findHuogui.vue'], resolve)    // Vue-Quill-Editor组件
 },
 {
     path: '/kucun',

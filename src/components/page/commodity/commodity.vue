@@ -7,93 +7,95 @@
 </div>
 <div class="ms-doc">
 <!--<h3>README.md</h3>-->
-<div>
-方案一：
-<el-button type="text">1层</el-button>
-<el-button type="text">2层</el-button>
-<el-button type="text">3层</el-button>
-<el-button type="text">4层</el-button>
-<el-button type="text">5层</el-button>
-<el-button type="text">6层</el-button>
-<el-button type="text">7层</el-button>
-<el-button type="text">8层</el-button>
-<el-button type="text">9层</el-button>
+<div class="back">
+    <el-button type="primary" round class="sts" size="mini" @click="findHuoGui">626</el-button>
+    <!--<img src="../../../assets/6.jpg"/>-->
+<!--方案一：-->
+<!--<el-button type="text">1层</el-button>-->
+<!--<el-button type="text">2层</el-button>-->
+<!--<el-button type="text">3层</el-button>-->
+<!--<el-button type="text">4层</el-button>-->
+<!--<el-button type="text">5层</el-button>-->
+<!--<el-button type="text">6层</el-button>-->
+<!--<el-button type="text">7层</el-button>-->
+<!--<el-button type="text">8层</el-button>-->
+<!--<el-button type="text">9层</el-button>-->
 <br/>
 方案二：
-<el-tabs v-model="activeName" @tab-click="handleClick">
-<el-tab-pane label="1层" name="first">1层教室平面图
-<el-carousel indicator-position="outside" >
-<!--<el-carousel-item v-for="item in data" :key="item">-->
-<el-carousel-item v-for="item in data" :key="item.id">
-<table>
-<!--<tr><th>{{item.position}}</th></tr>-->
-<tr>
-<td ><div class="goodcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-</tr>
-<tr>
-<td ><div class="goodcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-</tr>
-<tr>
-<td ><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-</tr>
-<tr>
-<td ><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-</tr>
-<tr>
-<td ><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-<td><div class="goodcicle"> </div></td>
-<td><div class="badcicle"> </div></td>
-</tr>
-</table>
-</el-carousel-item>
-</el-carousel>
-</el-tab-pane>
-<el-tab-pane label="2层" name="second">2层教室平面图
-<el-carousel indicator-position="outside">
-<!--<el-carousel-item v-for="item in data" :key="item">-->
-<el-carousel-item v-for="item in data" :key="item.id">
-</el-carousel-item>
-</el-carousel>
-</el-tab-pane>
-<el-tab-pane label="3层" name="third">3层教室平面图
-<el-carousel indicator-position="outside">
-<!--<el-carousel-item v-for="item in data" :key="item">-->
-<el-carousel-item v-for="item in data" :key="item.id">
-<h3>{{ item.desc}}</h3>
+<!--<el-tabs v-model="activeName" @tab-click="handleClick">-->
+<!--<el-tab-pane label="1层" name="first">1层教室平面图-->
+<!--<el-carousel indicator-position="outside" >-->
+<!--&lt;!&ndash;<el-carousel-item v-for="item in data" :key="item">&ndash;&gt;-->
+<!--<el-carousel-item v-for="item in data" :key="item.id">-->
+<!--<table>-->
+<!--&lt;!&ndash;<tr><th>{{item.position}}</th></tr>&ndash;&gt;-->
+<!--<tr>-->
+<!--<td ><div class="goodcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td ><div class="goodcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--</tr>-->
+<!--<tr>-->
+    <!--<td ><div > <img src="../../../assets/0.jpg" class="goodcicle"></img></div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td ><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td ><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--<td><div class="goodcicle"> </div></td>-->
+<!--<td><div class="badcicle"> </div></td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</el-carousel-item>-->
+<!--</el-carousel>-->
+<!--</el-tab-pane>-->
+<!--<el-tab-pane label="2层" name="second">2层教室平面图-->
+<!--<el-carousel indicator-position="outside">-->
+<!--&lt;!&ndash;<el-carousel-item v-for="item in data" :key="item">&ndash;&gt;-->
+<!--<el-carousel-item v-for="item in data" :key="item.id">-->
+<!--</el-carousel-item>-->
+<!--</el-carousel>-->
+<!--</el-tab-pane>-->
+<!--<el-tab-pane label="3层" name="third">3层教室平面图-->
+<!--<el-carousel indicator-position="outside">-->
+<!--&lt;!&ndash;<el-carousel-item v-for="item in data" :key="item">&ndash;&gt;-->
+<!--<el-carousel-item v-for="item in data" :key="item.id">-->
+<!--<h3>{{ item.desc}}</h3>-->
 
-<!--<el-tag style="background: yellow">标签一</el-tag>-->
-<!--<el-tag type="success">标签二</el-tag>-->
-<!--<el-tag type="info">标签三</el-tag>-->
-<!--<el-tag type="warning">标签四</el-tag>-->
-<!--<el-tag type="danger">标签五</el-tag>-->
-</el-carousel-item>
-</el-carousel>
-</el-tab-pane>
-<el-tab-pane label="4层" name="fourth">4层教室平面图</el-tab-pane>
-<el-tab-pane label="5层" name="lll">5层教室平面图</el-tab-pane>
-<el-tab-pane label="6层" name="ttt">6层教室平面图</el-tab-pane>
-<el-tab-pane label="7层" name="sss">7层教室平面图</el-tab-pane>
-<el-tab-pane label="8层" name="mmm">8层教室平面图</el-tab-pane>
-<el-tab-pane label="9层" name="ppp">9层教室平面图</el-tab-pane>
-</el-tabs>
+<!--&lt;!&ndash;<el-tag style="background: yellow">标签一</el-tag>&ndash;&gt;-->
+<!--&lt;!&ndash;<el-tag type="success">标签二</el-tag>&ndash;&gt;-->
+<!--&lt;!&ndash;<el-tag type="info">标签三</el-tag>&ndash;&gt;-->
+<!--&lt;!&ndash;<el-tag type="warning">标签四</el-tag>&ndash;&gt;-->
+<!--&lt;!&ndash;<el-tag type="danger">标签五</el-tag>&ndash;&gt;-->
+<!--</el-carousel-item>-->
+<!--</el-carousel>-->
+<!--</el-tab-pane>-->
+<!--<el-tab-pane label="4层" name="fourth">4层教室平面图</el-tab-pane>-->
+<!--<el-tab-pane label="5层" name="lll">5层教室平面图</el-tab-pane>-->
+<!--<el-tab-pane label="6层" name="ttt">6层教室平面图</el-tab-pane>-->
+<!--<el-tab-pane label="7层" name="sss">7层教室平面图</el-tab-pane>-->
+<!--<el-tab-pane label="8层" name="mmm">8层教室平面图</el-tab-pane>-->
+<!--<el-tab-pane label="9层" name="ppp">9层教室平面图</el-tab-pane>-->
+<!--</el-tabs>-->
 </div>
 <!--<article>-->
 <!--<h1>manage-system</h1>-->
@@ -132,81 +134,21 @@
 export default {
 data: function(){
 return {
-tableData: [{
-date: '2016-05-02',
-name: '王小虎',
-address: '上海市普陀区金沙江路 1518 弄',
-tag: '灯1'
-}, {
-date: '2016-05-04',
-name: '王小虎',
-address: '上海市普陀区金沙江路 1517 弄',
-tag: '灯2'
-}, {
-date: '2016-05-01',
-name: '王小虎',
-address: '上海市普陀区金沙江路 1519 弄',
-tag: '灯3'
-}, {
-date: '2016-05-03',
-name: '王小虎',
-address: '上海市普陀区金沙江路 1516 弄',
-tag: '灯4'
-}],
-activeName: 'second',
 //每个教室灯的信息
-data:[
-{
-id: '123',
-position:'灯一' ,
-desc: '111',
-power:'30%',
-dataList:[{name:'灯1',status:0},{name:'灯2',status:0},{name:'灯2',status:0},{name:'灯3',status:0},{name:'灯4',status:0},{name:'灯5',status:0},{name:'灯6',status:0},{name:'灯7',status:0},{name:'灯8',status:0}],
-way:'WIFI',
-ower:'北京市国税局',
-url:'../../assets/logo.png'
-}, {
-id: '234',
-position: '灯二',
-desc: '112',
-status:1,
-power:'80%',
-way:'WIFI',
-ower:'北京房管局',
-url:'../../assets/logo.png'
-}, {
-id: '345',
-position:'灯三',
-desc: '113',
-status:1,
-power:'60%',
-way:'4G',
-ower:'北京水利',
-url:'../../assets/logo.png'
-}],
+
 }
 },
 created(){
-//通过点击楼层数返回相应的楼层教室•	http://10.103.243.94:8080/commodity/page?page=1&size=2
-    this.$ajax(
-        {
-            method: 'get', //请求方式
-            url: 'http://10.103.243.94:8080/commodity/page',
-            params:{
-                page:1,
-                size:5
-            },
-            headers:{"Authorization":localStorage.getItem('token')},
-        }).then((res)=>{
-        this.warehouseInfo=[],
-        this.warehouseInfo=res.data.data.results;
-    console.log('结果商品',res.data.data.results)
-})
+//通过点击楼层数返回相应的楼层教室•	http://10.103.243.94:8080/commodity/page?page=1&size=
 },
 methods: {
-handleClick(tab, event) {
-console.log(tab, event);
-}
+        handleClick(tab, event) {
+        console.log(tab, event);
+        },
+    findHuoGui(){
+        this.$router.push('/findHuogui');
+
+    }
 }
 }
 </script>
@@ -298,6 +240,17 @@ background: grey;
 border-radius: 24px;
 margin: 5px;
 }
+    .back{
+        /*width: 200px;*/
+        position: relative;
+        height: 600px;
+        background:  url(../../../assets/6.jpg) no-repeat;
+    }
+    .sts{
+        position: absolute;
+        bottom:130px;
+        left:60px;
+    }
 </style>
 <!--<template>-->
     <!--<div class="dashboard-container" style="background:black">-->
