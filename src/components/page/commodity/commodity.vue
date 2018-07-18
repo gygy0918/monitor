@@ -5,129 +5,13 @@
 <el-breadcrumb-item><i class="el-icon-setting"></i> 楼层详细信息</el-breadcrumb-item>
 </el-breadcrumb>
 </div>
-<div class="ms-doc">
-<!--<h3>README.md</h3>-->
 <div class="back">
     <el-button type="primary" round class="sts" size="mini" @click="findHuoGui">626</el-button>
-    <!--<img src="../../../assets/6.jpg"/>-->
-<!--方案一：-->
-<!--<el-button type="text">1层</el-button>-->
-<!--<el-button type="text">2层</el-button>-->
-<!--<el-button type="text">3层</el-button>-->
-<!--<el-button type="text">4层</el-button>-->
-<!--<el-button type="text">5层</el-button>-->
-<!--<el-button type="text">6层</el-button>-->
-<!--<el-button type="text">7层</el-button>-->
-<!--<el-button type="text">8层</el-button>-->
-<!--<el-button type="text">9层</el-button>-->
-<br/>
-方案二：
-<!--<el-tabs v-model="activeName" @tab-click="handleClick">-->
-<!--<el-tab-pane label="1层" name="first">1层教室平面图-->
-<!--<el-carousel indicator-position="outside" >-->
-<!--&lt;!&ndash;<el-carousel-item v-for="item in data" :key="item">&ndash;&gt;-->
-<!--<el-carousel-item v-for="item in data" :key="item.id">-->
-<!--<table>-->
-<!--&lt;!&ndash;<tr><th>{{item.position}}</th></tr>&ndash;&gt;-->
-<!--<tr>-->
-<!--<td ><div class="goodcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<td ><div class="goodcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--</tr>-->
-<!--<tr>-->
-    <!--<td ><div > <img src="../../../assets/0.jpg" class="goodcicle"></img></div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<td ><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<td ><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--<td><div class="goodcicle"> </div></td>-->
-<!--<td><div class="badcicle"> </div></td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</el-carousel-item>-->
-<!--</el-carousel>-->
-<!--</el-tab-pane>-->
-<!--<el-tab-pane label="2层" name="second">2层教室平面图-->
-<!--<el-carousel indicator-position="outside">-->
-<!--&lt;!&ndash;<el-carousel-item v-for="item in data" :key="item">&ndash;&gt;-->
-<!--<el-carousel-item v-for="item in data" :key="item.id">-->
-<!--</el-carousel-item>-->
-<!--</el-carousel>-->
-<!--</el-tab-pane>-->
-<!--<el-tab-pane label="3层" name="third">3层教室平面图-->
-<!--<el-carousel indicator-position="outside">-->
-<!--&lt;!&ndash;<el-carousel-item v-for="item in data" :key="item">&ndash;&gt;-->
-<!--<el-carousel-item v-for="item in data" :key="item.id">-->
-<!--<h3>{{ item.desc}}</h3>-->
-
-<!--&lt;!&ndash;<el-tag style="background: yellow">标签一</el-tag>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-tag type="success">标签二</el-tag>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-tag type="info">标签三</el-tag>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-tag type="warning">标签四</el-tag>&ndash;&gt;-->
-<!--&lt;!&ndash;<el-tag type="danger">标签五</el-tag>&ndash;&gt;-->
-<!--</el-carousel-item>-->
-<!--</el-carousel>-->
-<!--</el-tab-pane>-->
-<!--<el-tab-pane label="4层" name="fourth">4层教室平面图</el-tab-pane>-->
-<!--<el-tab-pane label="5层" name="lll">5层教室平面图</el-tab-pane>-->
-<!--<el-tab-pane label="6层" name="ttt">6层教室平面图</el-tab-pane>-->
-<!--<el-tab-pane label="7层" name="sss">7层教室平面图</el-tab-pane>-->
-<!--<el-tab-pane label="8层" name="mmm">8层教室平面图</el-tab-pane>-->
-<!--<el-tab-pane label="9层" name="ppp">9层教室平面图</el-tab-pane>-->
-<!--</el-tabs>-->
-</div>
-<!--<article>-->
-<!--<h1>manage-system</h1>-->
-<!--<p>基于Vue.js 2.x系列 + Element UI 的后台管理系统解决方案</p>-->
-<!--<h2>前言</h2>-->
-<!--<p>之前在公司用了Vue + Element组件库做了个后台管理系统，基本很多组件可以直接引用组件库的，但是也有一些需求无法满足。像图片裁剪上传、富文本编辑器、图表等这些在后台管理系统中很常见的功能，就需要引用其他的组件才能完成。从寻找组件，到使用组件的过程中，遇到了很多问题，也积累了宝贵的经验。所以我就把开发这个后台管理系统的经验，总结成这个后台管理系统解决方案。</p>-->
-<!--<p>该方案作为一套多功能的后台框架模板，适用于绝大部分的后台管理系统（Web Management System）开发。基于vue.js,使用vue-cli脚手架快速生成项目目录，引用Element UI组件库，方便开发快速简洁好看的组件。分离颜色样式，支持手动切换主题色，而且很方便使用自定义主题色。</p>-->
-<!--<h2>功能</h2>-->
-<!--<el-checkbox disabled checked>Element UI</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>登录/注销</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>表格</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>表单</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>图表</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>富文本编辑器</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>markdown编辑器</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>图片拖拽/裁剪上传</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>支持切换主题色</el-checkbox>-->
-<!--<br>-->
-<!--<el-checkbox disabled checked>列表拖拽排序</el-checkbox>-->
-<!--<br>-->
-<!--</article>-->
-</div>
 
 </div>
+</div>
+
+
 </template>
 
 <script>
@@ -244,12 +128,13 @@ margin: 5px;
         /*width: 200px;*/
         position: relative;
         height: 600px;
-        background:  url(../../../assets/6.jpg) no-repeat;
+        background:  url(../../../assets/1.png) no-repeat;
+        background-size:100% 100%;
     }
     .sts{
         position: absolute;
-        bottom:130px;
-        left:60px;
+        bottom:170px;
+        left:80px;
     }
 </style>
 <!--<template>-->

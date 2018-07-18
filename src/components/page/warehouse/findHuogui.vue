@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+        <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
             <el-card :body-style="{ padding: '0px'}" class="csrd">
                 <img src="../../../assets/0.jpg" class="image">
                 <div style="padding: 14px;">
@@ -19,8 +19,8 @@
     export default {
         data() {
             return {
-                currentDate: new Date(),
-                data:[1,2,3,4,5,6]
+                currentDate: new Date().getFullYear(),
+                data:[1,2,3,4,5,6,7,8,8,9,1,2,1,2,3,4,5,2]
             };
         },
         name: "find-huogui"
@@ -59,8 +59,8 @@
         clear: both
     }
     .csrd{
-        width: 200px;
-        height: 180px;
+        width: 150px;
+        height: 170px;
         margin-bottom: 20px;
     }
 </style>
