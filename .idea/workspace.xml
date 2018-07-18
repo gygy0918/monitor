@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30aad9c6-a12e-4922-a61a-48ceba30be42" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/3.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/commodity/commodity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/commodity/commodity.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -39,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commodity.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="commodity.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/commodity/commodity.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="136" column="14" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
+            <state relative-caret-position="-72">
+              <caret line="137" column="5" lean-forward="true" selection-start-line="137" selection-start-column="5" selection-end-line="138" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -72,11 +68,11 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file leaf-file-name="findHuogui.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="findHuogui.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="22" column="56" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
+            <state relative-caret-position="121">
+              <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#0;n#template#0;n#!!top" expanded="true" />
               </folding>
@@ -105,7 +101,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>自动匹配</find>
       <find>输入</find>
       <find>tableData</find>
       <find>dialogFormVisible6</find>
@@ -135,6 +130,7 @@
       <find>rou</find>
       <find>image</find>
       <find>back</find>
+      <find>csrd</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -207,8 +203,8 @@
         <option value="$PROJECT_DIR$/src/components/page/warehouse/mapRouter.vue" />
         <option value="$PROJECT_DIR$/src/components/page/warehouse/personnalCheckApply.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
-        <option value="$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue" />
         <option value="$PROJECT_DIR$/src/components/page/commodity/commodity.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue" />
       </list>
     </option>
   </component>
@@ -235,9 +231,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="563" />
-    <option name="y" value="96" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1546" />
     <option name="height" value="1086" />
   </component>
@@ -277,7 +273,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+              <item name="warehouse" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="monitor" type="b2602c69:ProjectViewProjectNode" />
@@ -414,18 +410,18 @@
       <workItem from="1531828397817" duration="2075000" />
       <workItem from="1531877110734" duration="42000" />
       <workItem from="1531911845846" duration="577000" />
-      <workItem from="1531912773691" duration="1770000" />
+      <workItem from="1531912773691" duration="3066000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="343429000" />
+    <option name="totallyTimeSpent" value="344725000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="563" y="96" width="1546" height="1086" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2917772" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23182297" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5029762" side_tool="true" weight="0.320339" />
@@ -433,7 +429,7 @@
       <window_info id="npm" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="top" id="Structure" order="0" side_tool="true" weight="0.24915254" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49702382" visible="true" weight="0.52699786" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49702382" visible="true" weight="0.50558037" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -703,16 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="22" column="56" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/commodity/addCommodity.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3161">
@@ -738,8 +724,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/commodity/commodity.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="136" column="14" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
+        <state relative-caret-position="-72">
+          <caret line="137" column="5" lean-forward="true" selection-start-line="137" selection-start-column="5" selection-end-line="138" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
