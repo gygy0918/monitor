@@ -5,10 +5,22 @@
 <el-breadcrumb-item><i class="el-icon-setting"></i> 楼层详细信息</el-breadcrumb-item>
 </el-breadcrumb>
 </div>
-<div class="back">
-    <el-button type="primary" round class="sts" size="mini" @click="findHuoGui">626</el-button>
+    <!--<el-carousel :interval="4000" type="card" height="200px">-->
+        <!--<el-carousel-item v-for="item in 6" :key="item">-->
+            <!--<h3>{{ item }}</h3>-->
+        <!--</el-carousel-item>-->
+    <!--</el-carousel>-->
+    <el-tabs :tab-position="tabPosition" style="height: 200px;">
+        <el-tab-pane label="一楼">
+            <div class="back">
+                <el-button type="primary" round class="sts" size="mini" @click="findHuoGui">626</el-button>
+            </div>
+        </el-tab-pane>
+        <el-tab-pane label="二楼">配置管理</el-tab-pane>
+        <el-tab-pane label="三楼">角色管理</el-tab-pane>
+        <el-tab-pane label="四楼">定时任务补偿</el-tab-pane>
+    </el-tabs>
 
-</div>
 </div>
 
 

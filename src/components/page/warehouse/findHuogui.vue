@@ -1,79 +1,111 @@
 <template>
     <div class="bacwall">
+        <el-row >
+        <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+        <el-card :body-style="{ padding: '0px'}" class="csrd">
+        <img src="../../../assets/0.jpg" class="image" >
+        <div style="padding: 14px;">
+        <span>{{o}}</span>
+        <div >
+        <time class="time">{{ currentDate }}</time>
+        <el-button type="text" class="button">货柜</el-button>
+        </div>
+        </div>
+        </el-card>
+        </el-col>
+        </el-row>
+        <div class="line"></div>
+        <el-row >
+            <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+                <el-card :body-style="{ padding: '0px'}" class="csrd">
+                    <img src="../../../assets/0.jpg" class="image" >
+                    <div style="padding: 14px;">
+                        <span>{{o}}</span>
+                        <div >
+                            <time class="time">{{ currentDate }}</time>
+                            <el-button type="text" class="button">货柜</el-button>
+                        </div>
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+        <div class="line"></div>
+        <el-row >
+            <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+                <el-card :body-style="{ padding: '0px'}" class="csrd">
+                    <img src="../../../assets/0.jpg" class="image" >
+                    <div style="padding: 14px;">
+                        <span>{{o}}</span>
+                        <div >
+                            <time class="time">{{ currentDate }}</time>
+                            <el-button type="text" class="button">货柜</el-button>
+                        </div>
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+        <div class="line"></div>
         <!--<div class="scene">-->
             <!-- camera -->
             <!--<div class="roll-camera">-->
                 <!--<div class="move-camera">-->
                     <!--<div class="wallpaper"></div>-->
-                    <div class="shelf top">
-                        <div class="face top"></div>
-                        <div class="face front" v-for="(o, index) in data" :key="o" >
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" >
-                            </a>
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" >
-                            </a>
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" >
-                            </a>
-                            <!--<el-row >-->
-                            <!--<el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">-->
-                            <!--<el-card :body-style="{ padding: '0px'}" class="csrd">-->
-                            <!--<img src="../../../assets/0.jpg" class="image" >-->
-                            <!--<div style="padding: 14px;">-->
-                            <!--<span>{{o}}</span>-->
-                            <!--<div >-->
-                            <!--<time class="time">{{ currentDate }}</time>-->
-                            <!--<el-button type="text" class="button">货柜</el-button>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</el-card>-->
-                            <!--</el-col>-->
-                            <!--</el-row>-->
-                        </div>
-                        <div class="face back"></div>
-                        <div class="face left"></div>
-                        <div class="face bottom"></div>
-                    </div>
-                    <div class="shelf middle">
-                        <div class="face top"></div>
-                        <div class="face front">
+                    <!--<div class="shelf top">-->
+                        <!--<div class="face top"></div>-->
+                        <!--<div class="face front" v-for="(o, index) in data" :key="o" >-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" >-->
+                            <!--</a>-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" >-->
+                            <!--</a>-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" >-->
+                            <!--</a>-->
 
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" alt="">
-                            </a>
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" alt="">
-                            </a>
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" alt="">
-                            </a>
+                        <!--</div>-->
+                        <!--<div class="face back"></div>-->
+                        <!--<div class="face left"></div>-->
+                        <!--<div class="face bottom"></div>-->
+                    <!--</div>-->
+                    <!--<div class="shelf middle">-->
+                        <!--<div class="face top"></div>-->
+                        <!--<div class="face front">-->
 
-                        </div>
-                        <div class="face back"></div>
-                        <div class="face left"></div>
-                        <div class="face bottom"></div>
-                    </div>
-                    <div class="shelf bottom">
-                        <div class="face top"></div>
-                        <div class="face front">
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" alt="">-->
+                            <!--</a>-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" alt="">-->
+                            <!--</a>-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" alt="">-->
+                            <!--</a>-->
 
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" alt="">
-                            </a>
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" alt="">
-                            </a>
-                            <a href="#" class="photocard">
-                                <img src="../../../assets/0.jpg" alt="">
-                            </a>
+                        <!--</div>-->
+                        <!--<div class="face back"></div>-->
+                        <!--<div class="face left"></div>-->
+                        <!--<div class="face bottom"></div>-->
+                    <!--</div>-->
+                    <!--<div class="shelf bottom">-->
+                        <!--<div class="face top"></div>-->
+                        <!--<div class="face front">-->
 
-                        </div>
-                        <div class="face back"></div>
-                        <div class="face left"></div>
-                        <div class="face bottom"></div>
-                    </div>
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" alt="">-->
+                            <!--</a>-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" alt="">-->
+                            <!--</a>-->
+                            <!--<a href="#" class="photocard">-->
+                                <!--<img src="../../../assets/0.jpg" alt="">-->
+                            <!--</a>-->
+
+                        <!--</div>-->
+                        <!--<div class="face back"></div>-->
+                        <!--<div class="face left"></div>-->
+                        <!--<div class="face bottom"></div>-->
+                    <!--</div>-->
                 </div>
             <!--</div>-->
         <!--</div>-->
@@ -85,7 +117,7 @@
         data() {
             return {
                 currentDate: new Date().getFullYear(),
-                data:[1,2,3,4]
+                data:[1,2,3,4,5,6]
             };
         },
         name: "find-huogui"
@@ -93,6 +125,12 @@
 </script>
 
 <style scoped>
+    .line{
+        border-bottom:15px solid #ccc;
+        box-shadow: 4px 6px 8px #ccc;
+        margin-bottom: 30px;
+        width: 93%;
+    }
     /* 3D scene */
     .scene {
         overflow: hidden;
@@ -236,10 +274,10 @@
         clear: both
     }
     .csrd{
-        width: 120px;
+        width: 150px;
         height: 150px;
-        margin-bottom: 20px;
-        box-shadow:3px 3px 8px #242f42;
+        box-shadow:2px 2px 7px #242f42;
+        margin-bottom: 3px;
     }
     /*.liti{*/
         /*box-shadow:-2px 0px 8px #f00,0px -2px 8px #000,0px 2px 8px #9e038a,2px 0px 8px #0f0;*/

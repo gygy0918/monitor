@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30aad9c6-a12e-4922-a61a-48ceba30be42" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/wall.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/commodity/commodity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/commodity/commodity.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,22 +21,15 @@
       <file leaf-file-name="findHuogui.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="22" />
+            <state relative-caret-position="203">
+              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
               <folding>
-                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                <element signature="e#4072#4260#0" />
-                <element signature="e#4262#4415#0" />
-                <element signature="e#4416#4572#0" />
-                <element signature="e#4617#4673#0" />
-                <element signature="e#4681#4727#0" />
-                <element signature="e#4730#4880#0" />
-                <element signature="e#4922#4978#0" />
-                <element signature="e#5035#5188#0" />
-                <element signature="e#5265#5364#0" />
+                <element signature="n#el-row#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-row#1;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-row#2;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#2;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,7 +38,7 @@
       <file leaf-file-name="lockers.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/commodity/lockers.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
+            <state relative-caret-position="29">
               <caret line="235" column="5" selection-start-line="235" selection-start-column="5" selection-end-line="235" selection-end-column="5" />
             </state>
           </provider>
@@ -54,8 +47,11 @@
       <file leaf-file-name="commodity.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/commodity/commodity.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="58" />
+            <state relative-caret-position="359">
+              <caret line="143" column="24" lean-forward="true" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="26" />
+              <folding>
+                <element signature="n#style#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,8 +96,8 @@
       <find>button</find>
       <find>rou</find>
       <find>image</find>
-      <find>back</find>
       <find>csrd</find>
+      <find>back</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -202,7 +198,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="336" />
     <option name="y" value="38" />
     <option name="width" value="1546" />
@@ -213,7 +209,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -263,6 +258,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -388,28 +384,28 @@
       <workItem from="1531877110734" duration="42000" />
       <workItem from="1531911845846" duration="577000" />
       <workItem from="1531912773691" duration="3120000" />
-      <workItem from="1531966102244" duration="3529000" />
+      <workItem from="1531966102244" duration="3671000" />
+      <workItem from="1531998772394" duration="4643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="348308000" />
+    <option name="totallyTimeSpent" value="353093000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="138" y="181" width="1546" height="1086" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2917772" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18387777" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5029762" side_tool="true" weight="0.320339" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="1" side_tool="true" />
       <window_info anchor="top" id="Structure" order="0" side_tool="true" weight="0.24915254" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49702382" visible="true" weight="0.48920086" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49702382" visible="true" weight="0.1953125" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -423,19 +419,19 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info id="npm" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23214285" />
       <window_info anchor="top" id="Structure" order="0" weight="0.24915254" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49702382" visible="true" weight="0.30508474" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5029762" side_tool="true" weight="0.320339" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -447,7 +443,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="14" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -695,36 +691,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/commodity/lockers.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
+        <state relative-caret-position="29">
           <caret line="235" column="5" selection-start-line="235" selection-start-column="5" selection-end-line="235" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/commodity/commodity.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="58" />
+        <state relative-caret-position="359">
+          <caret line="143" column="24" lean-forward="true" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/warehouse/findHuogui.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="22" />
+        <state relative-caret-position="203">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
           <folding>
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-            <element signature="e#4072#4260#0" />
-            <element signature="e#4262#4415#0" />
-            <element signature="e#4416#4572#0" />
-            <element signature="e#4617#4673#0" />
-            <element signature="e#4681#4727#0" />
-            <element signature="e#4730#4880#0" />
-            <element signature="e#4922#4978#0" />
-            <element signature="e#5035#5188#0" />
-            <element signature="e#5265#5364#0" />
+            <element signature="n#el-row#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-row#1;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-row#2;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#el-card#0;n#el-col#0;n#el-row#2;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
