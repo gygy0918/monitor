@@ -73,10 +73,10 @@
                                index: 'warehouselist',
                                title: '仓库列表'
                            },
-                           // {
-                           //     index: 'testGood',
-                           //     title: '测试'
-                           // },
+                           {
+                               index: 'newwarehouse',
+                               title: '申请入库'
+                           },
                            {
                                index: 'check',
                                title: '盘点'
@@ -98,6 +98,10 @@
                            //     title: '查看申请出库'
                            // },
                            {
+                               index: 'addWarehouse',
+                               title: '可视化新增仓库'
+                           },
+                           {
                                index: 'kucun',
                                title: '总体库存信息'
                            },
@@ -111,30 +115,26 @@
 //                            }
                        ]
                    },
-                    {
-                        icon: 'el-icon-date',
-                        index: '5',
-                        title: '仓库管理',
-                        subs: [
-                            {
-                                index: 'newwarehouse',
-                                title: '申请入库'
-                            },
-                            {
-                                index: 'addWarehouse',
-                                title: '新增仓库'
-                            }
-                        ]
-                    },
+                    // {
+                    //     icon: 'el-icon-date',
+                    //     index: '5',
+                    //     title: '仓库管理',
+                    //     subs: [
+                    //         // {
+                    //         //     index: 'newwarehouse',
+                    //         //     title: '申请入库'
+                    //         // },
+                    //         // {
+                    //         //     index: 'addWarehouse',
+                    //         //     title: '新增仓库'
+                    //         // }
+                    //     ]
+                    // },
                     {
                         icon: 'el-icon-menu',
                         index: '9',
                         title: '商品管理',
                         subs: [
-                            {
-                                index: 'commodity',
-                                title: '商品信息'
-                            },
                             {
                                 index: 'commodityTotal',
                                 title: '商品总体信息'
@@ -228,7 +228,7 @@
 
 <style scoped>
     .sidebar{
-        display: block;
+        /*display: block;*/
         position: absolute;
         width: 200px;
         left: 0;
@@ -238,9 +238,10 @@
     }
     @media screen and (max-width: 375px) {
         .sidebar {
-            /*display:none;*/
-            visibility: hidden;
+            display:none;
+            /*visibility: hidden;*/
         }
+
     }
     .sidebar > ul {
         height:100%;

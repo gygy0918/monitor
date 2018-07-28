@@ -16,9 +16,14 @@
                 <el-form-item label="输入仓库具体位置">
                     <el-input v-model=" LocationDetails.ckAddress"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="仓库管理员">-->
+                <el-form-item label="选择位置">
                     <!--<el-input v-model=" LocationDetails.ckManage"></el-input>-->
-                <!--</el-form-item>-->
+                    <el-cascader
+                        :options="options"
+                        v-model="selectedOptions"
+                        @change="handleChange">
+                    </el-cascader>
+                </el-form-item>
                 仓库管理员: <el-select v-model="value" placeholder="请选择" >
                     <el-option
                         v-for="item in options2"
@@ -53,6 +58,19 @@
                      LocationItem:'',
                     subDistricts:[],
                 options2:[],
+                options: [{
+                    value: '6',
+                    label: '6',
+                    children: [{
+                        value: '821',
+                        label: '821',
+
+                    }, {
+                        value: '626',
+                        label: '626',
+                    }]
+                }],
+                selectedOptions: [],
                 value: '',
                     city:'',
                     district:'',
@@ -96,6 +114,13 @@
         },
 
         methods: {
+            handleChange(value) {
+                console.log('val',value)
+                this.obj={};
+                this.obj.floor=value[0];
+                this.obj.room=value[1];
+                console.log('选择的楼层',this.obj);
+            },
             inital: function () {
 //                console.log('参数',data);
                 //初始化地图对象，加载地图
@@ -214,11 +239,14 @@ console.log('0000000000000',this.value)
                 // console.log('1111111111111111111111',this.LocationDetails.ckManage)
                 // console.log('submit!',window.district,this.LocationDetails);
                 // let data=Object.assign({},this.LocationDetails,window.LocationItem);
+                this.LocationDetails=Object.assign({},this.LocationDetails,this.obj)
+                console.log('00000',this.LocationDetails)
                 let data=window.LocationItem
                 this.subDistricts.push(
                     this.LocationDetails
                 )
                 data.subDistricts=this.subDistricts
+               // data=Object.assign({},data,this.obj);
                 console.log('llllllll',data)
                 this.$ajax(
                     {

@@ -156,8 +156,8 @@
                                        @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="small" type="danger"
                                        @click="handleDelete(scope.$index,scope.row)">删除</el-button>
-                            <el-button size="small" type="danger"
-                                       @click="findhuogui(scope.$index,scope.row)">查看货柜</el-button>
+                            <!--<el-button size="small" type="danger"-->
+                                       <!--@click="findhuogui(scope.$index,scope.row)">查看货柜</el-button>-->
                             <el-button size="small" type="danger"
                                        @click="findInMAP(scope.$index,scope.row)">到这去</el-button>
                         </template>

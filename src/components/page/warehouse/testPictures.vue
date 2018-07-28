@@ -232,67 +232,69 @@
 
 
                 var _onClickThree = function(e) {
-                    if(e.target.subMarkers.length){
-                        // alert('33')
-                        // console.log('3333',e.target.subMarkers)
-                        document.querySelector(".side").style.display= "block";
-                        // map.add(e.target.subMarkers);
-                        // map.setFitView(e.target.subMarkers);
-                        var subMarkersFour=e.target.subMarkers;
-                        // var html=subMarkersFour.map((item)=>{
-                        //     var title=item.getTitle();
-                        // })
-                        var htmls=[];
-                        var checkDetails=function  (e) {
-                            console.log('999',e)
-                        }
-                        for (var j = 0; j < subMarkersFour.length; j += 1) {
-                            console.log("000",subMarkersFour[j])
-
-                            var title = e.target.subMarkers[j].getTitle();
-                            var ckManger=e.target.subMarkers[j].G.ckManger
-                            var ckStatusName=e.target.subMarkers[j].G.ckStatusName
-                            var ckAddress=e.target.subMarkers[j].G.ckAddress
-                            // localStorage.setItem("ckId",e.target.subMarkers[j].G.ckId)
-                            localStorage.setItem("ckId",152222760072925)
-                            // console.log("ckManger",ckId)
-                            // var html='<li class="showcontent"><p class="p">公司名称：'+title+'</p><p class="p">联系方式：'+title+'</p><i class="fa triangle_i">&#xf0d7</i><i class="fa close_i">&#xf057</i></li><p class="showtitle"><i  class="fa">&#xf1ba</i>&nbsp;&nbsp;'+title+'</p>';
-                            var html='<li class="detail-list"><div class="img"></div><p class="p">仓库名称：'+title+'</p>' +
-                                '<p class="p">仓库管理员编号：'+ckManger+'</p>' +
-                                '<p class="p">仓库状态：'+ckStatusName+'</p>' +
-                                '<p class="p">仓库具体位置：'+ckAddress+'</p>' +
-                                '<button class="detail" >查看室内详情</button></li>';
-                            htmls.push(html)
-                            // e.target.subMarkers[j].setContent(html);
-                            AMap.event.addListener(subMarkersFour[j], 'click', _onClickFour);
-
-                        }
-
-                        // htmls
-                        document.querySelector('.side').innerHTML=htmls.join(" ")
-                        // map.remove(markersThree)
-                        console.log("++++++++++++" ,document.getElementsByClassName('detail')[0])
-                        // document.querySelector()
-                        let list=document.getElementsByClassName('detail')
-                        for(let i=0;i<list.length;i++){
-                            list[i].addEventListener('click',function (e) {
-                                // alert('99999999999',e)
-                                //     console.log('e',e.target)
-                                    window.location.href = "/#/singleHK"
-                                // this.$router.push('/filterMap')
-                                // })
-
-                            })
-
-                        }
-                        // document.getElementsByClassName('detail')[0].addEventListener('click',function (e) {
-                        //     // alert('99999999999',e)
-                        //     console.log('e',e.target)
-                        //     window.location.href = "/#/singleHK"
-                        //     // this.$router.push('/filterMap')
-                        // })
-
-                    }
+                    // if(e.target.subMarkers.length){
+                    //     // alert('33')
+                    //     // console.log('3333',e.target.subMarkers)
+                    //     // document.querySelector(".side").style.display= "block";
+                    //     // map.add(e.target.subMarkers);
+                    //     // map.setFitView(e.target.subMarkers);
+                    //     // var subMarkersFour=e.target.subMarkers;
+                    //     // // var html=subMarkersFour.map((item)=>{
+                    //     // //     var title=item.getTitle();
+                    //     // // })
+                    //     // var htmls=[];
+                    //     // var checkDetails=function  (e) {
+                    //     //     console.log('999',e)
+                    //     // }
+                    //     // for (var j = 0; j < subMarkersFour.length; j += 1) {
+                    //     //     console.log("000",subMarkersFour[j])
+                    //     //
+                    //     //     var title = e.target.subMarkers[j].getTitle();
+                    //     //     var ckManger=e.target.subMarkers[j].G.ckManger
+                    //     //     var ckStatusName=e.target.subMarkers[j].G.ckStatusName
+                    //     //     var ckAddress=e.target.subMarkers[j].G.ckAddress
+                    //     //     // localStorage.setItem("ckId",e.target.subMarkers[j].G.ckId)
+                    //     //     localStorage.setItem("ckId",152222760072925)
+                    //     //     // console.log("ckManger",ckId)
+                    //     //     // var html='<li class="showcontent"><p class="p">公司名称：'+title+'</p><p class="p">联系方式：'+title+'</p><i class="fa triangle_i">&#xf0d7</i><i class="fa close_i">&#xf057</i></li><p class="showtitle"><i  class="fa">&#xf1ba</i>&nbsp;&nbsp;'+title+'</p>';
+                    //     //     var html='<li class="detail-list"><div class="img"></div><p class="p">仓库名称：'+title+'</p>' +
+                    //     //         '<p class="p">仓库管理员编号：'+ckManger+'</p>' +
+                    //     //         '<p class="p">仓库状态：'+ckStatusName+'</p>' +
+                    //     //         '<p class="p">仓库具体位置：'+ckAddress+'</p>' +
+                    //     //         '<button class="detail" >查看室内详情</button></li>';
+                    //     //     htmls.push(html)
+                    //     //     // e.target.subMarkers[j].setContent(html);
+                    //     //     AMap.event.addListener(subMarkersFour[j], 'click', _onClickFour);
+                    //     //
+                    //     // }
+                    //
+                    //     // htmls
+                    //     // document.querySelector('.side').innerHTML=htmls.join(" ")
+                    //     // // map.remove(markersThree)
+                    //     // console.log("++++++++++++" ,document.getElementsByClassName('detail')[0])
+                    //     // document.querySelector()
+                    //     // let list=document.getElementsByClassName('detail')
+                    //     // for(let i=0;i<list.length;i++){
+                    //     //     list[i].addEventListener('click',function (e) {
+                    //     //         // alert('99999999999',e)
+                    //     //         //     console.log('e',e.target)
+                    //     //             window.location.href = "/#/singleHK"
+                    //     //         // this.$router.push('/filterMap')
+                    //     //         // })
+                    //     //
+                    //     //     })
+                    //     //
+                    //     // }
+                    //     // document.getElementsByClassName('detail')[0].addEventListener('click',function (e) {
+                    //     //     // alert('99999999999',e)
+                    //     //     console.log('e',e.target)
+                    //     //     window.location.href = "/#/singleHK"
+                    //     //     // this.$router.push('/filterMap')
+                    //     // })
+                    //
+                    // }
+                    // this.$router.push('/commodity');
+                    window.location.href = "/#/commodity"
 
                 }
 

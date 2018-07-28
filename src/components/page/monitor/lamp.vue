@@ -2,6 +2,7 @@
     <div >
         <div>
             <el-button type="success" round style="margin:10px" @click="add">新增监控物品</el-button>
+            <h3 style="display:inline-block">当前监控物品数据:{{ datainfo.length }}个</h3>
         </div>
         <div id="container" style="float: left;width:700px; height:700px;margin:10px">室外 </div>
         <div id="outer-box" style="margin-left: 620px;">
@@ -23,33 +24,31 @@
     export default {
         data(){
             return{
-
+                datainfo:[]
             }
 
         },
         created(){
-            var datainfo=[];
+            // var datainfo=[];
             this.$ajax(
                 {
                     method: 'get', //请求方式
                     url: 'http://10.103.241.154:8080/lightInfo/page',
                     params:{
                         page:1,
-                        size:9
+                        size:100
                     },
                 }).then((res)=>{
-//                console.log('结果',res.data.data.results)
-                datainfo=res.data.data.results;
-                datainfo.map((item)=>{
+                this.datainfo=res.data.data.results;
+                           console.log('静态this.datainf',this.datainfo)
+            this.datainfo.map((item)=>{
                     let positions=[]
                     if(item.longitude&&item.latitude){
                         positions.push(item.longitude);
                         positions.push(item.latitude);
                         item.positions=positions;
                     }
-//                this.datainfo=datainfo;
-                    console.log('page',datainfo)
-                    window.test=datainfo;
+                    window.test=this.datainfo;
                 })
 
             });
@@ -73,31 +72,10 @@
     // }
         mounted: function () {
             this.$options.methods.inital.bind(this)();
-//            var goEasy = new GoEasy({
-//                appkey: "BS-6d10683de85143f488ca00f6ea1c04b7",
-////                onConnected: function () {
-////                    alert("成功连接GoEasy。");
-////                },
-//            });
-//            window.ss=goEasy;
-//            var datainfo = new Array(10);
-//            var obj={};
-//           ss.subscribe({
-//                channel: "light_info",
-//                onMessage: function (message) {
-//                    obj=message.content;
-//                   let id=JSON.parse(obj).lightId;
-////                    console.log('message',message.content.lightId
-//                    datainfo[id]=JSON.parse(obj);
-//                    console.log('实时数组拼接',datainfo);
-//                    window.test=datainfo;
-//                }
-//            });
         },
 
         methods: {
             inital: function () {
-//                console.log('参数',data);
                 //初始化地图对象，加载地图
                 var clickListener,map = new AMap.Map("container", {
                     resizeEnable: true,
@@ -136,6 +114,7 @@
                             },
                             //返回数据项的位置信息，需要是AMap.LngLat实例，或者是经纬度数组，比如[116.789806, 39.904989]
                             getPosition: function(dataItem) {
+                                // console.log('dataItem',dataItem)
                                 return dataItem.positions;
                             },
                             //返回数据项对应的Marker
@@ -153,7 +132,7 @@
 
                                 //返回一个新的Marker
 //                                console.log('flag',flag1)
-                                console.log('maker',dataItem.state )
+//                                 console.log('maker',dataItem.state )
                                 return new SvgMarker(
                                     new SvgMarker.Shape.TriangleFlagPin({
                                         height: 30,
@@ -173,8 +152,8 @@
                                 var tpl2 = '<div style="font-size:12px;overflow-y: scroll"><%- dataItem.location %>室外</img>' +
                                     '<p>当前电压<%- dataItem.voltage %>V</p>' +
                                     '<p>当前电流<%- dataItem.electricity%>A</p>'+
-                                    '<p>当前功率<%- dataItem.power%>W</p>'
-                                     +
+                                    '<p>当前功率<%- dataItem.power%>W</p>'+
+                                    '<p>当前编号<%- dataItem.lightNumber %>号</p>' +
                                     '</div><br/>';
                                 var tpl=flag?tpl1:tpl2
                                 var content = MarkerList.utils.template(tpl, {
@@ -354,28 +333,40 @@
 //                },
                         });
                         window.ss=goEasy;
-                        var datainfo = new Array(10);
+                        // var datainfo = [];
+                        var newArr=[];
                         var obj={};
                         ss.subscribe({
                             channel: "light_info",
                             onMessage: function (message) {
                                 obj=message.content;
                                 let id=JSON.parse(obj).lightId;
-//                    console.log('message',message.content.lightId
-                                datainfo[id]=JSON.parse(obj);
-                                console.log('实时数组拼接',datainfo);
-                                datainfo.map((item)=>{
-                                    console.log('item',item.lightId)
+                                window.test.forEach((item) => {
+                                if(item.lightId === id){
+                                    item.voltage=JSON.parse(obj).voltage
+                                    item.electricity=JSON.parse(obj).electricity
+                                    item.power=JSON.parse(obj).power
+                                }
+                            });
+                                let keys = window.test.map((item) => {   //  有同事指出应该声明一个新变量来存储map的结果，这个建议我认为是对的。
+                                return item.lightId
+                            });
+                               let len = window.test.length;
+                                let newLen =1;
+                                keys.forEach(function(item){  //这里利用map，filter方法也可以实现
+                                    var bool = keys.indexOf(id);  //从传入参数的下一个索引值开始寻找是否存在重复
+                                    if(bool === -1 && newLen ){
+                                        newLen = 0;
+                                        window.test.push(JSON.parse(obj));
+                                    }
+                                })
+                                console.log('数据量',window.test.length)
+                                markerList.render( window.test)
 
-                                });
-                                setTimeout(()=>{markerList.render(datainfo)}, 10);
-//                                markerList.render(datainfo)
-//                                console.log('window',window.test);
-//                                var data=window.test ;
                             }
                         });
 
-                        console.log('window.test',window.test)
+                        // console.log('data.test',datainfo)
 //                        window.markerList=markerList;
                         markerList.render(window.test)
 //                        window.setInterval()
