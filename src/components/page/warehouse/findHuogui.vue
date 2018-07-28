@@ -1,14 +1,29 @@
 <template>
     <div class="bacwall">
+
         <el-row >
-        <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+        <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
         <el-card :body-style="{ padding: '0px'}" class="csrd">
         <img src="../../../assets/0.jpg" class="image" >
         <div style="padding: 14px;">
-        <span>{{o}}</span>
+        <span style="font-size: small">{{o}}号柜</span>
+        <span style="font-size: small">规格：{{ rules }}</span>
+            <el-popover
+                placement="right"
+                width="400"
+                trigger="click">
+                <el-table :data="gridData">
+                    <el-table-column width="120" property="date" label="操作日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="物品名称"></el-table-column>
+                    <el-table-column width="100" property="address" label="类型"></el-table-column>
+                    <el-table-column width="100" property="number" label="数量"></el-table-column>
+                </el-table>
+                <el-button slot="reference" size="small" type="text">查看货柜内物品</el-button>
+            </el-popover>
         <div >
         <time class="time">{{ currentDate }}</time>
-        <el-button type="text" class="button">货柜</el-button>
+        <!--<el-button type="text" class="button">货柜</el-button>-->
+
         </div>
         </div>
         </el-card>
@@ -16,14 +31,26 @@
         </el-row>
         <div class="line"></div>
         <el-row >
-            <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+            <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
                 <el-card :body-style="{ padding: '0px'}" class="csrd">
                     <img src="../../../assets/0.jpg" class="image" >
                     <div style="padding: 14px;">
                         <span>{{o}}</span>
+                        <el-popover
+                            placement="right"
+                            width="400"
+                            trigger="click">
+                            <el-table :data="gridData">
+                                <el-table-column width="150" property="date" label="日期"></el-table-column>
+                                <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                                <el-table-column width="300" property="address" label="地址"></el-table-column>
+                            </el-table>
+                            <el-button slot="reference" size="small" type="text">查看货柜内物品</el-button>
+                        </el-popover>
                         <div >
                             <time class="time">{{ currentDate }}</time>
-                            <el-button type="text" class="button">货柜</el-button>
+                            <!--<el-button type="text" class="button">货柜</el-button>-->
+
                         </div>
                     </div>
                 </el-card>
@@ -31,81 +58,32 @@
         </el-row>
         <div class="line"></div>
         <el-row >
-            <el-col :span="4" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+            <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
                 <el-card :body-style="{ padding: '0px'}" class="csrd">
                     <img src="../../../assets/0.jpg" class="image" >
                     <div style="padding: 14px;">
                         <span>{{o}}</span>
+                        <el-popover
+                            placement="right"
+                            width="400"
+                            trigger="click">
+                            <el-table :data="gridData">
+                                <el-table-column width="150" property="date" label="日期"></el-table-column>
+                                <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                                <el-table-column width="300" property="address" label="地址"></el-table-column>
+                            </el-table>
+                            <el-button slot="reference" size="small" type="text">查看货柜内物品</el-button>
+                        </el-popover>
                         <div >
                             <time class="time">{{ currentDate }}</time>
-                            <el-button type="text" class="button">货柜</el-button>
+                            <!--<el-button type="text" class="button">货柜</el-button>-->
+
                         </div>
                     </div>
                 </el-card>
             </el-col>
         </el-row>
         <div class="line"></div>
-        <!--<div class="scene">-->
-            <!-- camera -->
-            <!--<div class="roll-camera">-->
-                <!--<div class="move-camera">-->
-                    <!--<div class="wallpaper"></div>-->
-                    <!--<div class="shelf top">-->
-                        <!--<div class="face top"></div>-->
-                        <!--<div class="face front" v-for="(o, index) in data" :key="o" >-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" >-->
-                            <!--</a>-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" >-->
-                            <!--</a>-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" >-->
-                            <!--</a>-->
-
-                        <!--</div>-->
-                        <!--<div class="face back"></div>-->
-                        <!--<div class="face left"></div>-->
-                        <!--<div class="face bottom"></div>-->
-                    <!--</div>-->
-                    <!--<div class="shelf middle">-->
-                        <!--<div class="face top"></div>-->
-                        <!--<div class="face front">-->
-
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" alt="">-->
-                            <!--</a>-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" alt="">-->
-                            <!--</a>-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" alt="">-->
-                            <!--</a>-->
-
-                        <!--</div>-->
-                        <!--<div class="face back"></div>-->
-                        <!--<div class="face left"></div>-->
-                        <!--<div class="face bottom"></div>-->
-                    <!--</div>-->
-                    <!--<div class="shelf bottom">-->
-                        <!--<div class="face top"></div>-->
-                        <!--<div class="face front">-->
-
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" alt="">-->
-                            <!--</a>-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" alt="">-->
-                            <!--</a>-->
-                            <!--<a href="#" class="photocard">-->
-                                <!--<img src="../../../assets/0.jpg" alt="">-->
-                            <!--</a>-->
-
-                        <!--</div>-->
-                        <!--<div class="face back"></div>-->
-                        <!--<div class="face left"></div>-->
-                        <!--<div class="face bottom"></div>-->
-                    <!--</div>-->
                 </div>
             <!--</div>-->
         <!--</div>-->
@@ -116,8 +94,25 @@
     export default {
         data() {
             return {
+                rules:'small',
                 currentDate: new Date().getFullYear(),
-                data:[1,2,3,4,5,6]
+                data:[1,2,3,4],
+                gridData: [{
+                    date: '2016-05-02',
+                    name: '飞利浦节能灯',
+                    address: '电灯',
+                    number: '2'
+                }, {
+                    date: '2016-05-04',
+                    name: '公牛插座',
+                    address: '开关',
+                    number: '4'
+                }, {
+                    date: '2016-05-01',
+                    name: 'PANDA/熊猫电线',
+                    address: '电线',
+                    number: '6'
+                }]
             };
         },
         name: "find-huogui"
@@ -274,8 +269,8 @@
         clear: both
     }
     .csrd{
-        width: 130px;
-        height: 150px;
+        width: 140px;
+        height: 160px;
         box-shadow:2px 2px 7px #242f42;
         margin-bottom: 3px;
     }
