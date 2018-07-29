@@ -2,23 +2,24 @@
     <div class="bacwall">
 
         <el-row >
-        <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+        <el-col :span="6" v-for="(o, index) in data.slice(0,4)" :key="index" :offset="index > 0 ? 0 : 0">
         <el-card :body-style="{ padding: '0px'}" class="csrd">
         <img src="../../../assets/0.jpg" class="image" >
         <div style="padding: 14px;">
-        <span style="font-size: small">{{o}}号柜</span>
-        <span style="font-size: small">规格：{{ rules }}</span>
+        <span style="font-size: small">{{o.hgId}}号</span>
+        <!--<el-tag size="mini">{{o.hgStatus?'有货物':'空柜'}}</el-tag>-->
+        <!--<span style="font-size: small">规格：{{ rules }}</span>-->
             <el-popover
                 placement="right"
                 width="400"
                 trigger="click">
-                <el-table :data="gridData">
-                    <el-table-column width="120" property="date" label="操作日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="物品名称"></el-table-column>
-                    <el-table-column width="100" property="address" label="类型"></el-table-column>
-                    <el-table-column width="100" property="number" label="数量"></el-table-column>
+                <el-table :data="commodity">
+                    <el-table-column width="100" property="spName" label="物品名称"></el-table-column>
+                    <el-table-column width="100" property="spType" label="类型"></el-table-column>
+                    <el-table-column width="100" property="rkCount" label="数量"></el-table-column>
+                    <el-table-column width="120" property="lastUpdate" label="操作日期"></el-table-column>
                 </el-table>
-                <el-button slot="reference" size="small" type="text">查看货柜内物品</el-button>
+                <el-button  slot="reference" size="small" type="text" @click="goodsDetail(o.hgId)">{{o.hgStatus?'查看货柜内物品':'空柜'}}</el-button>
             </el-popover>
         <div >
         <time class="time">{{ currentDate }}</time>
@@ -31,21 +32,22 @@
         </el-row>
         <div class="line"></div>
         <el-row >
-            <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+            <el-col :span="6" v-for="(o, index) in data.slice(4,8)" :key="index" :offset="index > 0 ? 0 : 0">
                 <el-card :body-style="{ padding: '0px'}" class="csrd">
                     <img src="../../../assets/0.jpg" class="image" >
                     <div style="padding: 14px;">
-                        <span>{{o}}</span>
+                        <span style="font-size: small">{{o.hgId}}号</span>
                         <el-popover
                             placement="right"
                             width="400"
                             trigger="click">
-                            <el-table :data="gridData">
-                                <el-table-column width="150" property="date" label="日期"></el-table-column>
-                                <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                                <el-table-column width="300" property="address" label="地址"></el-table-column>
+                            <el-table :data="commodity">
+                                <el-table-column width="100" property="spName" label="物品名称"></el-table-column>
+                                <el-table-column width="100" property="spType" label="类型"></el-table-column>
+                                <el-table-column width="100" property="rkCount" label="数量"></el-table-column>
+                                <el-table-column width="120" property="lastUpdate" label="操作日期"></el-table-column>
                             </el-table>
-                            <el-button slot="reference" size="small" type="text">查看货柜内物品</el-button>
+                            <el-button  slot="reference" size="small" type="text" @click="goodsDetail(o.hgId)">{{o.hgStatus?'查看货柜内物品':'空柜'}}</el-button>
                         </el-popover>
                         <div >
                             <time class="time">{{ currentDate }}</time>
@@ -58,21 +60,23 @@
         </el-row>
         <div class="line"></div>
         <el-row >
-            <el-col :span="6" v-for="(o, index) in data" :key="o" :offset="index > 0 ? 0 : 0">
+            <el-col :span="6" v-for="(o, index) in data.slice(8,12)" :key="index" :offset="index > 0 ? 0 : 0">
                 <el-card :body-style="{ padding: '0px'}" class="csrd">
                     <img src="../../../assets/0.jpg" class="image" >
                     <div style="padding: 14px;">
-                        <span>{{o}}</span>
+                        <span style="font-size: small">{{o.hgId}}号</span>
                         <el-popover
                             placement="right"
                             width="400"
                             trigger="click">
-                            <el-table :data="gridData">
-                                <el-table-column width="150" property="date" label="日期"></el-table-column>
-                                <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                                <el-table-column width="300" property="address" label="地址"></el-table-column>
+                            <el-table :data="commodity">
+                                <el-table-column width="100" property="spName" label="物品名称"></el-table-column>
+                                <el-table-column width="100" property="spType" label="类型"></el-table-column>
+                                <el-table-column width="100" property="rkCount" label="数量"></el-table-column>
+                                <el-table-column width="120" property="lastUpdate" label="操作日期"></el-table-column>
                             </el-table>
-                            <el-button slot="reference" size="small" type="text">查看货柜内物品</el-button>
+                            <el-button   v-if="o.hgId==1" slot="reference" size="small" type="text" @click="goodsDetail(o.hgId)">查看货柜内物品'</el-button>
+                            <el-button   v-else disabled slot="reference" size="small" type="text" @click="goodsDetail(o.hgId)">空柜</el-button>
                         </el-popover>
                         <div >
                             <time class="time">{{ currentDate }}</time>
@@ -97,6 +101,7 @@
                 rules:'small',
                 currentDate: new Date().getFullYear(),
                 data:[1,2,3,4],
+                commodity:[],
                 gridData: [{
                     date: '2016-05-02',
                     name: '飞利浦节能灯',
@@ -112,8 +117,61 @@
                     name: 'PANDA/熊猫电线',
                     address: '电线',
                     number: '6'
-                }]
+                }],
+                form:{
+                    yhId:'',
+                    ckId:'',
+                    hgId:'',
+                    spId:'',
+                    rkCount:'',
+                    remark:''
+                },
             };
+        },
+        created(){
+//            this.getData();
+            this.form.ckId= window.localStorage.getItem('ckId')
+            console.log('this.form.ckId',this.form.ckId)
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.243.94:8080/box/page',
+                    params:{
+                        page:1,
+                        size:10,
+                        ckId: this.form.ckId,
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                this.warehouseIn=[],
+                this.data=res.data.data.results;
+            console.log('结果9999',res.data.data.results)
+        })
+        },
+        methods:{
+            goodsDetail(val){
+                console.log('goodsDetail',val)
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.243.94:8080/warehouseIn',
+                        params:{
+                            hgId: val,
+                            page:1,
+                            size:11,
+                            // hgId:152289887438404
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    this.commodity=[],
+                    console.log('*****',res)
+                let info=res.data.data.commodity;
+                info.rkCount=res.data.data.rkCount
+                window.info=info
+                this.commodity.push(info)
+                console.log('000',this.commodity)
+            })
+            }
         },
         name: "find-huogui"
     }
@@ -269,7 +327,7 @@
         clear: both
     }
     .csrd{
-        width: 140px;
+        width: 150px;
         height: 160px;
         box-shadow:2px 2px 7px #242f42;
         margin-bottom: 3px;

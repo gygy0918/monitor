@@ -45,6 +45,7 @@
             </el-form>
             <!--<el-input v-model="select_word" placeholder="筛选关键词" style="width:150px"></el-input>-->
             <div style="display: inline-block;">
+                <el-button type="primary" round @click="addInwarehouse" >申请入库</el-button>
             </div>
 
             <!--<el-button type="primary"  @click="search">新增人员</el-button>-->
@@ -213,6 +214,9 @@
             }
         },
         methods: {
+            addInwarehouse(){
+                this.$router.push('/newwarehouse');
+            },
             getTimeDuration(input) {
                 let ret = [];
                 //你的实现

@@ -50,16 +50,6 @@
         style="width: 100%"
         :default-sort = "{prop: 'date', order: 'descending'}"
     >
-        <!--<el-table-column-->
-            <!--prop="serviceId"-->
-            <!--label="服务编号"-->
-            <!--sortable-->
-            <!--width="100">-->
-            <!--<template slot-scope="scope">-->
-                <!--<i class="el-icon-time"></i>-->
-                <!--<span style="margin-left: 10px">{{ scope.row.serviceId }}</span>-->
-            <!--</template>-->
-        <!--</el-table-column>-->
         <el-table-column
             prop="name"
             label="服务名称"
@@ -260,6 +250,85 @@
                 <el-button type="primary" @click="submitMatch('form')">确 定</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="消息列表" :visible.sync="dialogTableVisible2">
+            <el-table :data="messageData">
+                <el-table-column property="messageId" label="消息ID" width="100"></el-table-column>
+                <el-table-column property="name" label="消息名称" width="100"></el-table-column>
+                <el-table-column property="serviceId" label="服务ID" width="100"></el-table-column>
+                <el-table-column property="address" label="操作">
+                    <template scope="scope">
+                        <el-button size="small"
+                                   @click="CheckAttr(scope.$index, scope.row)">查看属性</el-button>
+                        <el-button size="small"
+                                   @click="EditMessage(scope.$index, scope.row)" class="el-icon-edit">编辑</el-button>
+                        <el-button size="small" type="danger"
+                                   @click="deleteMessage(scope.$index,scope.row)" class="el-icon-delete">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-dialog>
+        <el-dialog title="属性信息" :visible.sync="dialogTableVisible3">
+            <el-table :data="attrData">
+                <el-table-column property="id" label="id" width="100"></el-table-column>
+                <el-table-column property="messageId" label="消息Id" width="100"></el-table-column>
+                <el-table-column property="name" label="名称"></el-table-column>
+                <el-table-column property="type" label="类型" width="100"></el-table-column>
+                <el-table-column property="mean" label="含义" width="100"></el-table-column>
+                <el-table-column property="integral" label="integral"></el-table-column>
+                <el-table-column property="empty" label="是否空" width="80"></el-table-column>
+                <el-table-column property="address" label="操作" width="300">
+                    <template scope="scope">
+                        <el-button size="small"
+                                   @click="EditAttr(scope.$index, scope.row)" class="el-icon-edit">编辑</el-button>
+                        <el-button size="small" type="danger"
+                                   @click="DeleteAttr(scope.$index,scope.row)" class="el-icon-delete">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-dialog>
+        <el-dialog title="修改消息" :visible.sync="dialogFormVisible4">
+            <el-form :model="messageform">
+                <el-form-item label="消息id" :label-width="formLabelWidth">
+                    <el-input v-model="messageform.messageId" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="消息名称" :label-width="formLabelWidth">
+                    <el-input v-model="messageform.name" auto-complete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible4 = false">取 消</el-button>
+                <el-button type="primary" @click="submitMessage">确 定</el-button>
+            </div>
+        </el-dialog>
+        <el-dialog title="修改属性" :visible.sync="dialogFormVisible3">
+            <el-form :model="attrform">
+                <el-form-item label="属性id" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.id" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性名称" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.name" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性类型" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.type" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性含义" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.mean" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="包含在消息中" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.integral" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="能否空" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.empty" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="活动名称" :label-width="formLabelWidth">
+                    <el-input v-model="attrform.id" auto-complete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible3 = false">取 消</el-button>
+                <el-button type="primary" @click="submitAttr">确 定</el-button>
+            </div>
+        </el-dialog>
         <div class="block" style="margin-top: 50px;margin-left: 300px">
             <!--<span class="demonstration">页数较少时的效果</span>-->
             <el-pagination
@@ -335,21 +404,57 @@
                         value: '',
                         key:""
                     }],
-                    // email: '',
-                    // operation:'',
-                    // key:''
                 },
                 tableData: [],
                 gridData:[],
+                attrData:[{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }],
+                messageData:[{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }],
                 dialogTableVisible: false,
                 dialogTableVisible2: false,
+                dialogTableVisible3: false,
                 dialogFormVisible: false,
                 dialogFormVisible1:false,
                 dialogFormVisible2:false,
+                dialogFormVisible3:false,
+                dialogFormVisible4:false,
                 dialogFormVisible6:false,
                 form: {},
                 editform:{},
+                attrform:{},
                 Searchform2:{},
+                messageform:{},
                 formLabelWidth: '120px'
             }
         },
@@ -369,6 +474,77 @@
         })
         },
         methods: {
+            CheckAttr(index,data){
+                console.log('CheckAttr',data)
+                this.dialogTableVisible3=true;
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.241.243:8080/messages/findAttributes',
+                        params:{
+                            page:1,
+                            size:10
+                        }
+                    }).then((res)=>{
+                    // this.warehouseOut=[],
+                    this.attrData=res.data.data.results;
+                console.log('查看某个属性结果',this.tableData)
+            })
+            },
+            EditMessage(index,data){
+                console.log('EditMessage',data)
+                this.dialogFormVisible4=true;
+                this.messageform=data;
+            },
+            submitMessage(){
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.241.243:8080/messages/updateMessages',
+                        data:this.messageform
+                    }).then((res)=>{
+                    console.log('修改消息结果',res)
+                this.dialogFormVisible4=false;
+            })
+            },
+           deleteMessage(index,data){
+                console.log('deleteMessage',data)
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.241.243:8080/messages/deleteAll',
+                        data:data
+                    }).then((res)=>{
+                    console.log('删除消息结果',res)
+            })
+            },
+            EditAttr(index,data){
+                console.log('EditAttr',data)
+                this.dialogFormVisible3=true;
+                this.attrform=data;
+            },
+            submitAttr(){
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.241.243:8080/messages/updateMessages',
+                        data:this.attrform
+                    }).then((res)=>{
+                    console.log('修改属性结果',res)
+                this.dialogFormVisible3=false;
+            })
+            },
+            DeleteAttr(index,data){
+                console.log('DeleteAttr',data)
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.241.243:8080/messages/deleteAttributes',
+                        data:data
+                    }).then((res)=>{
+                    console.log('修改属性结果',res)
+            })
+            },
             submitForm(formName) {
                 this.$ajax(
                     {
@@ -398,7 +574,18 @@
                 this.dialogFormVisible2=true;
             },
             checkMessage(index,data){
-                this.dialogFormVisible2=true;
+                console.log('checkMessage',data)
+                this.dialogTableVisible2=true;
+                this.$ajax(
+                    {
+                        method: 'GET', //请求方式
+                        url: 'http://10.103.241.243:8080/messages/findByServiceId',
+                        params:{id:data.serviceId}
+                    }).then((res)=>{
+                    // this.warehouseOut=[],
+                    this.messageData=res.data.data;
+                console.log('查看对应消息结果',res.data.data)
+            })
             },
             removeDomain(item) {
                 var index = this.dynamicValidateForm.domains.indexOf(item)

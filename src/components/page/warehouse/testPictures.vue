@@ -1,6 +1,9 @@
 <template>
     <body>
-    <div id="tip">可以缩放地图，得到缩放级别哦！<br><span id="info"></span></div>
+    <div id="tip" style="display: inline-block;margin-right: 100px">可以缩放地图，得到缩放级别哦！<br><span id="info"></span>
+    </div>
+   <el-button type="primary" icon="el-icon-edit" style="margin-bottom: 10px" @click="addWarehouse"> 选址建库</el-button>
+
     <ul style="float:right;display: none;" class="side">
         室内仓库列表
     </ul>
@@ -65,6 +68,11 @@
         },
 
         methods: {
+            addWarehouse(){
+            //    addWarehouse
+                this.$router.push('/addWarehouse');
+            },
+
             inital: function () {
                 var provinces=[]
                 // var clickListener, map = new AMap.Map("container", {
@@ -294,6 +302,7 @@
                     //
                     // }
                     // this.$router.push('/commodity');
+                    localStorage.setItem("ckId",152222760072925)
                     window.location.href = "/#/commodity"
 
                 }

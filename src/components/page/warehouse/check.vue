@@ -19,6 +19,7 @@
                 </el-form-item>
                 <el-button type="primary" icon="search" @click="search">搜索</el-button>
             </el-form>
+            <el-button type="primary" icon="el-icon-search"   @click="toKuCun">总库存信息</el-button>
             <el-button type="primary"  class="el-icon-plus" @click="addService">增加盘点单</el-button>
         </div>
 
@@ -327,6 +328,10 @@
         })
         },
         methods: {
+            toKuCun(){
+                // /kucun
+                this.$router.push('/kucun');
+            },
             handleChange(value) {
                 this.obj={};
                 this.obj.ckId=value[0];

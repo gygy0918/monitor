@@ -74,16 +74,12 @@
                                title: '仓库列表'
                            },
                            {
-                               index: 'newwarehouse',
-                               title: '申请入库'
-                           },
-                           {
                                index: 'check',
                                title: '盘点'
                            },
                            {
                                index: 'testpictures',
-                               title: '点聚合'
+                               title: '仓库可视化聚合'
                            },
                            {
                                index: 'filterMap',
@@ -97,14 +93,14 @@
                            //     index: 'checkOut',
                            //     title: '查看申请出库'
                            // },
-                           {
-                               index: 'addWarehouse',
-                               title: '可视化新增仓库'
-                           },
-                           {
-                               index: 'kucun',
-                               title: '总体库存信息'
-                           },
+                           // {
+                           //     index: 'addWarehouse',
+                           //     title: '可视化新增仓库'
+                           // },
+                           // {
+                           //     index: 'kucun',
+                           //     title: '总体库存信息'
+                           // },
 //                            {
 //                                index: 'markdown',
 //                                title: 'markdown'

@@ -231,7 +231,7 @@
         },
         created(){
 //            this.getData();
-            this.form.ckId= window.localStorage.getItem('ckId')
+            this.form.ckId= localStorage.getItem('ckId')
             console.log('this.form.ckId',this.form.ckId)
             this.$ajax(
                 {
