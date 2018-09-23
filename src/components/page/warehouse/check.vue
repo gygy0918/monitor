@@ -299,7 +299,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/inventory/page',
+                    url: 'http://10.103.240.238:8080/inventory/page',
                     params:{
                         page:1,
                         size:10,
@@ -314,7 +314,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/list/ckAndSp',
+                    url: 'http://10.103.240.238:8080/list/ckAndSp',
                     params:{
                         page:1,
                         size:5,
@@ -342,7 +342,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.243.94:8080/check/getCkSp',
+                        url: 'http://10.103.240.238:8080/check/getCkSp',
                         params:{
                             page:1,
                             size:5,
@@ -371,7 +371,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/inventory',
+                        url: 'http://10.103.240.238:8080/inventory',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -406,7 +406,7 @@
                 this.$ajax(
                     {
                         method: 'PUT', //请求方式
-                        url: 'http://10.103.243.94:8080/inventory',
+                        url: 'http://10.103.240.238:8080/inventory',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -423,7 +423,7 @@
                 let id=row.id;
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.243.94:8080/inventory',
+                    url: 'http://10.103.240.238:8080/inventory',
                     params:{
                         id
                     },

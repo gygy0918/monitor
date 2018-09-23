@@ -150,7 +150,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/list/ckIds',
+                    url: 'http://10.103.240.238:8080/list/ckIds',
                     params:{
                         page:1,
                         size:9
@@ -164,7 +164,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/list/spIds',
+                    url: 'http://10.103.240.238:8080/list/spIds',
                     params:{
                         page:1,
                         size:9
@@ -206,7 +206,7 @@
                 this.$ajax(
                     {
                         method: 'POST', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouseApply/scheduling',
+                        url: 'http://10.103.240.238:8080/warehouseApply/scheduling',
                         data:newarr,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -221,7 +221,7 @@
                     this.$ajax(
                         {
                             method: 'post', //请求方式
-                            url: 'http://10.103.243.94:8080/warehouseApply',
+                            url: 'http://10.103.240.238:8080/warehouseApply',
                             data:data,
                             headers:{"Authorization":localStorage.getItem('token')},
                         }).then((res)=>{
@@ -237,7 +237,7 @@
                     this.$ajax(
                         {
                             method: 'get', //请求方式
-                            url: 'http://10.103.243.94:8080/scheduling/In',
+                            url: 'http://10.103.240.238:8080/scheduling/In',
                             params:{
                                 applyCount:data.applyCount,
                                 spId:data.spId

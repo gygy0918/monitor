@@ -121,7 +121,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/list/ckAndSp',
+                    url: 'http://10.103.240.238:8080/list/ckAndSp',
                     params:{
                         page:1,
                         size:5,
@@ -153,7 +153,7 @@
                     this.$ajax(
                         {
                             method: 'get', //请求方式
-                            url: 'http://10.103.243.94:8080/check/getCkSp',
+                            url: 'http://10.103.240.238:8080/check/getCkSp',
                             params:{
                                 page:1,
                                 size:5,

@@ -178,7 +178,7 @@
                         let data={username,password};
                         this.$ajax({
                             method:'post',
-                            url:'http://10.103.243.94:8080/login',
+                            url:'http://10.103.240.238:8080/login',
                             data:data
                         }).then((res)=>{
                             console.log('test',res)

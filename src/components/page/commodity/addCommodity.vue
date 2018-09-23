@@ -100,7 +100,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/commodity',
+                        url: 'http://10.103.240.238:8080/commodity',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

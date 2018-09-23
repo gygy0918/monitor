@@ -124,8 +124,8 @@
                         this.$ajax(
                             {
                                 method: 'put', //请求方式
-                                url: 'http://10.103.243.94:8080/userInfo/newPassword',
-//                                http://10.103.243.94:8080/userInfo/newPassword?id=5&num1=111111&num2=123456
+                                url: 'http://10.103.240.238:8080/userInfo/newPassword',
+//                                http://10.103.240.238:8080/userInfo/newPassword?id=5&num1=111111&num2=123456
                                 data:data,
                                 headers:{"Authorization":localStorage.getItem('token')},
                             }).then((res)=>{

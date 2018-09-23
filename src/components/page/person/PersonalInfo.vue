@@ -118,7 +118,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/userInfo',
+                    url: 'http://10.103.240.238:8080/userInfo',
                     params:{
                         username:localStorage.getItem('ms_username')
                     },
@@ -190,7 +190,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.243.94:8080/userInfo',
+                        url: 'http://10.103.240.238:8080/userInfo',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

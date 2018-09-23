@@ -140,7 +140,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/role/page',
+                    url: 'http://10.103.240.238:8080/role/page',
                     params:{
                         page:1,
                         size:5
@@ -154,7 +154,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.243.94:8080/permission/page',
+                    url: 'http://10.103.240.238:8080/permission/page',
                     params:{
                         page:1,
                         size:20
@@ -206,7 +206,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.243.94:8080/role',
+                        url: 'http://10.103.240.238:8080/role',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -220,7 +220,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.243.94:8080/role',
+                        url: 'http://10.103.240.238:8080/role',
                         params:{
                             id:row.id
                         },
@@ -284,7 +284,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouse',
+                        url: 'http://10.103.240.238:8080/warehouse',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

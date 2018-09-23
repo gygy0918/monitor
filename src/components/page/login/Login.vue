@@ -11,6 +11,7 @@
                 </el-form-item>
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')" style="margin-bottom: 10px"> 登录</el-button>
+                    <a> 忘记密码</a>
                 </div>
                 <!--<el-button @click="forgetPass()" size="mini" >忘记密码？</el-button>-->
                 <!--<p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>-->
@@ -50,7 +51,7 @@
                         let data={username,password};
                         this.$ajax({
                             method:'post',
-                            url:'http://10.103.243.94:8080/login',
+                            url:'http://10.103.240.238:8080/login',
                             data:data
                         }).then((res)=>{
                             console.log('test',res)
@@ -60,7 +61,6 @@
                                 localStorage.setItem('yhId',res.data.yhId);
                                 localStorage.setItem('msg',res.data.msg);
                                 self.$router.push('/readme');
-
                             }else {
                                 this.$message('请检查用户名或密码是否正确');
 //                                alert('请检查用户名或密码是否正确')

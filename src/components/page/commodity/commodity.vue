@@ -48,7 +48,7 @@ return {
 }
 },
 created(){
-//通过点击楼层数返回相应的楼层教室•	http://10.103.243.94:8080/commodity/page?page=1&size=
+//通过点击楼层数返回相应的楼层教室•	http://10.103.240.238:8080/commodity/page?page=1&size=
 },
 methods: {
         handleClick(tab, event) {

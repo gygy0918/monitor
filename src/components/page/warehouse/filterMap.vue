@@ -65,7 +65,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.243.94:8080/warehouse/page',
+                        url: 'http://10.103.240.238:8080/warehouse/page',
                         params:{
                             page:1,
                             size:1000
