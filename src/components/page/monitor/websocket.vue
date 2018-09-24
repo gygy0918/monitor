@@ -36,7 +36,7 @@
 //            this.$ajax(
 //                {
 //                    method: 'get', //请求方式
-//                    url: 'http://10.103.241.154:8080/lightInfo/page',
+//                    url: 'http://10.103.243.162:8080/lightInfo/page',
 //                    params:{
 //                        page:1,
 //                        size:5

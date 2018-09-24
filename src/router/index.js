@@ -43,7 +43,7 @@ export default new Router({
 },
 {
     path: '/addWarehouse2',
-        component: resolve => require(['../components/page/warehouse/addWarehouse.vue'], resolve)    // 拖拽列表组件
+        component: resolve => require(['../components/page/warehouse/searchAddWarehouse.vue'], resolve)    // 拖拽列表组件
 },
 {
     path: '/pppp',
@@ -56,6 +56,10 @@ export default new Router({
 {
     path: '/filterMap',
         component: resolve => require(['../components/page/warehouse/filterMap.vue'], resolve)    // 拖拽列表组件
+},
+{
+    path: '/innerMonitor',
+        component: resolve => require(['../components/page/monitor/innerMonitor.vue'], resolve)    // 拖拽列表组件
 },
 {
     path: '/newWarehouse',

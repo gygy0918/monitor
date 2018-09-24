@@ -131,11 +131,11 @@
                     url: 'http://10.103.240.238:8080/userInfo/page',
                     params:{
                         page:1,
-                        size:5
+                        size:50
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
-                this.usersInfo=[],
+                // this.usersInfo=[],
                     res.data.data.results.map((item)=>{
                         console.log('0000',item.gender)
                       item.gender=item.gender?'男':'女'
@@ -179,9 +179,9 @@
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
-                    this.usersInfo=[],
-                        this.usersInfo=res.data.data.results;
-                    console.log('结果',this.usersInfo)
+                    // this.usersInfo=[],
+                    //     this.usersInfo=res.data.data.results;
+                    // console.log('结果',this.usersInfo)
                 });
                 this.dialogFormVisible = false;
             },

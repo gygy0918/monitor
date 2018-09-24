@@ -162,7 +162,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.241.154:8080/ws/page',
+                    url: 'http://10.103.243.162:8080/ws/page',
                     params:{
                         page:1,
                         size:10
@@ -184,7 +184,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/matching',
+                        url: 'http://10.103.243.162:8080/ws/matching',
                         data:data
                     }).then((res)=>{
                     this.tableData=[],
@@ -228,7 +228,7 @@
             //     this.$ajax(
             //         {
             //             method: 'post', //请求方式
-            //             url: 'http://10.103.241.154:8080/ws/result',
+            //             url: 'http://10.103.243.162:8080/ws/result',
             //             data:data
             //         }).then((res)=>{
             //         // this.warehouseOut=[],

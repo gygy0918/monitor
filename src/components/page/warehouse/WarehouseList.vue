@@ -54,20 +54,32 @@
             <el-table-column type="selection" width="55"></el-table-column>
             <!--<el-table-column prop="date" label="日期" sortable width="150">-->
             <!--</el-table-column>-->
-            <el-table-column prop="ckId" label="仓库标号" width="120">
-            </el-table-column>
+            <!--<el-table-column prop="ckId" label="仓库标号" width="120">-->
+            <!--</el-table-column>-->
             <el-table-column prop="name" label="仓库名称" width="120">
             </el-table-column>
             <el-table-column prop="ckAddress" label="位置" width="120">
             </el-table-column>
-            <el-table-column prop="count" label="货柜总数" width="120">
+            <el-table-column prop="count" label="货柜总数" width="100">
             </el-table-column>
-            <el-table-column prop="ckAttribute" label="属性" width="120">
+            <el-table-column prop="ckAttribute" label="属性" width="100">
             </el-table-column>
-            <el-table-column prop="ckStatus" label="状态" width="120">
+            <el-table-column prop="ckStatus" label="状态" width="100">
+                <template scope="scope">
+                    <el-tag type="danger" v-if="scope.row.ckStatus==1">不可用</el-tag>
+                    <el-tag type="success" v-else>可用</el-tag>
+                    <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
+                    <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
+
+                    <!--<el-button size="small" type="text" disabled v-else-->
+                    <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
+                </template>
             </el-table-column>
-            <!--<el-table-column prop="address" label="地址" :formatter="formatter">-->
-            <!--</el-table-column>-->
+
+            <el-table-column prop="floor" label="楼层" width="120">
+            </el-table-column>
+            <el-table-column prop="room" label="房间号" :width="120">
+            </el-table-column>
             <el-table-column label="操作" width="180">
                 <template scope="scope">
                     <el-button size="small"
@@ -181,7 +193,7 @@
                     url: 'http://10.103.240.238:8080/warehouse/page',
                     params:{
                         page:1,
-                        size:15
+                        size:30
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{

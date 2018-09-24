@@ -412,9 +412,9 @@
                 console.log('ddddd',row)
                 let id=row.id;
                 this.$ajax({
-                    method: 'delete', //请求方式
-                    url: 'http://10.103.240.238:8080/box',
-                    params:{
+                        method: 'delete', //请求方式
+                        url: 'http://10.103.240.238:8080/box',
+                        params:{
                         id
                     },
                     headers:{"Authorization":localStorage.getItem('token')}

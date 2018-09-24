@@ -163,11 +163,28 @@
         </el-dialog>
         <el-dialog title="服务详细信息" :visible.sync="dialogTableVisible">
             <el-table :data="gridData">
-                <el-table-column property="description" label="服务" width="150"></el-table-column>
-                <el-table-column property="reliability" label="可靠性" width="200"></el-table-column>
-                <el-table-column property="responseTime" label="响应时间"></el-table-column>
-                <el-table-column property="delay" label="延迟"></el-table-column>
-                <el-table-column property="usability" label="可用性"></el-table-column>
+                <el-table-column property="description" label="服务" width="100"></el-table-column>
+                <el-table-column property="reliability" label="可靠性" width="100"></el-table-column>
+                <el-table-column property="responseTime" label="响应时间" width="100"></el-table-column>
+                <el-table-column property="delay" label="延迟" width="100"></el-table-column>
+                <el-table-column property="usability" label="可用性" width="100"></el-table-column>
+                <el-table-column label="操作" >
+                    <template scope="scope">
+                        <el-button size="small"
+                                   @click="serviceMethod(scope.$index, scope.row)">服务的方法</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-dialog>
+        <el-dialog title="服务方法" :visible.sync="dialogTableVisible8">
+            <el-table :data="serviceMethodData">
+                <el-table-column property="opId" label="编号" width="80"></el-table-column>
+                <el-table-column property="name" label="服务方法名" width="150"></el-table-column>
+                <el-table-column property="input" label="输入" width="150"></el-table-column>
+                <el-table-column property="output" label="输出"  width="100"></el-table-column>
+                <el-table-column property="description" label="方法描述"  width="150"></el-table-column>
+                <!--<el-table-column property="usability" label="可用性"></el-table-column>-->
+                <!--<el-button type="primary" @click="submitEdit('editform')">确 定</el-button>-->
             </el-table>
         </el-dialog>
         <el-dialog title="输入匹配值" :visible.sync="dialogFormVisible6">
@@ -205,23 +222,23 @@
         <el-dialog title="添加消息" :visible.sync="dialogFormVisible2">
             <el-form :model="dynamicValidateForm2" ref="dynamicValidateForm2" label-width="100px" class="demo-dynamic" >
                 <el-form-item label="消息名称" :label-width="formLabelWidth">
-                <el-input v-model="form.delay" auto-complete="off"  placeholder="0-1"></el-input>
+                <el-input v-model="form.messageName" auto-complete="off"  placeholder="0-1"></el-input>
                 </el-form-item>
                 <el-form-item label="服务id" :label-width="formLabelWidth">
-                <el-input v-model="form.responseTime" auto-complete="off"  placeholder="0-1"></el-input>
+                <el-input v-model="form.serviceId" auto-complete="off"  placeholder="0-1"></el-input>
                 </el-form-item>
-                <el-form-item label="消息属性" :label-width="formLabelWidth">
+            <!--    <el-form-item label="消息属性" :label-width="formLabelWidth">
                     <el-input v-model="form.responseTime" auto-complete="off"  placeholder="0-1"></el-input>
-                </el-form-item>
+                </el-form-item>-->
                 <el-form-item
                     v-for="(domain, index) in dynamicValidateForm2.domains"
-                    :label="'属性' + index"
+                    :label="'消息属性' + index"
                     :key="domain.key"
-                    :prop="'domains.' + index + '.value'">
-                    <el-input v-model="domain.value" style="width: 80px" label="属性名称" placeholder="属性名称" ></el-input>
-                    <el-input v-model="domain.value" style="width: 80px" label="属性类型" placeholder="属性类型" ></el-input>
-                    <el-input v-model="domain.value" style="width: 80px" label="属性含义" placeholder="属性含义" ></el-input>
-                    <el-select v-model="domain.key" placeholder="是否为空" style="width: 80px">
+                    :prop="'domains' + index + 'value'">
+                    <el-input v-model="domain.name" style="width: 80px" label="属性名称" placeholder="属性名称" ></el-input>
+                    <el-input v-model="domain.type" style="width: 80px" label="属性类型" placeholder="属性类型" ></el-input>
+                    <el-input v-model="domain.mean" style="width: 80px" label="属性含义" placeholder="属性含义" ></el-input>
+                    <el-select v-model="domain.empty" placeholder="是否为空" style="width: 80px">
                         <el-option
                             v-for="item in options3"
                             :key="item.value"
@@ -229,7 +246,7 @@
                             :value="item.value">
                         </el-option>
                     </el-select>
-                    <el-select v-model="domain.operation" placeholder="是否必须在消息中" style="width: 80px">
+                    <el-select v-model="domain.integral" placeholder="是否必须在消息中" style="width: 80px">
                         <el-option
                             v-for="item in options4"
                             :key="item.value"
@@ -257,6 +274,8 @@
                 <el-table-column property="serviceId" label="服务ID" width="100"></el-table-column>
                 <el-table-column property="address" label="操作">
                     <template scope="scope">
+                        <el-button size="small"
+                                   @click="addAttr(scope.$index, scope.row)">增加属性</el-button>
                         <el-button size="small"
                                    @click="CheckAttr(scope.$index, scope.row)">查看属性</el-button>
                         <el-button size="small"
@@ -298,6 +317,33 @@
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible4 = false">取 消</el-button>
                 <el-button type="primary" @click="submitMessage">确 定</el-button>
+            </div>
+        </el-dialog>
+        <el-dialog title="增加属性" :visible.sync="dialogFormVisible7">
+            <el-form :model="attrAddform">
+                <el-form-item label="消息id" :label-width="formLabelWidth">
+                    <el-input v-model="attrAddform.messageId" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性名称" :label-width="formLabelWidth">
+                    <el-input v-model="attrAddform.name" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性类型" :label-width="formLabelWidth">
+                    <el-input v-model="attrAddform.type" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性含义" :label-width="formLabelWidth">
+                    <el-input v-model="attrAddform.mean" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性是否必须包含在消息中" :label-width="formLabelWidth">
+                    <el-input v-model="attrAddform.integral" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="属性是否能够为空" :label-width="formLabelWidth">
+                    <el-input v-model="attrAddform.empty" auto-complete="off"></el-input>
+                </el-form-item>
+
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible4 = false">取 消</el-button>
+                <el-button type="primary" @click="submitattrInM">确 定</el-button>
             </div>
         </el-dialog>
         <el-dialog title="修改属性" :visible.sync="dialogFormVisible3">
@@ -389,23 +435,23 @@
                     value: 'false',
                     label: 'false'
                 }],
-                operation: '',
                 dynamicValidateForm: {
                     domains: [{
                         value: '',
                         key:""
                     }],
-                    // email: '',
-                    // operation:'',
-                    // key:''
                 },
                 dynamicValidateForm2: {
                     domains: [{
-                        value: '',
-                        key:""
+                        name: '',
+                        type:'',
+                        mean:'',
+                        empty: '',
+                        integral:''
                     }],
                 },
                 tableData: [],
+                serviceMethodData:[],
                 gridData:[],
                 attrData:[{
                     date: '2016-05-02',
@@ -441,6 +487,7 @@
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1518 弄'
                 }],
+                attrAddform:{},
                 dialogTableVisible: false,
                 dialogTableVisible2: false,
                 dialogTableVisible3: false,
@@ -450,6 +497,8 @@
                 dialogFormVisible3:false,
                 dialogFormVisible4:false,
                 dialogFormVisible6:false,
+                dialogFormVisible7:false,
+                dialogTableVisible8:false,
                 form: {},
                 editform:{},
                 attrform:{},
@@ -462,7 +511,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.241.154:8080/ws/page',
+                    url: 'http://10.103.243.162:8080/ws/page',
                     params:{
                         page:1,
                         size:10
@@ -474,21 +523,55 @@
         })
         },
         methods: {
+            addAttr(index,data){
+                this.dialogFormVisible7=true;
+                this.attrAddform.messageId=data.messageId
+            },
+            submitattrInM(){
+                this.$ajax(
+                    {
+                        method: 'post', //请求方式
+                        url: 'http://10.103.243.162:8080/messages/saveAttributes',
+                        data:this.attrAddform
+                    }).then((res)=>{
+                    console.log('增加属性',res)
+                this.dialogFormVisible7=false;
+            })
+            },
+            serviceMethod(index,data){
+                this.dialogTableVisible8=true,
+                    // serviceMethodData
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.243.162:8080/operations/find',
+                            params:{
+                                // page:1,
+                                // size:10,
+                                id:data.serviceId
+                            }
+                        }).then((res)=>{
+                        // this.warehouseOut=[],
+                        this.serviceMethodData=res.data.data;
+                console.log('服务结果',this.serviceMethodData)
+            })
+            },
             CheckAttr(index,data){
-                console.log('CheckAttr',data)
+                console.log('CheckAttr',data.messageId)
                 this.dialogTableVisible3=true;
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.241.243:8080/messages/findAttributes',
+                        url: 'http://10.103.243.162:8080/messages/findAttributes',
                         params:{
                             page:1,
-                            size:10
+                            size:50,
+                            id:data.messageId
                         }
                     }).then((res)=>{
                     // this.warehouseOut=[],
-                    this.attrData=res.data.data.results;
-                console.log('查看某个属性结果',this.tableData)
+                    this.attrData=res.data.data;
+                console.log('查看某个属性结果',res.data)
             })
             },
             EditMessage(index,data){
@@ -500,7 +583,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.243:8080/messages/updateMessages',
+                        url: 'http://10.103.243.162:8080/messages/updateMessages',
                         data:this.messageform
                     }).then((res)=>{
                     console.log('修改消息结果',res)
@@ -512,10 +595,11 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.241.243:8080/messages/deleteAll',
-                        data:data
+                        url: 'http://10.103.243.162:8080/messages/deleteAll',
+                        params:{id:data.messageId}
                     }).then((res)=>{
                     console.log('删除消息结果',res)
+               this.messageData.splice(index, 1);
             })
             },
             EditAttr(index,data){
@@ -527,7 +611,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.243:8080/messages/updateMessages',
+                        url: 'http://10.103.243.162:8080/messages/updateAttributes',
                         data:this.attrform
                     }).then((res)=>{
                     console.log('修改属性结果',res)
@@ -538,18 +622,19 @@
                 console.log('DeleteAttr',data)
                 this.$ajax(
                     {
-                        method: 'post', //请求方式
-                        url: 'http://10.103.241.243:8080/messages/deleteAttributes',
-                        data:data
+                        method: 'get', //请求方式
+                        url: 'http://10.103.243.162:8080/messages/deleteAttributes',
+                        params:{id:data.id}
                     }).then((res)=>{
                     console.log('修改属性结果',res)
+                this.attrData.splice(index,1)
             })
             },
             submitForm(formName) {
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/result',
+                        url: 'http://10.103.243.162:8080/ws/result',
                         data:this.dynamicValidateForm.domains
                     }).then((res)=>{
                     // this.warehouseOut=[],
@@ -571,6 +656,8 @@
                 this.$refs[formName].resetFields();
             },
             addMessage(index,data){
+                console.log('addMessage',data)
+                this.form.serviceId=data.serviceId
                 this.dialogFormVisible2=true;
             },
             checkMessage(index,data){
@@ -579,7 +666,7 @@
                 this.$ajax(
                     {
                         method: 'GET', //请求方式
-                        url: 'http://10.103.241.243:8080/messages/findByServiceId',
+                        url: 'http://10.103.243.162:8080/messages/findByServiceId',
                         params:{id:data.serviceId}
                     }).then((res)=>{
                     // this.warehouseOut=[],
@@ -601,8 +688,11 @@
             },
             addattribute() {
                 this.dynamicValidateForm2.domains.push({
-                    value: '',
-                    key: Date.now()
+                    name: '',
+                    type:'',
+                    mean:'',
+                    empty: '',
+                    integral:''
                 });
             },
             removeattribute(item) {
@@ -623,18 +713,18 @@
 
             },
             submitMatch(){
-                console.log('00000',this.form)
-                let data=this.form
+                console.log('00000',this.dynamicValidateForm2.domains)
+                let data=Object.assign(this.form,{attributes:this.dynamicValidateForm2.domains})
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/matching',
+                        url: 'http://10.103.243.162:8080/messages/saveMessages',
                         data:data
                     }).then((res)=>{
                     this.tableData=[],
                     this.tableData.push(res.data.data);
                 console.log('自动匹配结果',this.tableData)
-                this.dialogFormVisible6=false
+                this.dialogFormVisible2=false
             })
             },
             addService(){
@@ -646,7 +736,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/save',
+                        url: 'http://10.103.243.162:8080/ws/save',
                         data:data
                     }).then((res)=>{
                     // this.warehouseOut=[],
@@ -663,7 +753,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/find',
+                        url: 'http://10.103.243.162:8080/ws/find',
                         params:{
                             page:1,
                             size:10,
@@ -690,7 +780,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/update',
+                        url: 'http://10.103.243.162:8080/ws/update',
                         data:data
                     }).then((res)=>{
 //                    this.usersInfo=[],
@@ -706,7 +796,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.241.154:8080/ws/delete',
+                        url: 'http://10.103.243.162:8080/ws/delete',
                         params:{
                             page:1,
                             size:10,

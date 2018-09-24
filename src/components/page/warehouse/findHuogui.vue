@@ -1,5 +1,6 @@
 <template>
     <div class="bacwall">
+        <el-button @click="addhuogui()" type="text" size="mini">新建货柜</el-button>
 
         <el-row >
         <el-col :span="6" v-for="(o, index) in data.slice(0,4)" :key="index" :offset="index > 0 ? 0 : 0">
@@ -20,6 +21,7 @@
                     <el-table-column width="120" property="lastUpdate" label="操作日期"></el-table-column>
                 </el-table>
                 <el-button  slot="reference" size="small" type="text" @click="goodsDetail(o.hgId)">{{o.hgStatus?'查看货柜内物品':'空柜'}}</el-button>
+                <el-button  slot="reference" size="small" type="text" @click="deleteHUOGUI(o.id,index)">删除</el-button>
             </el-popover>
         <div >
         <time class="time">{{ currentDate }}</time>
@@ -149,6 +151,24 @@
         })
         },
         methods:{
+            addhuogui(){
+                this.$router.push('/huoguiList');
+            },
+            deleteHUOGUI(val,index){
+                console.log('deleteHUOGUI')
+                this.$ajax({
+                    method: 'delete', //请求方式
+                    url: 'http://10.103.240.238:8080/box',
+                    params:{
+                        id:val
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')}
+                }).then(
+                    (res) => {
+                    this.data.splice(index, 1);
+                    console.log(res);
+            });
+            },
             goodsDetail(val){
                 console.log('goodsDetail',val)
                 this.$ajax(

@@ -10,26 +10,32 @@
             <!--<h3>{{ item }}</h3>-->
         <!--</el-carousel-item>-->
     <!--</el-carousel>-->
-    <el-tabs :tab-position="tabPosition" style="height: 200px;">
-        <el-tab-pane label="一楼">
+    <el-tabs :tab-position="tabPosition" style="height: 200px;"  v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="一楼" name="first" >
             <div class="back1">
-                <el-button type="primary" round class="ott" size="mini" @click="findHuoGui">122</el-button>
+                <el-button type="primary" round class="ott" size="mini" @click="findHuoGui">112
+                </el-button>
                 <el-button type="primary" round class="oof" size="mini" @click="findHuoGui">115</el-button>
                 <el-button type="primary" round class="oot" size="mini" @click="findHuoGui">112</el-button>
 
             </div>
         </el-tab-pane>
-        <el-tab-pane label="二楼">
-
+        <el-tab-pane label="二楼" name="second">
         </el-tab-pane>
-        <el-tab-pane label="三楼">角色管理</el-tab-pane>
+        <el-tab-pane label="三楼" name="third">角色管理</el-tab-pane>
         <el-tab-pane label="四楼">定时任务补偿</el-tab-pane>
-        <el-tab-pane label="六楼">
-            <div class="back">
-            <el-button type="primary" round class="sts" size="mini" @click="findHuoGui">626</el-button>
-            <el-button type="primary" round class="stsr" size="mini" @click="findHuoGui">627</el-button>
-            <el-button type="primary" round class="stf" size="mini" @click="findHuoGui">625</el-button>
+        <el-tab-pane label="六楼" name="6" >
+            <div class="back" >
+            <el-button type="primary" v-for="item in warehouseInfo" round class="sts" size="mini"  v-if="item.room=='626'" @click="findHuoGui(item.ckId)">{{ item.room }}</el-button>
+                <el-button type="primary" round class="sof" size="mini"  v-else-if="item.room=='614'" @click="findHuoGui(item.ckId)">{{ item.room }}</el-button>
+                <el-button type="primary" round class="stf2" size="mini"  v-else-if="item.room=='635'" @click="findHuoGui(item.ckId)">{{ item.room }}</el-button>
+                <el-button type="primary" round class="stf" size="mini"  v-else-if="item.room=='634'" @click="findHuoGui(item.ckId)">{{ item.room }}</el-button>
+                <el-button type="primary" round class="sto" size="mini"  v-else-if="item.room=='631'" @click="findHuoGui(item.ckId)">{{ item.room }}</el-button>
+                <el-button type="primary" round class="stsr" size="mini"  v-else-if="item.room=='636'" @click="findHuoGui(item.ckId)">{{ item.room }}</el-button>
 
+                <!--<el-button type="primary" round class="stsr" size="mini" @click="findHuoGui">627</el-button>-->
+
+            <!--<el-button type="primary" round class="stf" size="mini" @click="findHuoGui">625</el-button>-->
         </div>
         </el-tab-pane>
     </el-tabs>
@@ -44,17 +50,40 @@ export default {
 data: function(){
 return {
 //每个教室灯的信息
+    activeName:'6'
 
 }
 },
 created(){
 //通过点击楼层数返回相应的楼层教室•	http://10.103.240.238:8080/commodity/page?page=1&size=
+    let parentName = localStorage.getItem('parentName')
+    this.$ajax(
+        {
+            method: 'get', //请求方式
+            url: 'http://10.103.240.238:8080/warehouse/page',
+            params:{
+                page:1,
+                size:30,
+                floor:6,
+                // ckAddress:'111',
+                parentName:parentName
+            },
+            headers:{"Authorization":localStorage.getItem('token')},
+        }).then((res)=>{
+        this.warehouseInfo=[],
+        this.warehouseInfo=res.data.data.results;
+    // this.warehouseInfo.push({room:631})
+    // this.warehouseInfo.push({room:636})
+    console.log('仓库列表',this.warehouseInfo)
+})
 },
 methods: {
         handleClick(tab, event) {
-        console.log(tab, event);
+        console.log(this.activeName, event);
         },
-    findHuoGui(){
+    findHuoGui(val){
+        console.log('仓库编号', val);
+        localStorage.setItem('ckId',val)
         this.$router.push('/findHuogui');
 
     }
@@ -163,34 +192,50 @@ margin: 5px;
     background:  url(../../../assets/教1.png) no-repeat;
     background-size:100% 100%;
 }
+.stf{
+    position: absolute;
+    bottom:185px;
+    left:360px;
+}
+.stf2{
+    position: absolute;
+    bottom:185px;
+    left:410px;
+}
+.sto{
+    position: absolute;
+    bottom:185px;
+    left:360px;
+}
     .sts{
         position: absolute;
         bottom:170px;
-        left:30px;
+        left:60px;
+    }
+    .sof{
+        position: absolute;
+        top:210px;
+        left:310px;
     }
 .stsr{
     position: absolute;
-    bottom:160px;
-    left:65px;
+    bottom:270px;
+    left:580px;
 }
-.stf{
-    position: absolute;
-    bottom:175px;
-    left:95px;
-}
+
     .ott{
         position: absolute;
         top:230px;
-        left:70px;
+        left:100px;
     }
     .oof{
         position: absolute;
         top:210px;
-        left:350px;
+        left:380px;
     }
     .oot{
         position: absolute;
-        top:180px;
+        top:170px;
         left:520px;
     }
 </style>

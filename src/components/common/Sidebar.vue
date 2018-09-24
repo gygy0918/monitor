@@ -148,8 +148,13 @@
                         subs: [
                             {
                                 index: 'lamp',
-                                title: '监控信息'
+                                title: '--室外--监控信息'
+                            },
+                            {
+                                index: 'innerMonitor',
+                                title: '--室内--监控信息'
                             }
+
 //                            {
 //                                index: 'websocket',
 //                                title: '监控数据测试'

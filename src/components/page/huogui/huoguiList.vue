@@ -164,8 +164,9 @@
             //     console.log(this.obj);
             // },
             onSubmit() {
-                // let spObj={}
+                let spObj={}
                 this.spObj.ckId=this.value;
+                // this.spObj.ckId=localStorage.getItem('ckId');
                 this.spObj.hgSizeId=this.value2;
                 let data=Object.assign({},this.form,this.obj,this.spObj);
                 console.log('ttt',data)
@@ -179,7 +180,7 @@
                     console.log('结果',res)
             });
                 this.$message.success('提交成功！');
-                this.$router.push('/checkApply');
+                this.$router.push('/findHuogui');
             }
         }
     }

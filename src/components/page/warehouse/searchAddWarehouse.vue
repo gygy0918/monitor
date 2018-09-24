@@ -10,11 +10,11 @@
         </div>
         <div style="float: right;width:300px; height:100px;margin-top: 80px;">
             <el-form ref=" LocationDetails" :model=" LocationDetails" label-width="80px">
-                <el-form-item label="输入仓库名称">
-                    <el-input v-model=" LocationDetails.name"></el-input>
+                <el-form-item label="***仓库名称">
+                    <el-input v-model=" LocationDetails.name"  placeholder="必须输入仓库名称且唯一"></el-input>
                 </el-form-item>
-                <el-form-item label="输入仓库具体位置">
-                    <el-input v-model=" LocationDetails.ckAddress"></el-input>
+                <el-form-item label="***仓库具体位置">
+                    <el-input v-model=" LocationDetails.ckAddress" placeholder="必须仓库具体位置且唯一"></el-input>
                 </el-form-item>
                 <el-form-item label="选择位置">
                     <!--<el-input v-model=" LocationDetails.ckManage"></el-input>-->
@@ -24,7 +24,8 @@
                         @change="handleChange">
                     </el-cascader>
                 </el-form-item>
-                仓库管理员: <el-select v-model="value" placeholder="请选择" >
+                仓库管理员:
+                <el-select v-model="value" placeholder="请选择" >
                     <el-option
                         v-for="item in options2"
                         :key="item.value"
@@ -32,9 +33,9 @@
                         :value="item.value">
                     </el-option>
                 </el-select>
-                <el-form-item label="仓库创建者">
-                    <el-input v-model="  LocationDetails.ckBuilder"></el-input>
-                </el-form-item>
+                <!--<el-form-item label="仓库创建者">-->
+                    <!--<el-input v-model="  LocationDetails.ckBuilder"></el-input>-->
+                <!--</el-form-item>-->
                 <el-form-item label="仓库属性（常规）">
                     <el-input v-model="  LocationDetails.ckAttribute"></el-input>
                 </el-form-item>
@@ -63,13 +64,27 @@
                     value: '6',
                     label: '6',
                     children: [{
-                        value: '821',
-                        label: '821',
+                        value: '614',
+                        label: '614',
 
                     }, {
-                        value: '626',
-                        label: '626',
-                    }]
+                        value: '635',
+                        label: '635',
+                    }, {
+                            value: '612',
+                            label: '612',
+                        }, {
+                            value: '634',
+                            label: '634',
+                        },
+                        {
+                            value: '631',
+                            label: '631',
+                        },
+                        {
+                            value: '636',
+                            label: '636',
+                        }]
                 }],
                 selectedOptions: [],
                 value: '',

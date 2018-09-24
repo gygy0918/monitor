@@ -240,7 +240,13 @@
 
 
                 var _onClickThree = function(e) {
+                    console.log('33333333333333',e.target.G.title)
                     // if(e.target.subMarkers.length){
+                    //     console.log('e.target.subMarkers',e.target.subMarkers)
+                    // }
+                    // console.log('33333333333333',e.target.G.title)
+                    // console.log('33333333333333',e.target.G.ckAddress)
+                    //
                     //     // alert('33')
                     //     // console.log('3333',e.target.subMarkers)
                     //     // document.querySelector(".side").style.display= "block";
@@ -260,10 +266,10 @@
                     //     //     var title = e.target.subMarkers[j].getTitle();
                     //     //     var ckManger=e.target.subMarkers[j].G.ckManger
                     //     //     var ckStatusName=e.target.subMarkers[j].G.ckStatusName
-                    //     //     var ckAddress=e.target.subMarkers[j].G.ckAddress
-                    //     //     // localStorage.setItem("ckId",e.target.subMarkers[j].G.ckId)
+                   //      var ckAddress=e.target.subMarkers[j].G.ckAddress
+                   // localStorage.setItem("ckId",e.target.subMarkers[j].G.ckId)
                     //     //     localStorage.setItem("ckId",152222760072925)
-                    //     //     // console.log("ckManger",ckId)
+                    //   console.log("ckAddress",ckAddress)
                     //     //     // var html='<li class="showcontent"><p class="p">公司名称：'+title+'</p><p class="p">联系方式：'+title+'</p><i class="fa triangle_i">&#xf0d7</i><i class="fa close_i">&#xf057</i></li><p class="showtitle"><i  class="fa">&#xf1ba</i>&nbsp;&nbsp;'+title+'</p>';
                     //     //     var html='<li class="detail-list"><div class="img"></div><p class="p">仓库名称：'+title+'</p>' +
                     //     //         '<p class="p">仓库管理员编号：'+ckManger+'</p>' +
@@ -302,7 +308,8 @@
                     //
                     // }
                     // this.$router.push('/commodity');
-                    localStorage.setItem("ckId",152222760072925)
+                    // localStorage.setItem("ckId",152222760072925)
+                    localStorage.setItem("parentName",e.target.G.title)
                     window.location.href = "/#/commodity"
 
                 }
