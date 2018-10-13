@@ -30,26 +30,6 @@
 
         mounted: function () {
             this.$options.methods.inital.bind(this)();
-//            var goEasy = new GoEasy({
-//                appkey: "BS-6d10683de85143f488ca00f6ea1c04b7",
-////                onConnected: function () {
-////                    alert("成功连接GoEasy。");
-////                },
-//            });
-//            window.ss=goEasy;
-//            var datainfo = new Array(10);
-//            var obj={};
-//           ss.subscribe({
-//                channel: "light_info",
-//                onMessage: function (message) {
-//                    obj=message.content;
-//                   let id=JSON.parse(obj).lightId;
-////                    console.log('message',message.content.lightId
-//                    datainfo[id]=JSON.parse(obj);
-//                    console.log('实时数组拼接',datainfo);
-//                    window.test=datainfo;
-//                }
-//            });
         },
 
         methods: {
@@ -58,76 +38,42 @@
                 //初始化地图对象，加载地图
                 var clickListener,map = new AMap.Map("container", {
                     resizeEnable: true,
-                    center: [ 108, 34],
+                    center: [ 116.356351,39.960395],
                     zoom: 18,
                 });
 
-
-                this.$ajax(
-                    {
-                        method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouse/page',
-                        params:{
-                            page:1,
-                            size:1000
-                        },
-                        headers:{"Authorization":localStorage.getItem('token')},
-                    }).then((res)=>{
-                    //     this.warehouseInfo=[],
-                    //     this.warehouseInfo=res.data.data.results;
-                    console.log(res.data.data.results)
-                let data=res.data.data.results
+                var markers = [{
+                    icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png',
+                    position: [116.356351,39.960395]
+                }, {
+                    icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png',
+                    position: [116.368904, 39.913423]
+                }, {
+                    icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png',
+                    position: [116.305467, 39.807761]
+                }];
                 var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
-                // infoWindow.open(map, marker.getPosition());
-                for (var i = 0, marker; i < data.length; i++) {
-                    var marker = new AMap.Marker({
-                        position: data[i].location,
-                        map: map
+                markers.forEach(function(marker) {
+                    var testMarker=new AMap.Marker({
+                        map: map,
+                        icon: marker.icon,
+                        position: [marker.position[0], marker.position[1]],
+                        offset: new AMap.Pixel(-13, -30)
                     });
-                    // marker.content = '我是第' + (i + 1) + '个Marker';
-                    console.log('999',data[i])
-                    marker.content='地名：' + data[i].ckAddress+'<a id="test" href="/#/singleHK">查看详情</a>'
-                    // let a= document.getElementsByTagName('a')
-                    marker.on('click', markerClick);
-                    marker.emit('click', {target: marker});
-                }
+                    testMarker.content = '教三';
+                    testMarker.on('click', markerClick);
+                });
+
                 function markerClick(e) {
+                    debugger
                     infoWindow.setContent(e.target.content);
                     infoWindow.open(map, e.target.getPosition());
-                    // let aa= document.getElementById('test')
-                    // p.addEventListener('click',function () {
-                    //     alter('iiii')
-                    // },false)
-                    // p.on('click', test);
-                    // console.log('++++++',aa)
-                    console.log('000',e)
-                    // window.localStorage.setItem("ckId",record.data.ckId);
-                    // setTimeout(function(){ alert('Hello'); },2000)
+                    window.location.href='/#innerMap'
                 }
-                // infoWindow.on('click', '.iddd', function(event) {
-                //
-                //     //阻止冒泡
-                //     event.stopPropagation();
-                //
-                //     alert('Click .mybtn of infoBody');
-                //
-                // });
-                function test() {
-                    alert('Hello');
-                }
-                map.setFitView();
-
-            })
-
-
 
 
 
             },//初始化完毕
-            add() {
-                this.$router.push('../addWarehouse')
-            }
-
         }
 
 

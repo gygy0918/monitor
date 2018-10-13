@@ -62,6 +62,14 @@ export default new Router({
         component: resolve => require(['../components/page/monitor/innerMonitor.vue'], resolve)    // 拖拽列表组件
 },
 {
+    path: '/innerMap',
+        component: resolve => require(['../components/page/monitor/innerMap.vue'], resolve)    // 拖拽列表组件
+},
+{
+    path: '/controlLamp',
+    component: resolve => require(['../components/page/monitor/controlLamp.vue'], resolve)    // 拖拽列表组件
+},
+{
     path: '/newWarehouse',
         component: resolve => require(['../components/page/warehouse/newWarehouse.vue'], resolve)
 },
