@@ -164,7 +164,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/list/spIds',
+                    url: 'http://10.103.240.238:8080/list/spIn',
                     params:{
                         page:1,
                         size:9
