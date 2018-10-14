@@ -44,9 +44,9 @@
                     <el-button>取消</el-button>
             </el-form>
             <!--<el-input v-model="select_word" placeholder="筛选关键词" style="width:150px"></el-input>-->
-            <div style="display: inline-block;">
-                <el-button type="primary" round @click="addInwarehouse" >申请入库</el-button>
-            </div>
+            <!--<div style="display: inline-block;">-->
+                <!--<el-button type="primary" round @click="addInwarehouse" >申请入库</el-button>-->
+            <!--</div>-->
 
             <!--<el-button type="primary"  @click="search">新增人员</el-button>-->
         </div>

@@ -24,18 +24,18 @@
                         @change="handleChange">
                     </el-cascader>
                 </el-form-item>
-                仓库管理员:
-                <el-select v-model="value" placeholder="请选择" >
-                    <el-option
-                        v-for="item in options2"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>
-                </el-select>
-                <!--<el-form-item label="仓库创建者">-->
-                    <!--<el-input v-model="  LocationDetails.ckBuilder"></el-input>-->
-                <!--</el-form-item>-->
+                <!--仓库管理员:-->
+                <!--<el-select v-model="value" placeholder="请选择" >-->
+                    <!--<el-option-->
+                        <!--v-for="item in options2"-->
+                        <!--:key="item.value"-->
+                        <!--:label="item.label"-->
+                        <!--:value="item.value">-->
+                    <!--</el-option>-->
+                <!--</el-select>-->
+                <el-form-item label="仓库创建者">
+                    <el-input v-model="  LocationDetails.ckBuilder"></el-input>
+                </el-form-item>
                 <el-form-item label="仓库属性（常规）">
                     <el-input v-model="  LocationDetails.ckAttribute"></el-input>
                 </el-form-item>
@@ -124,6 +124,7 @@
 //                 datainfo=res.data.data.results;
 //
         });
+            this.LocationDetails.ckBuilder = localStorage.getItem('yhId')
         },
         mounted: function () {
             this.$options.methods.inital.bind(this)();
@@ -247,6 +248,7 @@ console.log('0000000000000',this.value)
                 window.LocationItem.city=window.city
                 this.LocationDetails.ckManager=this.value;
                 window.LocationItem.district=window.district
+                this.LocationDetails.ckBuilder = localStorage.getItem('yhId')
                 this.LocationDetails.lat=window.LocationItem.lat
                 this.LocationDetails.lng=window.LocationItem.lng
                 // this.subDistricts.push(

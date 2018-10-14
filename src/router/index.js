@@ -122,6 +122,14 @@ export default new Router({
         component: resolve => require(['../components/page/warehouse/singleHK.vue'], resolve)     // Vue-Quill-Editor组件
 },
 {
+    path: '/outApply',
+        component: resolve => require(['../components/page/warehouse/outApply.vue'], resolve)       // Vue-Core-Image-Upload组件
+},
+{
+    path: '/outApplyList',
+    component: resolve => require(['../components/page/warehouse/outApplyList.vue'], resolve)       // Vue-Core-Image-Upload组件
+},
+{
     path: '/outWarehousesList',
         component: resolve => require(['../components/page/warehouse/outWarehousesList.vue'], resolve)       // Vue-Core-Image-Upload组件
 },

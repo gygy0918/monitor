@@ -87,7 +87,7 @@
                            },
                            {
                                index: 'checkApply',
-                               title: '查看申请单'
+                               title: '申请管理'
                            },
                            // {
                            //     index: 'checkOut',

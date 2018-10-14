@@ -4,13 +4,13 @@
         <div id="outer-box" style="margin-left: 620px;">
             <!--<div id="eventInfo">添加监控物品</div>-->
         </div>
-        <el-button type="success" round style="margin:10px" @click="add">新增监控物品</el-button>
-        <div id="panel">
-            <div id="intro">
-                <h5>详细信息</h5>
-            </div>
-            <ul id="my-list" style="max-height: 600px"></ul>
-        </div>
+        <!--<el-button type="success" round style="margin:10px" @click="add">新增监控物品</el-button>-->
+        <!--<div id="panel">-->
+            <!--<div id="intro">-->
+                <!--<h5>详细信息</h5>-->
+            <!--</div>-->
+            <!--<ul id="my-list" style="max-height: 600px"></ul>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -65,10 +65,13 @@
                 });
 
                 function markerClick(e) {
-                    debugger
-                    infoWindow.setContent(e.target.content);
-                    infoWindow.open(map, e.target.getPosition());
+                    // debugger
+                    // infoWindow.setContent(e.target.content);
+                    // infoWindow.open(map, e.target.getPosition());
                     window.location.href='/#innerMap'
+                    window.location.reload()
+                    // this.$router.push('/innerMap');
+
                 }
 
 
