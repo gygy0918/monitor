@@ -173,6 +173,10 @@
                             {
                                 index: 'repaireInfo',
                                 title: '维修任务列表'
+                            },
+                            {
+                                index: 'repaireLog',
+                                title: '维修日志'
                             }
                         ]
                     },

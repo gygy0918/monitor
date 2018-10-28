@@ -34,6 +34,10 @@ export default new Router({
         component: resolve => require(['../components/page/repaire/repaireinfo.vue'], resolve)    // 拖拽列表组件
 },
 {
+    path: '/repaireLog',
+        component: resolve => require(['../components/page/repaire/repaireLog.vue'], resolve)    // 拖拽列表组件
+},
+{
     path: '/repairePerson',
         component: resolve => require(['../components/page/repaire/repairePerson.vue'], resolve)    // 拖拽列表组件
 },

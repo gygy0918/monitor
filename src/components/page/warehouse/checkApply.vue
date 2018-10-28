@@ -30,9 +30,15 @@
             </el-table-column>
             <el-table-column prop="ckId" label="仓库编号" width="120">
             </el-table-column>
+            <el-table-column prop="ckName" label="仓库名称" width="120">
+            </el-table-column>
             <el-table-column prop="hgId" label="货柜编号" width="120">
             </el-table-column>
+            <el-table-column prop="hgName" label="货柜名称" width="120">
+            </el-table-column>
             <el-table-column prop="spId" label="商品编号" width="120">
+            </el-table-column>
+            <el-table-column prop="spName" label="商品名称" width="120">
             </el-table-column>
             <el-table-column prop="applyCount" label="申请数量" width="120">
             </el-table-column>

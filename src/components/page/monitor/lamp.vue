@@ -40,7 +40,6 @@
                     },
                 }).then((res)=>{
                 this.datainfo=res.data.data.results;
-                           console.log('静态this.datainf',this.datainfo)
             this.datainfo.map((item)=>{
                     let positions=[]
                     if(item.longitude&&item.latitude){
@@ -48,8 +47,10 @@
                         positions.push(item.latitude);
                         item.positions=positions;
                     }
-                    window.test=this.datainfo;
+                    window.test=this.datainfo.slice(0,this.datainfo.length-4);
                 })
+            console.log('静态this.datainf',this.datainfo,window.test)
+            // console.log('created', window.test)
 
             });
         },

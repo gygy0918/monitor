@@ -187,6 +187,7 @@
             submitEditUser(){
                 let data=Object.assign({},this.form);
                 console.log('编辑提交信息',data)
+                delete data.state;
                 this.$ajax(
                     {
                         method: 'put', //请求方式
