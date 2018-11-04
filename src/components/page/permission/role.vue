@@ -143,7 +143,7 @@
                     url: 'http://10.103.240.238:8080/role/page',
                     params:{
                         page:1,
-                        size:5
+                        size:20
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
@@ -234,9 +234,26 @@
 
 
              },
+            // handleCurrentChange(val){
+            //     this.cur_page = val;
+            //     this.getData();
+            // },
             handleCurrentChange(val){
+                console.log('fenye',val)
                 this.cur_page = val;
-                this.getData();
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.240.238:8080/role/page',
+                        params:{
+                            page:this.cur_page,
+                            size:5,
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    this.rolesInfo=[],
+                    this.rolesInfo=res.data.data.results;
+            });
             },
 //            getData(){
 //                let self = this;
@@ -268,23 +285,45 @@
 //                this.$message('编辑第'+(index+1)+'行');
                 this.form=row;
             },
-            handleDelete(index, row) {
-                this.$message.error('删除第'+(index+1)+'行');
+            handleDelete (index, row) {
+                this.$confirm('确认删除？')
+                    .then(_ => {
+                this.rolesInfo.splice(index, 1);
+                console.log('ddddd',row)
+                let id=row.id;
+                this.$ajax({
+                    method: 'DELETE', //请求方式
+                    url: 'http://10.103.240.238:8080/role',
+                    params:{
+                        id
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')}
+                }).then(
+                    (res) => {
+                    console.log(res);
+            });
+                this.$message({
+                    message: "操作成功！",
+                    type: 'success'
+                });
+            })
+            .catch(_ => {});
+
             },
             submitUpdatarole(form){
                 let data=Object.assign({},this.form);
-                let permission=[]
+                let permissions=[]
                 this.addpermission.map((item)=>{
                     item={id:item}
-                    permission.push(item)
+                    permissions.push(item)
                 })
-                data.permission=permission
-                delete data.permissions
+                data.permissions=permissions
+                // delete data.permissions
                 console.log('编辑提交信息',data)
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouse',
+                        url: 'http://10.103.240.238:8080/role',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

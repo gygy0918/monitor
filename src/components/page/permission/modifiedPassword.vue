@@ -131,6 +131,10 @@
                             }).then((res)=>{
 //                            this.permissionsInfo=[],
 //                                this.permissionsInfo=res.data.data.results;
+                            this.$message({
+                            message:res.data.msg,
+                            type: 'success'
+                        });
                             console.log('修改密码结果',res)
                         })
 

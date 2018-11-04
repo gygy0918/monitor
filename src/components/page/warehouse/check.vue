@@ -45,6 +45,11 @@
                 width="120">
             </el-table-column>
             <el-table-column
+                prop="ckName"
+                label="位置"
+                width="120">
+            </el-table-column>
+            <el-table-column
                 prop="unit"
                 label="计量单位（个）"
                 width="100">
@@ -127,6 +132,7 @@
                 <el-form-item label="类别" :label-width="formLabelWidth">
                     <el-input v-model="form.spType" auto-complete="off"></el-input>
                 </el-form-item>
+
                 <el-form-item label="计量单位（个）" :label-width="formLabelWidth">
                     <el-input v-model="form.unit" auto-complete="off"></el-input>
                 </el-form-item>
@@ -169,7 +175,7 @@
                     <!--<el-input v-model="addform.spId" auto-complete="off"></el-input>-->
                 <!--</el-form-item>-->
 
-                <el-form-item label="选择日期" style="display: inline-block;width: 500px">
+                <el-form-item label="选择日期" style="display: inline-block;width: 500px;margin-left: 50px">
                     <el-date-picker
                         v-model="value7"
                         type="date"
@@ -186,15 +192,25 @@
                         value-format="yyyy-MM-dd">
                     </el-date-picker>
                 </el-form-item>
+                <el-form-item label="选择仓库和商品" :label-width="formLabelWidth">
                 <el-cascader
                     :options="options"
                     v-model="selectedOptions"
                     placeholder="选择仓库和商品"
                     @change="handleChange"
-                    style="margin-left: 120px">
+                 >
                 </el-cascader>
+                </el-form-item>
                 <el-form-item label="商品类型" :label-width="formLabelWidth">
-                    <el-input v-model="addform.spType" auto-complete="off"></el-input>
+                    <!--<el-input v-model="addform.spType" auto-complete="off"></el-input>-->
+                    <el-select v-model="value3" placeholder="商品类型"  style="width: 150px">
+                    <el-option
+                    v-for="item in typeInfos"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="计量单位（个）" :label-width="formLabelWidth">
                     <el-input v-model="addform.unit" auto-complete="off"></el-input>
@@ -235,10 +251,12 @@
                 addform:{},
                 value7:'',
                 value6:'',
+                value3:'',
                 dialogFormVisible1:false,
                 form:{},
                 options: [],
                 selectedOptions: [],
+                typeInfos:[],
                 dialogFormVisible:false,
                 Searchform2:{},
                 formLabelWidth: '120px',
@@ -326,6 +344,21 @@
                 this.options=res.data;
             console.log('级联',res.data)
         })
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.240.238:8080/list/spType',
+                    // params:{
+                    //     page:1,
+                    //     size:10,
+                    //     yhId:localStorage.getItem('yhId')
+                    // },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                this.typeInfos=[],
+                this.typeInfos=res.data;
+            console.log('商品类型',res.data)
+        })
         },
         methods: {
             toKuCun(){
@@ -366,7 +399,7 @@
             },
             submitAdd(){
                 let data=this.addform;
-                data=Object.assign({},this.addform,this.obj)
+                data=Object.assign({},this.addform,this.obj,{spType:this.value3})
                 console.log("--------",data,this.selectedOptions)
                 this.$ajax(
                     {

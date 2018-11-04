@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>维修任务管理</el-breadcrumb-item>
-                <el-breadcrumb-item>维修任务信息列表</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>维修日志管理</el-breadcrumb-item>
+                <el-breadcrumb-item>维修日志信息列表</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">

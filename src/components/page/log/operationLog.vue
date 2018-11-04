@@ -129,7 +129,7 @@
                     url: 'http://10.103.240.238:8080/operationLog/page',
                     params:{
                         page:1,
-                        size:5
+                        size:20
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{

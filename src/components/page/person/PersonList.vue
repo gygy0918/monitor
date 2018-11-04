@@ -43,12 +43,16 @@
             </el-table-column>
             <!--<el-table-column prop="address" label="地址" :formatter="formatter">-->
             <!--</el-table-column>-->
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作" width="380">
                 <template scope="scope">
                     <!--<el-button size="small"-->
                             <!--@click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>-->
                     <el-button size="small" type="danger"
                             @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                    <el-button size="small" type="danger"
+                               @click="checkRole(scope.$index, scope.row)">查看角色</el-button>
+                    <el-button size="small"
+                               @click="handleEdit(scope.$index, scope.row)">编辑修改</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -60,28 +64,55 @@
                     :total="1000">
             </el-pagination>
         </div>
+        <el-dialog title="角色信息" :visible.sync="dialogTableVisible" style="width: 50%;margin: auto" >
+            <el-table
+                :data="role"
+                stripe
+                style="width: 100%">
+                <el-table-column
+                    prop="roleName"
+                    label="该用户角色信息如下"
+                    width="280">
+                </el-table-column>
+            </el-table>
+        </el-dialog>
         <el-dialog title="新增人员" :visible.sync="dialogFormVisible">
-            <el-form :model="form" ref="form">
-                <el-form-item label="用户名" :label-width="formLabelWidth">
-                    <el-input v-model="form.username" auto-complete="off"></el-input>
+            <el-form :model="form" ref="form" :rules="rules2"  >
+                <el-form-item label="*用户名" :label-width="formLabelWidth">
+                    <el-input v-model="form.username" auto-complete="off" placeholder="必填用户名" ></el-input>
                 </el-form-item>
-                <el-form-item label="名称" :label-width="formLabelWidth">
-                    <el-input v-model="form.name" auto-complete="off"></el-input>
+                <el-form-item label="*名称" :label-width="formLabelWidth">
+                    <el-input v-model="form.name" auto-complete="off" placeholder="名称（支持中、英下划线，不能纯数字）" ></el-input>
                 </el-form-item>
-                <el-form-item label="密码" :label-width="formLabelWidth">
-                    <el-input v-model="form.password" auto-complete="off"></el-input>
+                <el-form-item label="*密码" :label-width="formLabelWidth">
+                    <el-input v-model="form.password" auto-complete="off" placeholder="密码长度6-12位"></el-input>
                 </el-form-item>
-                <el-form-item label="用户职位" :label-width="formLabelWidth">
-                    <el-input v-model="form.job" auto-complete="off"></el-input>
+                <el-form-item label="*用户职位" :label-width="formLabelWidth">
+                    <el-select v-model="value2" placeholder="职位"  style="width: 120px">
+                        <el-option
+                            v-for="item in jobOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
-                <el-form-item label="性别" :label-width="formLabelWidth">
-                    <el-input v-model="form.gender" auto-complete="off"></el-input>
+                <el-form-item label="*性别" :label-width="formLabelWidth">
+                    <!--<el-input v-model="form.gender" auto-complete="off"></el-input>-->
+                    <el-select v-model="value" placeholder="请选择">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
-                <el-form-item label="手机号" :label-width="formLabelWidth">
-                    <el-input v-model="form.phone" auto-complete="off"></el-input>
+                <el-form-item label="*手机号" :label-width="formLabelWidth">
+                    <el-input v-model="form.phone" auto-complete="off" placeholder="必填手机号"></el-input>
                 </el-form-item>
-                <el-form-item label="邮箱" :label-width="formLabelWidth">
-                    <el-input v-model="form.email" auto-complete="off"></el-input>
+                <el-form-item label="*邮箱" :label-width="formLabelWidth">
+                    <el-input v-model="form.email" auto-complete="off" placeholder="必填邮箱"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="活动区域" :label-width="formLabelWidth">-->
                     <!--<el-select v-model="form.region" placeholder="请选择活动区域">-->
@@ -95,6 +126,38 @@
                 <el-button type="primary" @click="addUser('form')">确 定</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="编辑角色信息" :visible.sync="dialogFormVisible2">
+            <el-form :model="editForm">
+                <el-form-item label="角色编号" :label-width="formLabelWidth">
+                    <el-input v-model="editForm.uid" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="角色名称" :label-width="formLabelWidth">
+                    <el-input v-model="editForm.job" auto-complete="off"></el-input>
+                </el-form-item>
+                <!--<el-form-item label="权限" :label-width="formLabelWidth">-->
+                <!--<el-input v-model="form.ckHgCount" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="属性" :label-width="formLabelWidth">-->
+                <!--<el-input v-model="form.ckAttribute" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form-item label="状态" :label-width="formLabelWidth">-->
+                <!--<el-input v-model="form.ckStatus" auto-complete="off"></el-input>-->
+                <!--</el-form-item>-->
+                <el-form-item label="角色" :label-width="formLabelWidth">
+                    <!--<el-select v-model="form.region" placeholder="请选择操作权限">-->
+                    <!--<el-option label="区域一" value="shanghai"></el-option>-->
+                    <!--<el-option label="区域二" value="beijing"></el-option>-->
+                    <!--</el-select>-->
+                    <el-checkbox-group v-model="addpermission" @change="handleCheckedCitiesChange">
+                        <el-checkbox v-for="permission in allpermissions" :label="permission.id" :key="permission.id">{{permission.description}}</el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+                <el-button type="primary" @click="submitUpdatarole('form')">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -103,13 +166,30 @@
         data() {
             return {
                 usersInfo: [],
+                role:[],
+                rules2:{},
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
                 select_word: '',
                 del_list: [],
                 is_search: false,
+                dialogTableVisible:false,
+                value:'',
+                value2:'',
+                jobOptions:[],
+                allpermissions:[],
+                allpermission:[],
+                editForm:{},
+                options: [{
+                    value: '0',
+                    label: '女'
+                }, {
+                    value: '1',
+                    label: '男'
+                }],
                 dialogFormVisible: false,
+                dialogFormVisible2:false,
                 form: {
                     username: '',
                     name:'',
@@ -120,7 +200,8 @@
                     email: '',
                     state:''
                 },
-                formLabelWidth: '120px'
+                formLabelWidth: '120px',
+                addpermission:[]
             }
         },
         created(){
@@ -145,6 +226,37 @@
                 console.log('结果',res.data.data)
 
             })
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.240.238:8080/role/page',
+                    params:{
+                        page:1,
+                        size:50
+                    },
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+            this.allpermissions=res.data.data.results;
+            console.log('角色结果',res.data.data.results)
+
+        })
+            this.$ajax(
+                {
+                    method: 'get', //请求方式
+                    url: 'http://10.103.240.238:8080/list/job',
+                    headers:{"Authorization":localStorage.getItem('token')},
+                }).then((res)=>{
+                // this.usersInfo=[],
+        //         res.data.data.results.map((item)=>{
+        //         console.log('0000',item.gender)
+        //     item.gender=item.gender?'男':'女'
+        //     item.state=item.state?'在线':'不在线'
+        // })
+        //     this.usersInfo=res.data.data.results;
+                this.jobOptions=res.data;
+            console.log('job结果',res.data)
+
+        })
         },
         computed: {
             data(){
@@ -169,8 +281,57 @@
             }
         },
         methods: {
+            submitUpdatarole(form){
+                let subForm={uid:this.editForm.uid}
+                let data=Object.assign({},subForm);
+                let roleList=[]
+                this.addpermission.map((item)=>{
+                    item={id:item}
+                    roleList.push(item)
+            })
+                data.roleList=roleList
+                // delete data.permissions
+                console.log('编辑提交信息',data)
+                this.$ajax(
+                    {
+                        method: 'put', //请求方式
+                        url: 'http://10.103.240.238:8080/userInfo',
+                        data:data,
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    console.log('编辑结果',res)
+            });
+                this.dialogFormVisible2 = false;
+            },
+            checkRole(index, row){
+                // let uid = row.uid
+                this.dialogTableVisible = true;
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.240.238:8080/userInfo/userRoles',
+                        params:{
+                              uid: row.uid
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                        this.role=[];
+                        this.role=res.data;
+                console.log('chakanjuese结果',res.data)
+
+            })
+            },
+            handleCheckedCitiesChange(value) {
+                console.log('fuxuan',value)
+//                let obj={}
+//                obj.id=value
+//                console.log('22',obj)
+                let checkedCount = value.length;
+                this.addpermission=[];
+                this.addpermission=value;
+            },
             addUser(formName){
-                let data=Object.assign({},this.form);
+                let data=Object.assign({},this.form,{gender:this.value},{job:this.value2});
                 console.log('ttt',data)
                 this.$ajax(
                     {
@@ -182,6 +343,7 @@
                     // this.usersInfo=[],
                     //     this.usersInfo=res.data.data.results;
                     // console.log('结果',this.usersInfo)
+                    this.getData();
                 });
                 this.dialogFormVisible = false;
             },
@@ -209,13 +371,26 @@
                 });
             },
             getData(){
-                let self = this;
-                if(process.env.NODE_ENV === 'development'){
-                    self.url = '/ms/table/list';
-                };
-                self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
-                    self.tableData = res.data.list;
-                })
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.240.238:8080/userInfo/page',
+                        params:{
+                            page:1,
+                            size:50
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    // this.usersInfo=[],
+                    res.data.data.results.map((item)=>{
+                    console.log('0000',item.gender)
+                item.gender=item.gender?'男':'女'
+                item.state=item.state?'在线':'不在线'
+            })
+                this.usersInfo=res.data.data.results;
+                console.log('结果',res.data.data)
+
+            })
             },
             search(){
                 this.$ajax(
@@ -253,6 +428,10 @@
             },
             handleEdit(index, row) {
                 this.$message('编辑第'+(index+1)+'行');
+                this.dialogFormVisible2 = true;
+//                this.$message('编辑第'+(index+1)+'行');
+                this.editForm=row;
+                console.log('bianji',this.editForm)
             },
 //            handleDelete(index, row) {
 //                this.$message.error('删除第'+(index+1)+'行');
@@ -277,7 +456,7 @@
                 console.log('ddddd',row.uid)
                 let uid=row.uid;
                 this.$ajax({
-                    method: 'delete', //请求方式
+                    method: 'DELETE', //请求方式
                     url: 'http://10.103.240.238:8080/userInfo',
                     params:{
                         uid

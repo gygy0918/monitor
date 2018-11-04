@@ -75,7 +75,7 @@
                            },
                            {
                                index: 'check',
-                               title: '盘点'
+                               title: '盘点和库存'
                            },
                            {
                                index: 'testpictures',

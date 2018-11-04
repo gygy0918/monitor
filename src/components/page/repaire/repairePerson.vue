@@ -25,7 +25,7 @@
             <!--</el-select>-->
             <!--<el-input v-model="select_word" placeholder="邮箱" class="handle-input" style="width: 120px"></el-input>-->
             <el-button type="primary" icon="search" @click="onSubmit">搜索</el-button>
-            <el-button type="primary" icon="search" @click="onAdd">增加</el-button>
+            <el-button type="primary"  class="el-icon-plus" @click="onAdd">增加维修人员</el-button>
         </div>
         <el-table :data="usersInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
