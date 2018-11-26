@@ -7,7 +7,7 @@
         <el-card :body-style="{ padding: '0px'}" class="csrd">
         <img src="../../../assets/0.jpg" class="image" >
         <div style="padding: 14px;">
-        <span style="font-size: small">{{o.hgId}}号</span>
+        <span style="font-size: small">{{o.hgName}}号</span>
         <!--<el-tag size="mini">{{o.hgStatus?'有货物':'空柜'}}</el-tag>-->
         <!--<span style="font-size: small">规格：{{ rules }}</span>-->
             <el-popover
@@ -38,7 +38,7 @@
                 <el-card :body-style="{ padding: '0px'}" class="csrd">
                     <img src="../../../assets/0.jpg" class="image" >
                     <div style="padding: 14px;">
-                        <span style="font-size: small">{{o.hgId}}号</span>
+                        <span style="font-size: small">{{o.hgName}}号</span>
                         <el-popover
                             placement="right"
                             width="400"
@@ -66,7 +66,7 @@
                 <el-card :body-style="{ padding: '0px'}" class="csrd">
                     <img src="../../../assets/0.jpg" class="image" >
                     <div style="padding: 14px;">
-                        <span style="font-size: small">{{o.hgId}}号</span>
+                        <span style="font-size: small">{{o.hgName}}号</span>
                         <el-popover
                             placement="right"
                             width="400"

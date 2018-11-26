@@ -9,7 +9,7 @@
         <div class="form-box">
             <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="货柜名称" style="width:320px">
-                    <el-input v-model="form.hgName"></el-input>
+                    <el-input v-model="form.hgName" placeholder="货柜名称不能重复"></el-input>
                 </el-form-item>
                 <div style="margin-left:20px;margin-bottom:20px">
                 <span style="margin:0">

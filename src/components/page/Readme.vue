@@ -287,7 +287,7 @@
 <!--</style>-->
 <template>
     <div class="dashboard-container" style="background:black">
-        <h3 　style="text-align:center;color:white">欢迎进入校园路灯监控后台管理系统</h3>
+        <h3 　style="text-align:center;color:white">欢迎进入监控后台管理系统</h3>
         <div style="text-align:center">
             <img  src="../../assets/1.gif" >
         </div>

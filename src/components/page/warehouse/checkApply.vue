@@ -2,8 +2,8 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i>申请入库信息管理</el-breadcrumb-item>
-                <el-breadcrumb-item>申请入库信息</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>申请入库进度信息管理</el-breadcrumb-item>
+                <el-breadcrumb-item>申请入库进度信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
@@ -165,9 +165,27 @@
             addInwarehouse(){
                 this.$router.push('/newwarehouse');
             },
+            // handleCurrentChange(val){
+            //     this.cur_page = val;
+            //     this.getData();
+            // },
             handleCurrentChange(val){
+                console.log('fenye',val)
                 this.cur_page = val;
-                this.getData();
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.240.238:8080/warehouseApply/pageByManage',
+                        params:{
+                            page:this.cur_page,
+                            size:5,
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    this.warehouseOut=[],
+                    this.warehouseOut=res.data.data.results;
+                console.log('结果',this.warehouseOut)
+            });
             },
             getData(){
                 let self = this;

@@ -112,6 +112,13 @@
             </el-table-column>
             <!--</el-table-column>-->
         </el-table>
+        <div class="pagination">
+            <el-pagination
+                @current-change ="handleCurrentChange"
+                layout="prev, pager, next"
+                :total="1000">
+            </el-pagination>
+        </div>
         <!-- Form -->
         <!--<el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
 
@@ -361,6 +368,24 @@
         })
         },
         methods: {
+            handleCurrentChange(val){
+                // console.log('fenye',val)
+                this.cur_page = val;
+                this.$ajax(
+                    {
+                        method: 'get', //请求方式
+                        url: 'http://10.103.240.238:8080/inventory/page',
+                        params:{
+                            page:this.cur_page,
+                            size:5,
+                        },
+                        headers:{"Authorization":localStorage.getItem('token')},
+                    }).then((res)=>{
+                    this.tableData3=[]
+                    this.tableData3=[]=res.data.data.results;
+                console.log('结果', this.tableData3)
+            });
+            },
             toKuCun(){
                 // /kucun
                 this.$router.push('/kucun');

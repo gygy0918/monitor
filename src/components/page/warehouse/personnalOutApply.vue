@@ -21,7 +21,7 @@
                     <el-table-column type="selection" width="55"></el-table-column>
                     <!--<el-table-column prop="date" label="日期" sortable width="150">-->
                     <!--</el-table-column>-->
-                    <el-table-column prop="yhId" label="申请出库人编号" width="100">
+                    <el-table-column prop="yhId" label="申请出库人编号" width="80">
                     </el-table-column>
                     <el-table-column prop="ckId" label="仓库编号" width="100">
                     </el-table-column>
@@ -29,7 +29,7 @@
                     </el-table-column>
                     <el-table-column prop="spId" label="商品编号" width="100">
                     </el-table-column>
-                    <el-table-column prop="applyCount" label="申请数量" width="100">
+                    <el-table-column prop="applyCount" label="申请数量" width="80">
                     </el-table-column>
                     <el-table-column prop="ckManager" label="仓库管理员" width="80">
                     </el-table-column>
@@ -56,7 +56,7 @@
                     <el-table-column type="selection" width="55"></el-table-column>
                     <!--<el-table-column prop="date" label="日期" sortable width="150">-->
                     <!--</el-table-column>-->
-                    <el-table-column prop="yhId" label="申请出库人编号" width="100">
+                    <el-table-column prop="yhId" label="申请出库人编号" width="50">
                     </el-table-column>
                     <el-table-column prop="ckId" label="仓库编号" width="100">
                     </el-table-column>
@@ -64,7 +64,7 @@
                     </el-table-column>
                     <el-table-column prop="spId" label="商品编号" width="100">
                     </el-table-column>
-                    <el-table-column prop="applyCount" label="申请数量" width="100">
+                    <el-table-column prop="applyCount" label="申请数量" width="80">
                     </el-table-column>
                     <el-table-column prop="ckManager" label="仓库管理员" width="80">
                     </el-table-column>
@@ -116,7 +116,7 @@
                     </el-table-column>
                     <el-table-column prop="spId" label="商品编号" width="100">
                     </el-table-column>
-                    <el-table-column prop="applyCount" label="申请数量" width="100">
+                    <el-table-column prop="applyCount" label="申请数量" width="50">
                     </el-table-column>
                     <el-table-column prop="ckManager" label="仓库管理员" width="80">
                     </el-table-column>
@@ -133,7 +133,7 @@
                                        <!--@click="handleDelete(scope.$index,scope.row)">已完成</el-button>-->
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="250">
+                    <el-table-column label="操作" width="350">
                         <template scope="scope">
                             <!--<el-button size="small" v-if="scope.row.outStatus==0"-->
                             <!--@click="handleEdit(scope.$index, scope.row)">未完成</el-button>-->
@@ -144,6 +144,8 @@
                                        @click="handleSure(scope.$index, scope.row)">确认出库</el-button>
                             <el-button size="small" type="text" disabled v-else
                                        @click="handleDelete(scope.$index,scope.row)">已确认</el-button>
+                            <el-button size="small" type="danger"
+                                       @click="findInMAP(scope.$index,scope.row)">到这去</el-button>
                             <el-button size="small"
                                        @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="small" type="danger"
@@ -207,6 +209,7 @@
         data() {
             return {
                 activeName: 'first',
+                index:0,
                 warehouseOut:[],
                 cur_page: 1,
                 multipleSelection: [],
@@ -282,9 +285,15 @@
                 console.log('确认申请出库',res)
             })
             },
+            findInMAP(index,row){
+                console.log('0000000000000',row.ckId)
+                this.$router.push('/maprouter');
+
+            },
             handleClick(tab, event) {
                 console.log(tab.index);
                 if(tab.index==0){
+                    this.index=0;
                     this.$ajax(
                         {
                             method: 'get', //请求方式
@@ -302,6 +311,7 @@
                 })
                 }
                 else if(tab.index==2){
+                    this.index=2;
                     this.$ajax(
                         {
                             method: 'get', //请求方式
@@ -319,6 +329,7 @@
                     console.log('我的申请出库',this.warehouseOut)
                 })
                 }else if(tab.index==1){
+                    this.index=1;
                     console.log('未被确认')
                     this.$ajax(
                         {
@@ -339,8 +350,61 @@
                 }
             },
             handleCurrentChange(val){
+                console.log('fenye',val)
+                console.log('activeName',this.activeName)
                 this.cur_page = val;
-                this.getData();
+                if(this.index==0){
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.240.238:8080/warehouseOutApply/page',
+                            params:{
+                                page:this.cur_page,
+                                size:5,
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseOut=[],
+                        this.warehouseOut=res.data.data.results;
+                    console.log('结果',this.warehouseOut)
+                });
+                }else if(this.index==='1'){
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.240.238:8080/warehouseOutApply/page',
+                            params:{
+                                page: this.cur_page,
+                                size:20,
+                                outStatus:0,
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseOut=[],
+                        this.warehouseOut=res.data.data.results;
+                    console.log('我的申请入库',this.warehouseOut)
+                })
+                } else if(this.index==2){
+                    this.$ajax(
+                        {
+                            method: 'get', //请求方式
+                            url: 'http://10.103.240.238:8080/warehouseOutApply/page',
+                            params:{
+                                page: this.cur_page,
+                                size:20,
+                                outStatus:1,
+                                yhId:localStorage.getItem('yhId')
+                            },
+                            headers:{"Authorization":localStorage.getItem('token')},
+                        }).then((res)=>{
+                        this.warehouseOut=[],
+                        this.warehouseOut=res.data.data.results;
+                    console.log('我的申请入库',this.warehouseOut)
+                })
+                }
+
             },
             getData(){
                 let self = this;

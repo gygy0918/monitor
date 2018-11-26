@@ -28,6 +28,8 @@
                     </el-table-column>
                     <el-table-column prop="hgId" label="货柜编号" width="100">
                     </el-table-column>
+                    <el-table-column prop="hgName" label="货柜名称" width="100">
+                    </el-table-column>
                     <el-table-column prop="spId" label="商品编号" width="100">
                     </el-table-column>
                     <el-table-column prop="applyCount" label="申请数量" width="100">
@@ -69,6 +71,8 @@
                     <el-table-column prop="ckId" label="仓库编号" width="100">
                     </el-table-column>
                     <el-table-column prop="hgId" label="货柜编号" width="100">
+                    </el-table-column>
+                    <el-table-column prop="hgName" label="货柜名称" width="100">
                     </el-table-column>
                     <el-table-column prop="spId" label="商品编号" width="100">
                     </el-table-column>
@@ -124,6 +128,8 @@
                     </el-table-column>
                     <!--<el-table-column prop="spId" label="商品编号" width="100">-->
                     <!--</el-table-column>-->
+                    <el-table-column prop="hgName" label="货柜名称" width="100">
+                    </el-table-column>
                     <el-table-column prop="applyCount" label="申请数量" width="60">
                     </el-table-column>
                     <el-table-column prop="ckManager" label="仓库管理员" width="80">
@@ -239,7 +245,7 @@
                     url: 'http://10.103.240.238:8080/warehouseApply/page',
                     params:{
                         page:1,
-                        size:10,
+                        size:20,
                         yhId:localStorage.getItem('yhId')
                     },
                     headers:{"Authorization":localStorage.getItem('token')},
@@ -312,7 +318,7 @@
                             url: 'http://10.103.240.238:8080/warehouseApply/page',
                             params:{
                                 page:1,
-                                size:5,
+                                size:20,
                                 yhId:localStorage.getItem('yhId')
                             },
                             headers:{"Authorization":localStorage.getItem('token')},
@@ -329,7 +335,7 @@
                             url: 'http://10.103.240.238:8080/warehouseApply/page',
                             params:{
                                 page:1,
-                                size:5,
+                                size:20,
                                 inStatus:1,
                                 yhId:localStorage.getItem('yhId')
                             },
@@ -347,7 +353,7 @@
                             url: 'http://10.103.240.238:8080/warehouseApply/page',
                             params:{
                                 page:1,
-                                size:5,
+                                size:20,
                                 inStatus:0,
                                 yhId:localStorage.getItem('yhId')
                             },
@@ -359,10 +365,28 @@
                 })
                 }
             },
-            handleCurrentChange(val){
-                this.cur_page = val;
-                this.getData();
-            },
+            // handleCurrentChange(val){
+            //     this.cur_page = val;
+            //     this.getData();
+            // },
+            // handleCurrentChange(val){
+            //     console.log('fenye',val)
+            //     this.cur_page = val;
+            //     this.$ajax(
+            //         {
+            //             method: 'get', //请求方式
+            //             url: 'http://10.103.240.238:8080/warehouseApply/page',
+            //             params:{
+            //                 page:this.cur_page,
+            //                 size:5,
+            //             },
+            //             headers:{"Authorization":localStorage.getItem('token')},
+            //         }).then((res)=>{
+            //         this.warehouseOut=[],
+            //         this.warehouseOut=res.data.data.results;
+            //     console.log('结果',this.warehouseOut)
+            // });
+            // },
             getData(){
                 let self = this;
                 if(process.env.NODE_ENV === 'development'){
@@ -413,7 +437,7 @@
                 console.log('ddddd',row.uid)
                 let id=row.id;
                 this.$ajax({
-                    method: 'delete', //请求方式
+                    method: 'DELETE', //请求方式
                     url: 'http://10.103.240.238:8080/warehouseApply',
                     params:{
                         id

@@ -1,8 +1,8 @@
 <template>
-    <div >
+    <div style="overflow:hidden" >
         <div>
             <el-button type="success" round style="margin:10px" @click="add">新增监控物品</el-button>
-            <h3 style="display:inline-block">当前监控物品数据:{{ datainfo.length }}个</h3>
+            <h3 style="display:inline-block">当前监控物品数据:{{ datainfo.length -3}}个</h3>
         </div>
         <div id="container" style="float: left;width:700px; height:700px;margin:10px">室外 </div>
         <div id="outer-box" style="margin-left: 620px;">
@@ -361,7 +361,7 @@
                                         window.test.push(JSON.parse(obj));
                                     }
                                 })
-                                console.log('数据量',window.test.length)
+                                // console.log('数据量',window.test.length)
                                 markerList.render( window.test)
 
                             }

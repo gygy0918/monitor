@@ -41,7 +41,7 @@
             <el-button>取消</el-button>
         <el-button type="primary" @click="checkWarehouse" style="margin-top: 20px;">查看理我最近的仓库</el-button>
         <div style="width: 750px;margin: 20px;float: left">
-        <el-table :data="repairInfo" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+        <el-table :data="repairInfo" border style="width: 100%" ref="multipleTable" >
             <!--<el-table-column type="selection" width="20"></el-table-column>-->
             <el-table-column prop="rName" label="维修人员" width="150">
             </el-table-column>

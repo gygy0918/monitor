@@ -189,8 +189,6 @@
                         method: 'get', //请求方式
                         url: 'http://10.103.240.238:8080/list/findSp',
                         params:{
-                            page:1,
-                            size:9,
                             spId:localStorage.getItem('spId'),
                             count:val.target.value
                         },

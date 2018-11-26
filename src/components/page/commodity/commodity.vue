@@ -10,10 +10,10 @@
             <!--<h3>{{ item }}</h3>-->
         <!--</el-carousel-item>-->
     <!--</el-carousel>-->
-    <el-tabs :tab-position="tabPosition" style="height: 200px;"  v-model="activeName" @tab-click="handleClick">
+    <el-tabs style="height: 200px;"  v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="一楼" name="first" >
             <div class="back1">
-                <el-button type="primary" round class="ott" size="mini" @click="findHuoGui">112
+                <el-button type="primary" round class="ott" size="mini" @click="findHuoGui">122
                 </el-button>
                 <el-button type="primary" round class="oof" size="mini" @click="findHuoGui">115</el-button>
                 <el-button type="primary" round class="oot" size="mini" @click="findHuoGui">112</el-button>
@@ -50,7 +50,8 @@ export default {
 data: function(){
 return {
 //每个教室灯的信息
-    activeName:'6'
+    activeName:'first',
+    warehouseInfo:[]
 
 }
 },
@@ -200,7 +201,7 @@ margin: 5px;
 .stf2{
     position: absolute;
     bottom:185px;
-    left:410px;
+    left:420px;
 }
 .sto{
     position: absolute;

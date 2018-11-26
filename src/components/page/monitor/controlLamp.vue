@@ -154,7 +154,7 @@
                     // },
                 });
                 // 实时刷新，打开定时器
-                // setInterval(this.fuzhi,500);
+                setInterval(this.fuzhi,500);
                 goEasy.subscribe({
                     channel: "realLight_info",
                     onMessage: function (message) {

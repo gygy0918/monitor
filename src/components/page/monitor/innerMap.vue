@@ -13,14 +13,15 @@
         <el-tabs :tab-position="tabPosition" style="height: 200px;"  v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="一楼" name="first" >
                 <div class="back1">
-                    <el-button type="primary" round class="ott" size="mini" @click="findHuoGui">112
+                    <el-button  class="ott" size="mini" @click="findHuoGui">112
                     </el-button>
-                    <el-button type="primary" round class="oof" size="mini" @click="findHuoGui">115</el-button>
-                    <el-button type="primary" round class="oot" size="mini" @click="findHuoGui">112</el-button>
+                    <el-button  class="oof" size="mini" @click="findHuoGui">115</el-button>
+                    <el-button class="oot" size="mini" @click="findHuoGui">112</el-button>
 
                 </div>
             </el-tab-pane>
             <el-tab-pane label="二楼" name="second">
+
             </el-tab-pane>
             <el-tab-pane label="三楼" name="third">角色管理</el-tab-pane>
             <el-tab-pane label="四楼">定时任务补偿</el-tab-pane>
@@ -228,7 +229,7 @@
     .ott{
         position: absolute;
         top:230px;
-        left:100px;
+        left:99px;
     }
     .oof{
         position: absolute;
@@ -238,7 +239,7 @@
     .oot{
         position: absolute;
         top:170px;
-        left:520px;
+        left:518px;
     }
 </style>
 <!--<template>-->
