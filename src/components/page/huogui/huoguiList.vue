@@ -127,7 +127,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/list/ckId',
+                    url: 'http://10.103.249.191:8080/list/ckId',
                     params:{
                         page:1,
                         size:9
@@ -142,7 +142,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/list/hgSize',
+                    url: 'http://10.103.249.191:8080/list/hgSize',
                     params:{
                         page:1,
                         size:9
@@ -173,7 +173,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.240.238:8080/box',
+                        url: 'http://10.103.249.191:8080/box',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

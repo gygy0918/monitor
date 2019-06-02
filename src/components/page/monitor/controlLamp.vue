@@ -96,7 +96,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.242.93:8080/lightInfo/realLight',
+                    url: 'http://10.103.240.64:8080/lightInfo/realLight',
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
                 //初始化，把结果给tableData
@@ -131,7 +131,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.242.93:8080/commandLog/control',
+                        url: 'http://10.103.240.64:8080/commandLog/control',
                         params:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -154,7 +154,7 @@
                     // },
                 });
                 // 实时刷新，打开定时器
-                setInterval(this.fuzhi,500);
+                setInterval(this.fuzhi,5000);
                 goEasy.subscribe({
                     channel: "realLight_info",
                     onMessage: function (message) {

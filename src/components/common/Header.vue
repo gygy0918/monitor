@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo">监控后台管理系统</div>
+        <div class="logo">照明监控管理系统</div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">

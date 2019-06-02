@@ -33,7 +33,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.242.93:8080/lightInfo/page',
+                    url: 'http://10.103.240.64:8080/lightInfo/page',
                     params:{
                         page:1,
                         size:100

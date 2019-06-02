@@ -270,7 +270,7 @@
         <el-dialog title="消息列表" :visible.sync="dialogTableVisible2">
             <el-table :data="messageData">
                 <el-table-column property="messageId" label="消息ID" width="100"></el-table-column>
-                <el-table-column property="name" label="消息名称" width="100"></el-table-column>
+                <el-table-column property="name" label="消息名称" width="120"></el-table-column>
                 <el-table-column property="serviceId" label="服务ID" width="100"></el-table-column>
                 <el-table-column property="address" label="操作">
                     <template scope="scope">
@@ -511,7 +511,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.242.93:8080/ws/page',
+                    url: 'http://10.103.240.64:8080/ws/page',
                     params:{
                         page:1,
                         size:10
@@ -531,7 +531,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/saveAttributes',
+                        url: 'http://10.103.240.64:8080/messages/saveAttributes',
                         data:this.attrAddform
                     }).then((res)=>{
                     console.log('增加属性',res)
@@ -544,7 +544,7 @@
                     this.$ajax(
                         {
                             method: 'get', //请求方式
-                            url: 'http://10.103.242.93:8080/operations/find',
+                            url: 'http://10.103.240.64:8080/operations/find',
                             params:{
                                 // page:1,
                                 // size:10,
@@ -562,7 +562,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/findAttributes',
+                        url: 'http://10.103.240.64:8080/messages/findAttributes',
                         params:{
                             page:1,
                             size:50,
@@ -583,7 +583,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/updateMessages',
+                        url: 'http://10.103.240.64:8080/messages/updateMessages',
                         data:this.messageform
                     }).then((res)=>{
                     console.log('修改消息结果',res)
@@ -595,7 +595,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/deleteAll',
+                        url: 'http://10.103.240.64:8080/messages/deleteAll',
                         params:{id:data.messageId}
                     }).then((res)=>{
                     console.log('删除消息结果',res)
@@ -611,7 +611,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/updateAttributes',
+                        url: 'http://10.103.240.64:8080/messages/updateAttributes',
                         data:this.attrform
                     }).then((res)=>{
                     console.log('修改属性结果',res)
@@ -623,7 +623,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/deleteAttributes',
+                        url: 'http://10.103.240.64:8080/messages/deleteAttributes',
                         params:{id:data.id}
                     }).then((res)=>{
                     console.log('修改属性结果',res)
@@ -634,7 +634,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/ws/result',
+                        url: 'http://10.103.240.64:8080/ws/result',
                         data:this.dynamicValidateForm.domains
                     }).then((res)=>{
                     // this.warehouseOut=[],
@@ -666,7 +666,7 @@
                 this.$ajax(
                     {
                         method: 'GET', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/findByServiceId',
+                        url: 'http://10.103.240.64:8080/messages/findByServiceId',
                         params:{id:data.serviceId}
                     }).then((res)=>{
                     // this.warehouseOut=[],
@@ -718,7 +718,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/messages/saveMessages',
+                        url: 'http://10.103.240.64:8080/messages/saveMessages',
                         data:data
                     }).then((res)=>{
                     this.tableData=[],
@@ -736,7 +736,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/ws/save',
+                        url: 'http://10.103.240.64:8080/ws/save',
                         data:data
                     }).then((res)=>{
                     // this.warehouseOut=[],
@@ -753,7 +753,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.242.93:8080/ws/find',
+                        url: 'http://10.103.240.64:8080/ws/find',
                         params:{
                             page:1,
                             size:10,
@@ -780,7 +780,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/ws/update',
+                        url: 'http://10.103.240.64:8080/ws/update',
                         data:data
                     }).then((res)=>{
 //                    this.usersInfo=[],
@@ -796,7 +796,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.242.93:8080/ws/delete',
+                        url: 'http://10.103.240.64:8080/ws/delete',
                         params:{
                             page:1,
                             size:10,

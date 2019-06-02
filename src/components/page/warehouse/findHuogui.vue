@@ -137,7 +137,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/box/page',
+                    url: 'http://10.103.249.191:8080/box/page',
                     params:{
                         page:1,
                         size:10,
@@ -158,7 +158,7 @@
                 console.log('deleteHUOGUI')
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.240.238:8080/box',
+                    url: 'http://10.103.249.191:8080/box',
                     params:{
                         id:val
                     },
@@ -174,7 +174,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouseIn',
+                        url: 'http://10.103.249.191:8080/warehouseIn',
                         params:{
                             hgId: val,
                             page:1,

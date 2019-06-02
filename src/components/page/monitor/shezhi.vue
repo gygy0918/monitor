@@ -128,7 +128,7 @@
             }
             this.$ajax({
                 method:'get',
-                url:'http://10.103.242.93:8080/repair/find',
+                url:'http://10.103.240.64:8080/repair/find',
                 params:{
                     lightId: this.form.lightId,
                 },
@@ -157,7 +157,7 @@
                 let data={type:this.type,lightId:this.form.lightId}
                 this.$ajax({
                     method:'post',
-                    url:'http://10.103.242.93:8080/commandLog/command',
+                    url:'http://10.103.240.64:8080/commandLog/command',
                     data:data
                 }).then((res)=>{
                     console.log('test',res)
@@ -178,7 +178,7 @@
                         let data={username,password};
                         this.$ajax({
                             method:'post',
-                            url:'http://10.103.240.238:8080/login',
+                            url:'http://10.103.249.191:8080/login',
                             data:data
                         }).then((res)=>{
                             console.log('test',res)

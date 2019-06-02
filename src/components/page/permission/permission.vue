@@ -76,7 +76,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/permission/page',
+                    url: 'http://10.103.249.191:8080/permission/page',
                     params:{
                         page:1,
                         size:5
@@ -115,7 +115,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/permission/page',
+                        url: 'http://10.103.249.191:8080/permission/page',
                         params:{
                             page:1,
                             size:5
@@ -134,7 +134,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/permission/page',
+                        url: 'http://10.103.249.191:8080/permission/page',
                         params:{
                             page:this.cur_page,
                             size:5,

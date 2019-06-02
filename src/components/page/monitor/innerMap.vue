@@ -56,14 +56,14 @@
             }
         },
         created(){
-//通过点击楼层数返回相应的楼层教室•	http://10.103.240.238:8080/commodity/page?page=1&size=
+//通过点击楼层数返回相应的楼层教室•	http://10.103.249.191:8080/commodity/page?page=1&size=
             let parentName = localStorage.getItem('parentName')
             this.warehouseInfo=[],
                 this.warehouseInfo.push({room:626})
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/warehouse/page',
+                    url: 'http://10.103.249.191:8080/warehouse/page',
                     params:{
                         page:1,
                         size:30,
@@ -213,7 +213,7 @@
     .sts{
         position: absolute;
         bottom:170px;
-        left:60px;
+        left:72px;
     }
     .sof{
         position: absolute;
@@ -239,7 +239,7 @@
     .oot{
         position: absolute;
         top:170px;
-        left:518px;
+        left:530px;
     }
 </style>
 <!--<template>-->

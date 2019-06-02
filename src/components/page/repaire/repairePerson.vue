@@ -388,7 +388,7 @@
 //                this.$ajax(
 //                    {
 //                        method: 'post', //请求方式
-//                        url: 'http://10.103.240.238:8080/userInfo',
+//                        url: 'http://10.103.249.191:8080/userInfo',
 //                        data:data,
 //                        headers:{"Authorization":localStorage.getItem('token')},
 //                    }).then((res)=>{
@@ -474,7 +474,7 @@
 //                this.$ajax(
 //                    {
 //                        method: 'post', //请求方式
-//                        url: 'http://10.103.240.238:8080/userInfo/{uid}',
+//                        url: 'http://10.103.249.191:8080/userInfo/{uid}',
 //                        data:data
 //                        headers:{"Authorization":localStorage.getItem('token')},
 //                    }).then((res)=>{

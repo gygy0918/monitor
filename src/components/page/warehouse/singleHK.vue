@@ -236,7 +236,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/box/page',
+                    url: 'http://10.103.249.191:8080/box/page',
                     params:{
                         page:1,
                         size:10,
@@ -314,7 +314,7 @@
                 //     this.$ajax(
                 //         {
                 //             method: 'post', //请求方式
-                //             url: 'http://10.103.240.238:8080/warehouseOutApply',
+                //             url: 'http://10.103.249.191:8080/warehouseOutApply',
                 //             data:row,
                 //             headers:{"Authorization":localStorage.getItem('token')},
                 //         }).then((res)=>{
@@ -328,7 +328,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouseOutApply',
+                        url: 'http://10.103.249.191:8080/warehouseOutApply',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -345,7 +345,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouseIn',
+                        url: 'http://10.103.249.191:8080/warehouseIn',
                         params:{
                             hgId: row.hgId,
                             // hgId:152289887438404
@@ -372,7 +372,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/list/hgSize',
+                        url: 'http://10.103.249.191:8080/list/hgSize',
                         params:{
                             page:1,
                             size:9
@@ -397,7 +397,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.240.238:8080/box',
+                        url: 'http://10.103.249.191:8080/box',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -413,7 +413,7 @@
                 let id=row.id;
                 this.$ajax({
                         method: 'delete', //请求方式
-                        url: 'http://10.103.240.238:8080/box',
+                        url: 'http://10.103.249.191:8080/box',
                         params:{
                         id
                     },
@@ -430,7 +430,7 @@
 //                this.$ajax(
 //                    {
 //                        method: 'put', //请求方式
-//                        url: 'http://10.103.240.238:8080/warehouseIn',
+//                        url: 'http://10.103.249.191:8080/warehouseIn',
 //                        data:data,
 //                        headers:{"Authorization":localStorage.getItem('token')},
 //                    }).then((res)=>{

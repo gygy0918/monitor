@@ -135,7 +135,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.242.93:8080/ws/result',
+                        url: 'http://10.103.240.64:8080/ws/result',
                         data:this.dynamicValidateForm.domains
                     }).then((res)=>{
                     // this.warehouseOut=[],

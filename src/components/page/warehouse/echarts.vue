@@ -45,7 +45,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/check/getQuarter',
+                        url: 'http://10.103.249.191:8080/check/getQuarter',
                         // params:{
                         //     hgId: row.hgId,
                         //     // hgId:152289888161255

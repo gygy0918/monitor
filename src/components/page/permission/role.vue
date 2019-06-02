@@ -140,7 +140,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/role/page',
+                    url: 'http://10.103.249.191:8080/role/page',
                     params:{
                         page:1,
                         size:20
@@ -154,7 +154,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/permission/page',
+                    url: 'http://10.103.249.191:8080/permission/page',
                     params:{
                         page:1,
                         size:20
@@ -206,7 +206,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.240.238:8080/role',
+                        url: 'http://10.103.249.191:8080/role',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -220,7 +220,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/role',
+                        url: 'http://10.103.249.191:8080/role',
                         params:{
                             id:row.id
                         },
@@ -244,7 +244,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/role/page',
+                        url: 'http://10.103.249.191:8080/role/page',
                         params:{
                             page:this.cur_page,
                             size:5,
@@ -293,7 +293,7 @@
                 let id=row.id;
                 this.$ajax({
                     method: 'DELETE', //请求方式
-                    url: 'http://10.103.240.238:8080/role',
+                    url: 'http://10.103.249.191:8080/role',
                     params:{
                         id
                     },
@@ -323,7 +323,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.240.238:8080/role',
+                        url: 'http://10.103.249.191:8080/role',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

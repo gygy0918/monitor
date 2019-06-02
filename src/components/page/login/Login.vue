@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrap">
-        <div class="ms-title">监控管理系统</div>
+        <div class="ms-title">照明监控管理系统</div>
         <div class="ms-login" v-if="forget">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm" >
                 <el-form-item prop="username">
@@ -87,7 +87,7 @@
                         let data={username,password};
                         this.$ajax({
                             method:'post',
-                            url:'http://10.103.240.238:8080/login',
+                            url:'http://10.103.249.191:8080/login',
                             data:data
                         }).then((res)=>{
                             console.log('test',res)

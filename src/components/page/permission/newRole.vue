@@ -94,7 +94,7 @@
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.240.238:8080/role',
+                        url: 'http://10.103.249.191:8080/role',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

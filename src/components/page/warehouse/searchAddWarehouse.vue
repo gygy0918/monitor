@@ -56,7 +56,7 @@
     export default {
         data: function(){
             return {
-                url:'10.103.240.238:8080',
+                url:'10.103.249.191:8080',
                      LocationItem:'',
                     subDistricts:[],
                 options2:[],
@@ -112,7 +112,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/list/ckManager',
+                    url: 'http://10.103.249.191:8080/list/ckManager',
                     params:{
                         page:1,
                         size:9
@@ -269,7 +269,7 @@ console.log('0000000000000',this.value)
                 this.$ajax(
                     {
                         method: 'post', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouseParent',
+                        url: 'http://10.103.249.191:8080/warehouseParent',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{

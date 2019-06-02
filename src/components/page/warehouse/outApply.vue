@@ -150,7 +150,7 @@
 //             this.$ajax(
 //                 {
 //                     method: 'get', //请求方式
-//                     url: 'http://10.103.240.238:8080/list/ckIds',
+//                     url: 'http://10.103.249.191:8080/list/ckIds',
 //                     params:{
 //                         page:1,
 //                         size:9
@@ -164,7 +164,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/list/spIn',
+                    url: 'http://10.103.249.191:8080/list/spIn',
                     params:{
                         page:1,
                         size:9
@@ -187,7 +187,7 @@
                 this.$ajax(
                     {
                         method: 'get', //请求方式
-                        url: 'http://10.103.240.238:8080/list/findSp',
+                        url: 'http://10.103.249.191:8080/list/findSp',
                         params:{
                             spId:localStorage.getItem('spId'),
                             count:val.target.value
@@ -227,7 +227,7 @@
                 this.$ajax(
                     {
                         method: 'POST', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouseOutApply/scheduling',
+                        url: 'http://10.103.249.191:8080/warehouseOutApply/scheduling',
                         data:newarr,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -243,7 +243,7 @@
                     this.$ajax(
                         {
                             method: 'post', //请求方式
-                            url: 'http://10.103.240.238:8080/warehouseOutApply',
+                            url: 'http://10.103.249.191:8080/warehouseOutApply',
                             data:data,
                             headers:{"Authorization":localStorage.getItem('token')},
                         }).then((res)=>{
@@ -259,7 +259,7 @@
                     this.$ajax(
                         {
                             method: 'get', //请求方式
-                            url: 'http://10.103.240.238:8080/scheduling/Out',
+                            url: 'http://10.103.249.191:8080/scheduling/Out',
                             params:{
                                 applyCount:data.applyCount,
                                 spId:data.spId

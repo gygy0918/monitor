@@ -112,7 +112,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/warehouse/page',
+                    url: 'http://10.103.249.191:8080/warehouse/page',
                     params:{
                         page:1,
                         size:5
@@ -180,7 +180,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouse',
+                        url: 'http://10.103.249.191:8080/warehouse',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -196,7 +196,7 @@
                 let ckId=row.ckId;
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.240.238:8080/warehouse',
+                    url: 'http://10.103.249.191:8080/warehouse',
                     params:{
                         ckId
                     },

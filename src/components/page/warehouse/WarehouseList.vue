@@ -190,7 +190,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/warehouse/page',
+                    url: 'http://10.103.249.191:8080/warehouse/page',
                     params:{
                         page:1,
                         size:30
@@ -282,11 +282,11 @@
                 this.form2.startTime=this.value7.toLocaleDateString()
                 this.form2.endTime=this.value6.toLocaleDateString()
                 console.log('1111111111',this.form2)
-                // http://10.103.240.238:8080/warehouse/pageByTime?page=1&start=2017/3/29&size=5&end=2018/4/3
+                // http://10.103.249.191:8080/warehouse/pageByTime?page=1&start=2017/3/29&size=5&end=2018/4/3
                     this.$ajax(
                         {
                             method: 'get', //请求方式
-                            url: 'http://10.103.240.238:8080/warehouse/pageByTime',
+                            url: 'http://10.103.249.191:8080/warehouse/pageByTime',
                             params:{
                                 page:1,
                                 size:5,
@@ -317,7 +317,7 @@
                 this.$ajax(
                     {
                         method: 'put', //请求方式
-                        url: 'http://10.103.240.238:8080/warehouse',
+                        url: 'http://10.103.249.191:8080/warehouse',
                         data:data,
                         headers:{"Authorization":localStorage.getItem('token')},
                     }).then((res)=>{
@@ -333,7 +333,7 @@
                 let ckId=row.ckId;
                 this.$ajax({
                     method: 'delete', //请求方式
-                    url: 'http://10.103.240.238:8080/warehouse',
+                    url: 'http://10.103.249.191:8080/warehouse',
                     params:{
                         ckId
                     },

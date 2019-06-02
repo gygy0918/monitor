@@ -55,7 +55,7 @@
             this.$ajax(
                 {
                     method: 'get', //请求方式
-                    url: 'http://10.103.240.238:8080/locationParent',
+                    url: 'http://10.103.249.191:8080/locationParent',
                     headers:{"Authorization":localStorage.getItem('token')},
                 }).then((res)=>{
                 console.log('结果',res)
